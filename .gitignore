@@ -1,0 +1,25 @@
+# Ignore all files by default
+*
+
+# Git
+!.gitignore
+!.gitconfig
+
+# Config Directory
+!.config/
+
+# Window Manager (i3)
+!.config/i3/
+!.config/i3/**
+
+# Terminal (kitty)
+!.config/kitty/
+!.config/kitty/**
+
+# Shell (zsh)
+!.zshrc
+!.zsh_profile
+
+# Editor (nvim)
+!.config/nvim/
+!.config/nvim/**

@@ -1,0 +1,31 @@
+[core]
+editor = nvim
+pager = delta
+autocrlf = input
+
+[user]
+name = ethanolx
+email = imotekhx@gmail.com
+
+[interactive]
+difffilter = delta --color-only
+
+[delta]
+navigate = true
+light = false
+side-by-side = true
+
+[merge]
+conflictstyle = diff3
+
+[diff]
+colormoved = default
+
+[push]
+default = current
+
+[filter.lfs]
+process = git-lfs filter-process
+required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
