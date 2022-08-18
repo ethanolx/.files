@@ -1,0 +1,292 @@
+# +------------------------------+
+# |                              |
+# |           STYLING            |
+# |                              |
+# +------------------------------+
+
+# Use thin borders
+for_window [class=".*"] border pixel 1
+
+# Define colour scheme
+# Class                 border  backgr. text    indicator child_border
+client.unfocused        #282c34 #282c34 #565c64 #282c34   #282c34
+client.focused          #ebcb8b #282c34 #abb2bf #282c34   #ebcb8b
+
+# Set font
+font pango:SFUIDisplay 12
+
+# +------------------------------+
+# |                              |
+# |         KEYBINDINGS          |
+# |                              |
+# +------------------------------+
+
+# -- CORE -- #
+
+# Use Windows key as modifier
+set $win Mod4
+set $alt Mod1
+
+# Spawn default application (alacritty)
+bindsym $win+Return exec alacritty
+
+# Kill focused window
+bindsym $win+Shift+q kill
+
+# Launch application runner
+bindsym $win+a exec --no-startup-id rofi -show drun -theme $HOME/.config/rofi/launchers/type-2/style-1.rasi
+bindsym $win+Shift+a exec --no-startup-id rofi -show drun -theme $HOME/.config/rofi/launchers/type-2/style-2.rasi
+
+# Launch file explorer
+bindsym $win+f exec --no-startup-id rofi -show filebrowser -theme $HOME/.config/rofi/launchers/type-4/style-7.rasi
+bindsym $win+Shift+f exec --no-startup-id rofi -show filebrowser -theme $HOME/.config/rofi/launchers/type-4/style-7.rasi
+
+# Launch generic runner
+bindsym $win+r exec --no-startup-id rofi -show drun -theme $HOME/.config/rofi/launchers/type-1/style-7.rasi
+
+# Launch window browser
+bindsym $win+w exec --no-startup-id rofi -show window -theme $HOME/.config/rofi/launchers/type-3/style-8.rasi
+bindsym $win+Shift+w exec --no-startup-id rofi -show window -theme $HOME/.config/rofi/launchers/type-3/style-7.rasi
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# -- NAVIGATION -- #
+
+# Move between windows
+bindsym $win+h focus left
+bindsym $win+j focus down
+bindsym $win+k focus up
+bindsym $win+l focus right
+
+bindsym $win+Left focus left
+bindsym $win+Down focus down
+bindsym $win+Up focus up
+bindsym $win+Right focus right
+
+# Move focused window
+bindsym $win+Shift+h move left
+bindsym $win+Shift+j move down
+bindsym $win+Shift+k move up
+bindsym $win+Shift+l move right
+
+bindsym $win+Shift+Left move left
+bindsym $win+Shift+Down move down
+bindsym $win+Shift+Up move up
+bindsym $win+Shift+Right move right
+
+# -- TILING -- #
+
+# Split next window horizontally
+bindsym $win+s split h
+
+# Split next window vertically
+bindsym $win+v split v
+
+# Toggle fullscreen for the focused container
+bindsym $win+z fullscreen toggle
+
+# Change container layouts (stacked, tabbed, toggle split)
+bindsym $win+Shift+s layout stacked
+bindsym $win+Shift+v layout toggle split
+bindsym $win+Shift+y layout tabbed
+
+# Toggle fullscreen mode
+bindsym $win+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $win+space focus mode_toggle
+
+# Focus the child container
+bindsym $win+c focus child
+
+# Focus the parent container
+bindsym $win+Shift+c focus parent
+
+# -- WORKSPACES -- #
+
+# Define workspaces
+set $wsp "₁"
+set $wsb "₂"
+set $wse "₃"
+set $wsd "₄"
+set $wst "₅"
+set $wsg "₆"
+set $wsu "₇"
+set $wso "₈"
+set $wsm "₉"
+set $wsn "₀"
+
+# Jumping to workspaces
+bindsym $win+p workspace number $wsp
+bindsym $win+b workspace number $wsb
+bindsym $win+e workspace number $wse
+bindsym $win+d workspace number $wsd
+bindsym $win+t workspace number $wst
+bindsym $win+g workspace number $wsg
+bindsym $win+u workspace number $wsu
+bindsym $win+o workspace number $wso
+bindsym $win+m workspace number $wsm
+bindsym $win+n workspace number $wsn
+
+bindsym $win+1 workspace number $wsp
+bindsym $win+2 workspace number $wsb
+bindsym $win+3 workspace number $wse
+bindsym $win+4 workspace number $wsd
+bindsym $win+5 workspace number $wst
+bindsym $win+6 workspace number $wsg
+bindsym $win+7 workspace number $wsu
+bindsym $win+8 workspace number $wso
+bindsym $win+9 workspace number $wsm
+bindsym $win+0 workspace number $wsn
+
+# Moving containers to workspaces
+bindsym $win+Shift+p move container to workspace number $wsp
+bindsym $win+Shift+b move container to workspace number $wsb
+bindsym $win+Shift+e move container to workspace number $wse
+bindsym $win+Shift+d move container to workspace number $wsd
+bindsym $win+Shift+t move container to workspace number $wst
+bindsym $win+Shift+g move container to workspace number $wsg
+bindsym $win+Shift+u move container to workspace number $wsu
+bindsym $win+Shift+o move container to workspace number $wso
+bindsym $win+Shift+m move container to workspace number $wsm
+bindsym $win+Shift+n move container to workspace number $wsn
+
+bindsym $win+Shift+1 move container to workspace number $wsp
+bindsym $win+Shift+2 move container to workspace number $wsb
+bindsym $win+Shift+3 move container to workspace number $wse
+bindsym $win+Shift+4 move container to workspace number $wsd
+bindsym $win+Shift+5 move container to workspace number $wst
+bindsym $win+Shift+6 move container to workspace number $wsg
+bindsym $win+Shift+7 move container to workspace number $wsu
+bindsym $win+Shift+8 move container to workspace number $wso
+bindsym $win+Shift+9 move container to workspace number $wsm
+bindsym $win+Shift+0 move container to workspace number $ws10
+
+# Navigate between proximal workspaces
+bindsym $win+Tab workspace next
+bindsym $win+Shift+Tab workspace prev
+
+# Reload i3
+bindsym $win+i reload
+
+# Restart i3
+bindsym $win+Shift+i restart
+
+# Launch power menu
+bindsym $win+x exec --no-startup-id $HOME/.config/rofi/powermenu/type-4/powermenu.sh
+bindsym $win+Shift+x exec --no-startup-id $HOME/.config/rofi/powermenu/type-4/powermenu-alt.sh
+
+# Enter resize mode
+bindsym $win+Shift+r mode "resize"
+
+# Resize mode keybindings
+mode "resize" {
+    # Adjust window proportions
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize shrink height 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize shrink height 10 px or 10 ppt
+    bindsym Up resize grow height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    # Exit resize mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $win+Shift+r mode "default"
+}
+
+# +------------------------------+
+# |                              |
+# |           SCRIPTS            |
+# |                              |
+# +------------------------------+
+
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex-autostart --autostart --environment i3
+
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# Load screen locker (before suspension)
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# Load network manager
+exec --no-startup-id nm-applet
+
+# Load compositor
+exec --no-startup-id picom
+
+# Load background image
+exec --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/neon-technology.jpg
+
+# Load status bar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# +------------------------------+
+# |                              |
+# |            LEGEND            |
+# |                              |
+# +------------------------------+
+
+# Meaning behind each keybinding
+# a: launch application runner
+# A: launch application runner alternative
+# b: go to browser workspace
+# B: move focused window to browser workspace
+# c: focus child window
+# C: focus parent window
+# d: go to database workspace
+# D: move focused window to database workspace
+# e: go to editor workspace
+# E: move focused window to editor workspace
+# f: launch file browser
+# F: launch file browser alternative
+# g: go to git workspace
+# G: move focused window to git workspace
+# h: move left
+# H: move focused window left / decrease focused window width
+# i: reload i3 configuration
+# I: restart i3
+# j: move down
+# J: move focused window down / decrease focused window height
+# k: move up
+# K: move focused window up / increase focused window height
+# l: move right
+# L: move focused window right / increase focused window width
+# m: go to browser workspace
+# M: move focused window to browser workspace
+# n: go to notes workspace
+# N: move focused window to notes workspace
+# o: go to office workspace
+# O: move focused window to office workspace
+# p: go to playlist workspace
+# P: move focused window to playlist workspace
+# q: close focused window
+# Q: close current workspace
+# r: launch generic runner
+# R: toggle resize mode
+# s: set horizontal split mode
+# S: set stacking layout
+# t: go to terminal workspace
+# T: move focused window to terminal workspace
+# u: go to upstream (VCS remote) workspace
+# U: move focused window to upstream (VCS remote) workspace
+# v: set horizontal split mode
+# V: set split layout
+# w: launch window runner
+# W: launch window runner alternative
+# x: launch powermenu
+# X: launch powermenu alternative
+# y:
+# Y: set tabbed layout
+# z: toggle fullscreen mode
+# Z:
