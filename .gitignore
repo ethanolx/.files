@@ -12,7 +12,15 @@
 !.config/i3/
 !.config/i3/**
 
-# Terminal (kitty)
+# Runner (rofi)
+!.config/rofi/
+!.config/rofi/**
+
+# Terminal Emulator (alacritty)
+!.config/alacritty/
+!.config/alacritty/**
+
+# Terminal Emulator (kitty)
 !.config/kitty/
 !.config/kitty/**
 
