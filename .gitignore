@@ -22,7 +22,7 @@
 
 # Shell (zsh)
 !.zshrc
-!.zsh_profile
+!.zprofile
 
 # Editor (nvim)
 !.config/nvim/
