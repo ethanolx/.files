@@ -16,7 +16,11 @@
 !.config/rofi/
 !.config/rofi/**
 
-# Terminal (kitty)
+# Terminal Emulator (alacritty)
+!.config/alacritty/
+!.config/alacritty/**
+
+# Terminal Emulator (kitty)
 !.config/kitty/
 !.config/kitty/**
 
