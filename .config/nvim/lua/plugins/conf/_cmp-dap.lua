@@ -1,0 +1,16 @@
+-- local present, cmp_dap = pcall(require, "cmp_dap")
+--
+-- if not present then
+--     return
+-- end
+--
+-- require'cmp'.setup {
+--   -- nvim-cmp by defaults disables autocomplete for prompt buffers
+--   enabled = function ()
+--     return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+--       or require("cmp_dap").is_dap_buffer()
+--   end,
+--   sources = {
+--     { name = 'dap' }
+--   }
+-- }
