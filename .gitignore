@@ -12,6 +12,10 @@
 !.config/i3/
 !.config/i3/**
 
+# Runner (rofi)
+!.config/rofi/
+!.config/rofi/**
+
 # Terminal (kitty)
 !.config/kitty/
 !.config/kitty/**
