@@ -1,6 +1,6 @@
 colors:
     primary:
-        background: '#282c34'
+        background: '#1e222a'
         foreground: '#abb2bf'
     selection:
         text:       CellForeground
@@ -32,4 +32,4 @@ font:
         family: UbuntuMonoNF
         style: Bold Italic
 
-    size: 16
+    size: 9
