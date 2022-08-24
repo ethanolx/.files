@@ -1,4 +1,4 @@
 # Environment variables
-export nvim="${HOME}/.config/nvim/"
-
-alias upd="sudo dnf update"
+export EDITOR=nvim
+export TERMINAL=alacritty
+export nvim=~/.config/nvim/
