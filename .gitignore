@@ -5,12 +5,27 @@
 !.gitignore
 !.gitconfig
 
+# Local Data Directory
+!.local/
+!.local/share/
+
+# Scripts
+!.scripts/
+!.scripts/**
+
+# Fonts
+!.local/share/fonts/
+!.local/share/fonts/**
+
 # Config Directory
 !.config/
 
 # Window Manager (i3)
 !.config/i3/
 !.config/i3/**
+
+# Compositor (picom)
+!.config/picom.conf
 
 # Status Bar (polybar)
 !.config/polybar/
