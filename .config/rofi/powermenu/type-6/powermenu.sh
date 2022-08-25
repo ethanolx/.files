@@ -72,6 +72,7 @@ run_cmd() {
 		elif [[ $1 == '--hibernate' ]]; then
 			systemctl hibernate
 		elif [[ $1 == '--suspend' ]]; then
+			sleep 0.5
 			mpc -q pause
 			amixer set Master mute
 			systemctl suspend

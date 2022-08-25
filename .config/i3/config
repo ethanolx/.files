@@ -95,8 +95,7 @@ bindsym $win+i reload
 bindsym $win+Shift+i restart
 
 # Launch power menu
-bindsym $win+x exec --no-startup-id ~/.config/rofi/powermenu/type-4/powermenu.sh
-bindsym $win+Shift+x exec --no-startup-id ~/.config/rofi/powermenu/type-4/powermenu-alt.sh
+bindsym $win+x exec --no-startup-id ~/.config/rofi/powermenu/type-2/powermenu.sh
 
 # Enter resize mode
 bindsym $win+Shift+r mode "resize"
@@ -264,15 +263,15 @@ for_window [class="firefox" title="YouTube"] move container to workspace $wsy
 
 # Terminal
 exec i3-msg 'workspace 3;exec kitty --title terminal'
-for_window [title="terminal"] move container to workspace $wst
+for_window [class="tty" title="terminal"] move container to workspace $wst
 
 # Mail
 exec i3-msg 'workspace 7;exec alacritty -t neomutt --command neomutt'
-for_window [title="neomutt"] move container to workspace $wsm
+for_window [class="tty" title="neomutt"] move container to workspace $wsm
 
 # Notes
 exec i3-msg 'workspace 8;exec alacritty -t notes --command nvim +NeorgStart'
-for_window [title="notes"] move container to workspace $wsn
+for_window [class="tty" title="notes"] move container to workspace $wsn
 
 # +------------------------------+
 # |                              |
@@ -328,7 +327,7 @@ for_window [title="notes"] move container to workspace $wsn
 # w: launch window runner
 # W:
 # x: launch powermenu
-# X: launch powermenu alternative
+# X:
 # y: go to youtube workspace
 # Y: move focused window to youtube workspace
 # z: toggle fullscreen mode

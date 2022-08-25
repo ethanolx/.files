@@ -5,6 +5,10 @@
 !.gitignore
 !.gitconfig
 
+# Root Directory
+!.root/
+!.root/**
+
 # Local Data Directory
 !.local/
 !.local/share/
@@ -16,6 +20,7 @@
 # Fonts
 !.local/share/fonts/
 !.local/share/fonts/**
+.local/share/fonts/**/.uuid
 
 # Config Directory
 !.config/
@@ -42,6 +47,9 @@
 # Terminal Emulator (kitty)
 !.config/kitty/
 !.config/kitty/**
+
+# Terminal Multiplexer (tmux)
+!.tmux.conf
 
 # Shell (zsh)
 !.zshrc

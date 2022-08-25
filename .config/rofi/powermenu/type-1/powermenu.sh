@@ -68,6 +68,7 @@ run_cmd() {
 		elif [[ $1 == '--reboot' ]]; then
 			systemctl reboot
 		elif [[ $1 == '--suspend' ]]; then
+			sleep 0.5
 			mpc -q pause
 			amixer set Master mute
 			systemctl suspend
