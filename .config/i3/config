@@ -20,6 +20,9 @@ exec --no-startup-id nm-applet
 # Load compositor
 exec --no-startup-id picom -bf
 
+# Load battery warning notifier
+exec --no-startup-id ~/.scripts/battery-warning.sh -L 25 -l 10 -m "Low Battery" -t 5m -n -i 
+
 # Load background image
 exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/neon-technology.jpg
 
@@ -42,6 +45,12 @@ set_from_resource $urgent_colour i3wm.colour.red
 
 # Use thin borders
 for_window [class=".*"] border pixel 1
+
+# Enable gaps between windows
+gaps inner 10
+gaps outer 0
+smart_gaps on
+smart_borders on
 
 # Define colour scheme
 # Class             border              background          text                indicator           child border
@@ -146,22 +155,13 @@ bindsym $win+Shift+Right move right
 # -- TILING -- #
 
 # Split next window horizontally
-bindsym $win+s split h
-
-# Change to tabbed layout
-bindsym $win+Shift+s layout tabbed
+bindsym $win+s split v
 
 # Split next window vertically
-bindsym $win+v split v
-
-# Change to stacked layout
-bindsym $win+Shift+v layout stacked
+bindsym $win+v split h
 
 # Toggle fullscreen for the focused container
 bindsym $win+z fullscreen toggle
-
-# Change to split layout
-bindsym $win+Shift+z layout toggle split
 
 # Change focus between tiled / floating windows
 bindsym $win+f focus mode_toggle
@@ -273,6 +273,8 @@ for_window [class="tty" title="neomutt"] move container to workspace $wsm
 exec i3-msg 'workspace 8;exec alacritty -t notes --command nvim +NeorgStart'
 for_window [class="tty" title="notes"] move container to workspace $wsn
 
+exec i3-msg 'workspace $wst'
+
 # +------------------------------+
 # |                              |
 # |            LEGEND            |
@@ -317,13 +319,13 @@ for_window [class="tty" title="notes"] move container to workspace $wsn
 # r: launch generic runner
 # R: toggle resize mode
 # s: set horizontal split mode
-# S: set tabbed layout
+# S:
 # t: go to terminal workspace
 # T: move focused window to terminal workspace
 # u: go to upstream (VCS remote) workspace
 # U: move focused window to upstream (VCS remote) workspace
 # v: set vertical split mode
-# V: set stacked layout
+# V:
 # w: launch window runner
 # W:
 # x: launch powermenu
@@ -331,4 +333,4 @@ for_window [class="tty" title="notes"] move container to workspace $wsn
 # y: go to youtube workspace
 # Y: move focused window to youtube workspace
 # z: toggle fullscreen mode
-# Z: change focus between tiled / floating windows
+# Z:

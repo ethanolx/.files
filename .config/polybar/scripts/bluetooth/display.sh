@@ -7,13 +7,13 @@ if [[ $(bluetoothctl show | grep "Powered: yes" | wc -l) -eq 0 ]]; then
 elif [[ $(bluetoothctl devices Connected | wc -l) -eq 0 ]]; then
 
     # Not connected to any device
-    echo "%{F#abb2bf}"
+    echo "%{F#abb2bf}"
 else
 
     # Connected to one or more devices
     readarray -t devices < <(bluetoothctl devices Connected)
 
-    device_string=":"
+    device_string=":"
 
     for index in ${!devices[@]}; do
         # Padding between icons
