@@ -176,4 +176,4 @@ configuration {
 	me-accept-custom: "Control+MouseDPrimary";
 }
 
-/* vi: ft=rasi */
+// vi: ft=rasi
