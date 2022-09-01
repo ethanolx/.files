@@ -78,3 +78,4 @@ source $ZSH/oh-my-zsh.sh
 
 # Aliases
 alias upd="sudo dnf update"
+alias icat="kitty +kitten icat"
