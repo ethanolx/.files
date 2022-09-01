@@ -9,6 +9,8 @@ cd ~/Downloads/
 sudo dnf install -y snapd
 sudo snap install snap-store
 
+# Make Utilities
+sudo dnf install -y make cmake automake
 # C/C++
 sudo dnf install -y gcc clang
 
@@ -34,6 +36,8 @@ sudo dnf install -y ruby
 sudo dnf install -y i3-gaps
 
 # I3 Screen Locker
+sudo dnf install -y xss-lock
+sudo dnf install -y autoconf cairo-devel fontconfig libev-devel libjpeg-turbo-devel libXinerama libxkbcommon-devel libxkbcommon-x11-devel libXrandr pam-devel pkgconf xcb-util-image-devel xcb-util-xrm-devel
 sudo dnf remove i3lock
 git clone https://github.com/Raymo111/i3lock-color.git
 cd i3lock-color

@@ -23,5 +23,5 @@ elif [[ -x '/usr/bin/i3lock' ]]; then
         --modif-color=282c34ff \
         --verif-text="..." \
         --wrong-text="!" \
-        --noinput-text="~" \
+        --noinput-text="~"
 fi
