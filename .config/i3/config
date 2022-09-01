@@ -161,13 +161,7 @@ bindsym $win+s split v
 bindsym $win+v split h
 
 # Toggle fullscreen for the focused container
-bindsym $win+z fullscreen toggle
-
-# Change focus between tiled / floating windows
-bindsym $win+f focus mode_toggle
-
-# Toggle floating mode
-bindsym $win+Shift+f floating toggle
+bindsym $win+f fullscreen toggle
 
 # Focus the child container
 bindsym $win+c focus child
@@ -258,7 +252,7 @@ exec i3-msg 'workspace 1;exec firefox'
 for_window [class="firefox"] move container to workspace $wsb
 
 # Youtube
-exec i3-msg 'workspace 0;exec firefox youtube.com'
+exec i3-msg 'workspace 0;exec firefox --new-window youtube.com'
 for_window [class="firefox" title="YouTube"] move container to workspace $wsy
 
 # Terminal
@@ -292,8 +286,8 @@ exec i3-msg 'workspace $wst'
 # D: move focused window to database workspace
 # e: go to editor workspace
 # E: move focused window to editor workspace
-# f: change focus between the tiled & floating windows
-# F: toggle floating mode
+# f: toggle fullscreen mode
+# F:
 # g: go to git workspace
 # G: move focused window to git workspace
 # h: move left
@@ -332,5 +326,5 @@ exec i3-msg 'workspace $wst'
 # X:
 # y: go to youtube workspace
 # Y: move focused window to youtube workspace
-# z: toggle fullscreen mode
+# z:
 # Z:
