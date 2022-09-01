@@ -1,6 +1,6 @@
-local M = {}
+local utils = {}
 
-M.get_colour_palette = function(colour_scheme)
+utils.get_colour_palette = function(colour_scheme)
     colour_scheme = colour_scheme or vim.g.colour_scheme
 
     local available, colour_palette = pcall(require, "core.themes." .. colour_scheme)
@@ -13,7 +13,7 @@ M.get_colour_palette = function(colour_scheme)
     return colour_palette
 end
 
-M.format_plugin_name = function(plugin_name)
+utils.format_plugin_name = function(plugin_name)
     local clean_plugin_name = plugin_name
     clean_plugin_name = string.lower(clean_plugin_name)
     clean_plugin_name, _ = string.gsub(clean_plugin_name, '[%.%-_]?n?vim[%.%-_]?', '')
@@ -22,49 +22,22 @@ M.format_plugin_name = function(plugin_name)
     return clean_plugin_name
 end
 
-M.load_highlight = function(plugin)
-    local colour_palette = M.get_colour_palette(vim.g.colour_scheme)
-    local plugin_highlights = require("ui.integrations." .. plugin)
+utils.load_highlights = function(callback)
+    local colour_palette = utils.get_colour_palette(vim.g.colour_scheme)
 
-    local hl_groups = plugin_highlights(colour_palette)
+    local base16 = colour_palette and colour_palette.base_16
+    local base30 = colour_palette and colour_palette.base_30
+    local merged_palette = vim.tbl_extend("error", base16, base30)
+
+    local hl_groups = callback(merged_palette)
 
     for hl_group, hl_opts in pairs(hl_groups) do
         vim.api.nvim_set_hl(0, hl_group, hl_opts)
     end
 end
 
-M.reload_colour_scheme = function(colour_scheme)
-    vim.g.colour_scheme = colour_scheme
-
-    local default_highlights = {
-        "defaults",
-        "git",
-        "lsp",
-        "syntax",
-        "devicons",
-    }
-
-    for _, highlight in ipairs(default_highlights) do
-        M.load_highlight(highlight)
-    end
-
-    for plugin_name, opts in pairs(packer_plugins) do
-        if opts.loaded then
-            local clean_plugin_name = M.format_plugin_name(plugin_name)
-            pcall(M.load_highlight, clean_plugin_name)
-        end
-    end
-
-end
-
-M.load = function(file)
-    local plugin_name = M.get_plugin_name()
-
-    return require(string.format("plugins.%s.%s", plugin_name, file))
-end
-
 -- WARN: depends on bufferline.nvim's api
-M.check_if_last_buffer = function()
+utils.check_if_last_buffer = function()
     local bufferline_commands = require "bufferline.commands"
     local bufferline_state = require "bufferline.state"
 
@@ -72,7 +45,7 @@ M.check_if_last_buffer = function()
     return current_buffer_index >= #bufferline_state.components
 end
 
-M.close_buffer = function(force)
+utils.close_buffer = function(force)
     if vim.bo.buftype == "terminal" then
         force = force or #vim.api.nvim_list_wins() < 2 and ":bd!"
         local swap = force and #vim.api.nvim_list_bufs() > 1 and ":bp | bd!" .. vim.fn.bufnr()
@@ -92,7 +65,7 @@ M.close_buffer = function(force)
 
     -- if buffer is the last, fall back to the previous buffer
     -- after closing, else fall back to the next buffer
-    local direction = M.check_if_last_buffer() and "p" or "n"
+    local direction = utils.check_if_last_buffer() and "p" or "n"
     local bufnr = vim.fn.bufnr()
 
     -- if not force, change to prev buf and then close current
@@ -100,53 +73,47 @@ M.close_buffer = function(force)
     vim.cmd(close_cmd)
 end
 
-M.load_mappings = function(mappings)
-    -- set mapping function with/without whichkey
-    local map_func
-    local whichkey_exists, wk = pcall(require, "which-key")
+utils.load_mappings = function(mappings)
+    -- Register mappings using Which-Key only
+    require("legendary").setup()
+    local which_key = require("which-key")
 
-    if whichkey_exists then
-        map_func = function(keybind, mapping_info, opts)
-            wk.register({ [keybind] = mapping_info }, opts)
-        end
-    else
-        map_func = function(keybind, mapping_info, opts)
-            local mode = opts.mode
-            opts.mode = nil
-            vim.keymap.set(mode, keybind, mapping_info[1], opts)
-        end
-    end
-
-    for section, section_mappings in pairs(mappings) do
-        -- skip mapping this as its mapppings are loaded in lspconfig
+    for category, section_mappings in pairs(mappings) do
         for mode, mode_mappings in pairs(section_mappings) do
             for keybind, mapping_info in pairs(mode_mappings) do
-                if section == "_compatibility" and not vim.g.load_compatibility_mappings then
-                    keybind = "<leader>" .. keybind
+                if category == "_compatibility" then
+                    local compatibility_mode = vim.g.compatibility_mode or 1
+                    if compatibility_mode == 0 then
+                        goto continue
+                    elseif compatibility_mode == 1 then
+                        keybind = "<leader>" .. keybind
+                    end
                 end
 
                 local opts = mapping_info[3] or { remap = false, silent = true, }
                 opts.mode = mode
                 mapping_info[3] = nil
 
-                map_func(keybind, mapping_info, opts)
+                which_key.register({ [keybind] = mapping_info }, opts)
+
+                ::continue::
             end
         end
     end
 end
 
-M.get_plugin_name = function()
+utils.get_plugin_name = function()
     local plugin_path = vim.fn.expand("%:h")
     local path_components = vim.fn.split(plugin_path, "[\\|/]")
     local plugin_name = path_components[#path_components]
     return plugin_name
 end
 
-M.term_codes = function(str)
+utils.term_codes = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-M.select_all = function()
+utils.select_all = function()
     local linenr = vim.fn.line(".")
     local colnr = vim.fn.col(".")
 
@@ -164,15 +131,15 @@ M.select_all = function()
     vim.cmd "normal ggVG"
 end
 
-M.activate_diagnostics = function()
+utils.activate_diagnostics = function()
     vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float()]]
 end
 
-M.capitalize = function(str)
+utils.capitalize = function(str)
     return (str:gsub("^%l", string.upper))
 end
 
-M.replace_with_trouble = function()
+utils.replace_with_trouble = function()
     local buftype = "quickfix"
     if vim.fn.getloclist(0, { filewinid = 1 }).filewinid ~= 0 then
         buftype = "loclist"
@@ -191,4 +158,4 @@ M.replace_with_trouble = function()
     end
 end
 
-return M
+return utils

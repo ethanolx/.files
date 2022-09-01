@@ -1,11 +1,9 @@
--- n, v, i, t = mode names
+local utils = require("core.utils")
+local termcodes = utils.term_codes
 
-local termcodes = require("core.utils").term_codes
+local mappings = {}
 
-
-local M = {}
-
-M._utilities = {
+mappings._utilities = {
     i = {
         ["<S-Tab>"] = { "<C-d>", "Undo indentation" },
         ["<C-k><C-k>"] = { "<cmd> lua require'better-digraphs'.digraphs(\"i\")<cr>", "digraphs" },
@@ -100,7 +98,7 @@ M._utilities = {
     }
 }
 
-M._compatibility = {
+mappings._compatibility = {
     n = {
         ["<C-a>"] = { "<cmd> lua require(\"core.utils\").select_all() <cr>", "SELECT ALL" },
         ["<C-s>"] = { "<cmd> w <cr>", "SAVE" },
@@ -116,7 +114,7 @@ M._compatibility = {
 -- prefix: definition
 
 -- a:  autocomplete
-M.a = {
+mappings.a = {
     n = {
         ["<leader>a"] = { name = "autocomplete", },
         ["<leader>as"] = { "<cmd>CmpStatus<cr>", "check autocomplete status" },
@@ -124,7 +122,7 @@ M.a = {
 }
 
 -- b:  buffers
-M.b = {
+mappings.b = {
     n = {
         -- Label
         ["<leader>b"] = { "", "﬘   buffers" },
@@ -154,7 +152,7 @@ M.b = {
 }
 
 -- c:  comments/colour picker
-M.c = {
+mappings.c = {
     n = {
         -- Label
         ["<leader>c"] = { name = " comments /  palette" },
@@ -180,7 +178,7 @@ M.c = {
 }
 
 -- d:  diagnostics/debugging
-M.d = {
+mappings.d = {
     n = {
         -- Label
         ["<leader>d"] = { "", " diagnostics /  debugging" },
@@ -223,7 +221,7 @@ M.d = {
 }
 
 -- e:  explorer/file tree/nvim tree
-M.e = {
+mappings.e = {
     n = {
         -- Label
         ["<leader>e"] = { "", "פּ   explorer" },
@@ -236,7 +234,7 @@ M.e = {
 }
 
 -- f:  find/telescope
-M.f = {
+mappings.f = {
     n = {
         -- Label
         ["<leader>f"] = { "", "   find" },
@@ -280,7 +278,7 @@ M.f = {
 }
 
 -- g:  git
-M.g = {
+mappings.g = {
     n = {
         -- Label
         ["<leader>g"] = { "", "   git" },
@@ -311,7 +309,7 @@ M.g = {
 }
 
 -- h:  health
-M.h = {
+mappings.h = {
     n = {
         ["<leader>h"] = { name = "health" },
         ["<leader><leader>h"] = { "<cmd>checkhealth<cr>", "check health" },
@@ -319,17 +317,17 @@ M.h = {
 }
 
 -- i:  - (insert)
-M.i = {
+mappings.i = {
 
 }
 
 -- j:  - (move down)
-M.j = {
+mappings.j = {
 
 }
 
 -- k:  keymaps
-M.k = {
+mappings.k = {
     n = {
         ["<leader>k"] = { name = "keymaps" },
         ["<leader><leader>k"] = {
@@ -340,7 +338,7 @@ M.k = {
 }
 
 -- l: LSP
-M.l = {
+mappings.l = {
     -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
 
     n = {
@@ -447,14 +445,14 @@ M.l = {
 }
 
 -- m:  multi cursor
-M.m = {
+mappings.m = {
     n = {
         ["<leader>mt"] = { "<cmd> MarksToggleSigns <cr>", "toggle marks" },
     },
 }
 
 -- n:  navigation or notes
-M.n = {
+mappings.n = {
     n = {
         -- Label
         ["<leader>n"] = { "", "   navigation" },
@@ -485,7 +483,7 @@ M.n = {
 }
 
 -- o:  outline
-M.o = {
+mappings.o = {
     n = {
         ["<leader>o"] = { "", "פּ   toggle outline" },
         -- ["<leader>oo"] = { "<cmd> SymbolsOutlineOpen <cr>", "פּ   open outline" },
@@ -495,7 +493,7 @@ M.o = {
 }
 
 -- p:  plugins
-M.p = {
+mappings.p = {
     n = {
         -- -- Label
         -- ["<leader>p"] = { "", "   projects" },
@@ -516,7 +514,7 @@ M.p = {
 }
 
 -- q:  quickfix
-M.q = {
+mappings.q = {
     n = {
         ["<leader>q"] = { "", "   quickfix" },
 
@@ -529,13 +527,13 @@ M.q = {
 }
 
 -- r:  run (for programs, or debugging)
-M.r = {
+mappings.r = {
     n = {
     },
 }
 
 -- s:  sessions
-M.s = {
+mappings.s = {
     n = {
         -- Label
         ["<leader>s"] = { "", "   sessions" },
@@ -549,7 +547,7 @@ M.s = {
 }
 
 -- t:  terminal/testing
-M.t = {
+mappings.t = {
 
     n = {
         ["<leader>t"] = { name = " terminal /  testing" },
@@ -597,7 +595,7 @@ M.t = {
 }
 
 -- u:  - (undo)
-M.u = {
+mappings.u = {
     n = {
         ["<leader>u"] = { "", "undotree" },
 
@@ -611,7 +609,7 @@ M.u = {
 }
 
 -- v:  - (visual)
-M.v = {
+mappings.v = {
     n = {
         ["<leader><leader>v"] = { "<cmd> luafile $nvim/init.lua <cr>", "Reload neovim config" },
         ["<leader>vx"] = { "<cmd> qa <cr>", "Exit neovim" },
@@ -620,7 +618,7 @@ M.v = {
 }
 
 -- w:  windows
-M.w = {
+mappings.w = {
     n = {
         -- Label
         ["<leader>w"] = { "", "   windows" },
@@ -629,7 +627,7 @@ M.w = {
 }
 
 -- x:  context
-M.x = {
+mappings.x = {
     n = {
         ["<leader>xj"] = {
             function()
@@ -650,7 +648,7 @@ M.x = {
 }
 
 -- z:  zen mode
-M.z = {
+mappings.z = {
     n = {
         ["<leader><leader>z"] = { "<cmd> ZenMode <cr>", " toggle zen-mode" },
 
@@ -659,4 +657,4 @@ M.z = {
     }
 }
 
-return M
+utils.load_mappings(mappings)
