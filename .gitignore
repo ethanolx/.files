@@ -25,6 +25,9 @@
 # Config Directory
 !.config/
 
+# X11 Resources
+!.Xresources
+
 # Window Manager (i3)
 !.config/i3/
 !.config/i3/**
@@ -58,4 +61,3 @@
 # Editor (nvim)
 !.config/nvim/
 !.config/nvim/**
-.config/nvim/plugin/

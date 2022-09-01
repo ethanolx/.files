@@ -3,6 +3,9 @@ editor = nvim
 pager = delta
 autocrlf = input
 
+[init]
+defaultbranch = main
+
 [user]
 name = ethanolx
 email = imotekhx@gmail.com
