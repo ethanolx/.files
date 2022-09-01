@@ -1,0 +1,55 @@
+! +------------------------------+
+! |                              |
+! |            THEME             |
+! |                              |
+! +------------------------------+
+
+! Enable access to base-30 palette
+*colour.white:          #abb2bf
+*colour.darker_black:   #1b1f27
+*colour.black:          #1e222a
+*colour.black2:         #252931
+*colour.one_bg:         #282c34
+*colour.one_bg2:        #353b45
+*colour.one_bg3:        #373b43
+*colour.grey:           #42464e
+*colour.grey_fg:        #565c64
+*colour.grey_fg2:       #6f737b
+*colour.light_grey:     #6f737b
+*colour.red:            #e06c75
+*colour.baby_pink:      #de8c92
+*colour.pink:           #ff75a0
+*colour.line:           #31353d
+*colour.green:          #98c379
+*colour.vibrant_green:  #7eca9c
+*colour.nord_blue:      #81A1C1
+*colour.blue:           #61afef
+*colour.yellow:         #e7c787
+*colour.sun:            #ebcb8b
+*colour.purple:         #de98fd
+*colour.dark_purple:    #c882e7
+*colour.teal:           #519ABA
+*colour.orange:         #fca2aa
+*colour.cyan:           #a3b8ef
+*colour.statusline_bg:  #22262e
+*colour.lightbg:        #2d3139
+*colour.pmenu_bg:       #61afef
+*colour.folder_bg:      #61afef
+
+! Enable access to base-16 palette
+*colour.base00:         #1e222a
+*colour.base01:         #353b45
+*colour.base02:         #3e4451
+*colour.base03:         #545862
+*colour.base04:         #565c64
+*colour.base05:         #abb2bf
+*colour.base06:         #b6bdca
+*colour.base07:         #c8ccd4
+*colour.base08:         #e06c75
+*colour.base09:         #d19a66
+*colour.base0A:         #e5c07b
+*colour.base0B:         #98c379
+*colour.base0C:         #56b6c2
+*colour.base0D:         #61afef
+*colour.base0E:         #c678dd
+*colour.base0F:         #be5046
