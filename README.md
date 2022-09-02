@@ -22,7 +22,7 @@ nvim +PackerSync
 ```
 
 ## Credits
-* Neovim: My Neovim configuration is derived from `siduck`'s [https://github.com/NvChad/NvChad](NvChad) framework.
+* Neovim: My Neovim configuration is derived from `siduck`'s [NvChad](https://github.com/NvChad/NvChad) framework.
 
 ## License
-This project is licensed under the MIT [https://github.com/ethanolx/.files/blob/main/LICENSE](license).
+This project is licensed under the MIT [license](https://github.com/ethanolx/.files/blob/main/LICENSE).
