@@ -2,8 +2,8 @@ return function(colour_palette)
     return {
         GitSignsCurrentLineBlame = { fg = colour_palette.grey_fg, italic = true },
 
-        DiffAdd = { fg = colour_palette.green },
-        DiffAdded = { fg = colour_palette.green },
+        DiffAdd = { fg = colour_palette.vibrant_green },
+        DiffAdded = { fg = colour_palette.vibrant_green },
         DiffChange = { fg = colour_palette.yellow },
         diffChanged = { fg = colour_palette.yellow },
         DiffModified = { fg = colour_palette.yellow },

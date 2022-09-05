@@ -17,7 +17,7 @@ toggleterm.setup {
     },
     hide_numbers = true,
     shade_filetypes = {},
-    shade_terminals = true,
+    shade_terminals = false,
     insert_mappings = true,
     terminal_mappings = true,
     persist_size = true,
@@ -33,8 +33,8 @@ toggleterm.setup {
     },
     winbar = {
         enabled = true,
-        name_formatter = function(term) --  term: Terminal
-            return term.name
+        name_formatter = function(terminal)
+            return terminal.name
         end
     },
 }

@@ -43,7 +43,6 @@ vim.opt.signcolumn = "auto:2-4"
 vim.opt.foldcolumn = "1"
 vim.opt.foldlevel = 99
 vim.opt.foldenable = true
-vim.opt.foldmethod = "expr"
 
 vim.opt.number = true
 vim.opt.numberwidth = 2

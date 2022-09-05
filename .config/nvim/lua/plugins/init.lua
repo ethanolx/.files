@@ -19,7 +19,7 @@ return {
         after = "friendly-snippets",
         module = "cmp",
         config = function()
-            require "plugins.conf.cmp"
+            require "plugins.cmp"
         end,
     },
     ["rafamadriz/friendly-snippets"] = {
@@ -32,7 +32,7 @@ return {
         wants = "friendly-snippets",
         after = "cmp-nvim-lsp",
         config = function()
-            require "plugins.conf.luasnip"
+            require "plugins.luasnip"
         end,
     },
     ["saadparwaiz1/cmp_luasnip"] = {
@@ -64,23 +64,23 @@ return {
         after = "vim-dadbod",
     },
 
-    -- BUFFERS
+    -- BUFFER
     ["akinsho/bufferline.nvim"] = {
         tag = "v2.*",
         after = "nvim-web-devicons",
         config = function()
-            require "plugins.conf.bufferline"
+            require "plugins.bufferline"
         end,
     },
 
-    -- COMMENTS
+    -- COMMENT
     ["numToStr/Comment.nvim"] = {
         module = "Comment",
         setup = function()
             require("core.lazy_load").on_file_open "Comment.nvim"
         end,
         config = function()
-            require "plugins.conf.comment"
+            require "plugins.comment"
         end,
     },
     ["folke/todo-comments.nvim"] = {
@@ -88,34 +88,42 @@ return {
             require("core.lazy_load").on_file_open "todo-comments.nvim"
         end,
         config = function()
-            require "plugins.conf.todo-comments"
+            require "plugins.todo-comments"
         end,
+    },
+
+    -- CSV
+    ["mechatroner/rainbow_csv"] = {
+        ft = "csv",
     },
 
     -- DAP
     ["mfussenegger/nvim-dap"] = {
         cmd = { "DapContinue", "DapToggleBreakpoint" },
         config = function()
-            require "plugins.conf.dap"
+            require "plugins.dap"
         end,
     },
     ["rcarriga/nvim-dap-ui"] = {
         after = "nvim-dap",
         config = function()
-            require "plugins.conf.dap-ui"
+            require "plugins.dap-ui"
         end,
     },
     ["nvim-telescope/telescope-dap.nvim"] = {
         after = "nvim-dap",
+        config = function()
+            require "plugins.telescope-dap"
+        end,
     },
     ["theHamsta/nvim-dap-virtual-text"] = {
         after = "nvim-dap",
         config = function()
-            require "plugins.conf.dap-virtual-text"
+            require "plugins.dap-virtual-text"
         end,
     },
 
-    -- EDITING
+    -- EDIT
     ["nvim-treesitter/nvim-treesitter"] = {
         module = "nvim-treesitter",
         setup = function()
@@ -131,13 +139,18 @@ return {
         },
         run = ":TSUpdate",
         config = function()
-            require "plugins.conf.treesitter"
+            require "plugins.treesitter"
+        end,
+    },
+    ["editorconfig/editorconfig-vim"] = {
+        setup = function ()
+            require("core.lazy_load").on_file_open "editorconfig-vim"
         end,
     },
     ["nacro90/numb.nvim"] = {
         event = "CmdlineEnter",
         config = function()
-            require "plugins.conf.numb"
+            require "plugins.numb"
         end,
     },
     ["wellle/targets.vim"] = {
@@ -148,16 +161,16 @@ return {
     ["nvim-treesitter/nvim-treesitter-textobjects"] = {
         after = "nvim-treesitter",
         config = function()
-            require "plugins.conf.treesitter-textobjects"
+            require "plugins.treesitter-textobjects"
         end,
     },
     ["mg979/vim-visual-multi"] = {
         keys = { "<M-n>", "<C-Up>", "<C-Down>", "\\\\\\", "\\\\A", "\\\\/" },
         setup = function()
-            require "plugins.conf.visual-multi"
+            require "plugins.visual-multi"
         end,
         config = function()
-            -- require "plugins.conf.visual-multi"
+            -- require "plugins.visual-multi"
             require("core.utils").load_highlight "visual-multi"
         end,
     },
@@ -165,44 +178,39 @@ return {
         cmd = { "MoveLine", "MoveBlock" },
     },
     ["ZhiyuanLck/smart-pairs"] = {
-        -- branch = "dev",
         event = "InsertEnter",
         config = function()
-            require "plugins.conf.smart-pairs"
+            require "plugins.smart-pairs"
         end,
     },
     ["SmiteshP/nvim-gps"] = {
         module = "nvim-gps",
         config = function()
-            require "plugins.conf.gps"
+            require "plugins.gps"
         end,
     },
     ["SmiteshP/nvim-navic"] = {
         module = "nvim-navic",
         config = function()
-            require "plugins.conf.navic"
+            require "plugins.navic"
         end,
     },
     ["nvim-treesitter/nvim-treesitter-context"] = {
-        -- after = "nvim-treesitter",
         module = "treesitter-context",
-        cond = function()
-            return vim.g.context_provider == "treesitter-context"
-        end,
         config = function()
-            require "plugins.conf.treesitter-context"
+            require "plugins.treesitter-context"
         end,
     },
     ["chentoast/marks.nvim"] = {
 	cmd = "MarksToggle",
         config = function()
-            require "plugins.conf.marks"
+            require "plugins.marks"
         end,
     },
     ["David-Kunz/treesitter-unit"] = {
         after = "nvim-treesitter",
         config = function()
-            require "plugins.conf.treesitter-unit"
+            require "plugins.treesitter-unit"
         end,
     },
     ["ThePrimeagen/harpoon"] = {
@@ -212,13 +220,13 @@ return {
     ["kyazdani42/nvim-tree.lua"] = {
         cmd = { "NvimTreeToggle", "NvimTreeFocus" },
         config = function()
-            require "plugins.conf.tree"
+            require "plugins.tree"
         end,
     },
     ["nvim-telescope/telescope-file-browser.nvim"] = {
         after = "telescope.nvim",
         config = function()
-            require "plugins.conf.telescope-file-browser"
+            require "plugins.telescope-file-browser"
         end,
     },
 
@@ -227,33 +235,44 @@ return {
         cmd = "Telescope",
         module = "telescope",
         config = function()
-            require "plugins.conf.telescope"
+            require "plugins.telescope"
         end,
+    },
+    -- FOLD
+    ["kevinhwang91/nvim-ufo"] = {
+        requires = "kevinhwang91/promise-async",
+        setup = function()
+            require "plugins.ufo"
+        end
     },
 
     -- GIT
     ["lewis6991/gitsigns.nvim"] = {
-        -- cond = function()
-        --     vim.cmd [[silent!git rev-parse --is-inside-work-tree]]
-        --     return (vim.v.shell_error == 0)
-        -- end,
         setup = function()
             require("core.lazy_load").on_file_open "gitsigns.nvim"
         end,
         config = function()
-            require "plugins.conf.gitsigns"
+            require "plugins.gitsigns"
         end,
     },
     ["rhysd/git-messenger.vim"] = {
         after = "gitsigns.nvim",
         config = function()
-            require "plugins.conf.git-messenger"
+            require "plugins.git-messenger"
         end,
     },
     ["TimUntersberger/neogit"] = {
         cmd = "Neogit",
         config = function()
-            require "plugins.conf.neogit"
+            require "plugins.neogit"
+        end,
+    },
+
+    -- JUMP
+    ["rlane/pounce.nvim"] = {
+        cmd = "Pounce",
+        config = function ()
+            require "plugins.pounce"
         end,
     },
 
@@ -261,7 +280,7 @@ return {
     ["folke/which-key.nvim"] = {
         after = "legendary.nvim",
         config = function()
-            require "plugins.conf.which-key"
+            require "plugins.which-key"
         end,
     },
 
@@ -269,19 +288,19 @@ return {
     ["williamboman/mason-lspconfig.nvim"] = {
         after = "mason-tool-installer.nvim",
         config = function ()
-            require "plugins.conf.mason-lspconfig" 
+            require "plugins.mason-lspconfig"
         end,
     },
     ["neovim/nvim-lspconfig"] = {
         after = "mason-lspconfig.nvim",
         config = function()
-            require "plugins.conf.lspconfig"
+            require "plugins.lspconfig"
         end,
     },
     ["jose-elias-alvarez/null-ls.nvim"] = {
         after = "nvim-lspconfig",
         setup = function()
-            require "plugins.conf.null-ls"
+            require "plugins.null-ls"
         end,
     },
 
@@ -294,20 +313,20 @@ return {
     ["stevearc/aerial.nvim"] = {
         cmd = "AerialToggle",
         config = function()
-            require "plugins.conf.aerial"
+            require "plugins.aerial"
         end,
     },
     ["nvim-treesitter/nvim-treesitter-refactor"] = {
         module = "refactor",
         config = function()
-            require "plugins.conf.treesitter-refactor"
+            require "plugins.treesitter-refactor"
         end,
     },
     ["ThePrimeagen/refactoring.nvim"] = {
         disable = true,
         module = "refactoring",
         setup = function()
-            require "plugins.conf.refactoring"
+            require "plugins.refactoring"
         end
     },
 
@@ -315,7 +334,7 @@ return {
     ["jbyuki/instant.nvim"] = {
         opt = true,
         config = function()
-            require "plugins.conf.instant"
+            require "plugins.instant"
         end,
     },
 
@@ -325,65 +344,64 @@ return {
         cmd = "NeorgStart",
         after = "nvim-treesitter",
         config = function()
-            require "plugins.conf.neorg"
+            require "plugins.neorg"
         end,
     },
 
-    -- PLUGIN/PACKAGE
-    ["wbthomason/packer.nvim"] = { },
+    -- PACKAGE
     ["williamboman/mason.nvim"] = {
+        event = "UIEnter",
         config = function ()
-            require "plugins.conf.mason" 
+            require "plugins.mason"
         end,
     },
     ["WhoIsSethDaniel/mason-tool-installer.nvim"] = {
         after = "mason.nvim",
         config = function ()
-            require "plugins.conf.mason-tool-installer"
+            require "plugins.mason-tool-installer"
         end,
     },
+
+    -- PLUGIN
+    ["wbthomason/packer.nvim"] = { },
 
     -- SESSION
     ["olimorris/persisted.nvim"] = {
         cmd = { "SessionSave", "SessionLoad" },
         config = function()
-            require "plugins.conf.persisted"
+            require "plugins.persisted"
         end,
     },
 
     -- SPECIAL
-    --   NOTE: CSV
-    ["mechatroner/rainbow_csv"] = {
-        ft = "csv",
-    },
 
-    --   NOTE: DOCKER
+    -- DOCKER
     ["jamestthompson3/nvim-remote-containers"] = {
         disable = true,
         config = function()
-            require "plugins.conf.remote-containers"
+            require "plugins.remote-containers"
         end,
     },
 
-    --   NOTE: PYTHON
+    -- PYTHON
     ["jmcantrell/vim-virtualenv"] = {
         ft = "python",
         cmd = "VirtualEnvList",
     },
 
-    --   NOTE: SQL
+    -- SQL
     ["tpope/vim-dadbod"] = {
         ft = "sql",
         cmd = { "DB", "DBUI" },
         config = function()
-            require "plugins.conf.dadbod"
+            require "plugins.dadbod"
         end,
     },
     ["kristijanhusak/vim-dadbod-ui"] = {
         after = "vim-dadbod",
         ft = "sql",
         config = function()
-            require "plugins.conf.dadbod-ui"
+            require "plugins.dadbod-ui"
         end,
     },
 
@@ -391,7 +409,7 @@ return {
     ["feline-nvim/feline.nvim"] = {
         after = "nvim-web-devicons",
         config = function()
-            require "plugins.conf.feline"
+            require "plugins.feline"
         end,
     },
 
@@ -401,7 +419,7 @@ return {
         tag = "v2.*",
         -- keys = "<leader>t",
         config = function()
-            require "plugins.conf.toggleterm"
+            require "plugins.toggleterm"
         end,
     },
 
@@ -409,7 +427,7 @@ return {
     ["nvim-neotest/neotest"] = {
         module = "neotest",
         config = function()
-            require "plugins.conf.neotest"
+            require "plugins.neotest"
         end,
     },
 
@@ -417,7 +435,7 @@ return {
     ["kyazdani42/nvim-web-devicons"] = {
         event = { "UIEnter", },
         config = function()
-            require "plugins.conf.web-devicons"
+            require "plugins.web-devicons"
         end,
     },
     ["lukas-reineke/indent-blankline.nvim"] = {
@@ -425,7 +443,7 @@ return {
             require("core.lazy_load").on_file_open "indent-blankline.nvim"
         end,
         config = function()
-            require "plugins.conf.indent-blankline"
+            require "plugins.indent-blankline"
         end,
     },
     ["norcalli/nvim-colorizer.lua"] = {
@@ -433,52 +451,44 @@ return {
             require("core.lazy_load").colorizer()
         end,
         config = function()
-            require "plugins.conf.colorizer"
+            require "plugins.colorizer"
         end,
     },
     ["stevearc/dressing.nvim"] = {
         module = "dressing",
         fn = { "vim.ui.input", "vim.ui.select" },
         config = function()
-            require "plugins.conf.dressing"
+            require "plugins.dressing"
         end,
     },
     ["rcarriga/nvim-notify"] = {
         module = "notify",
         fn = "vim.notify",
         config = function()
-            require "plugins.conf.notify"
+            require "plugins.notify"
         end,
     },
     ["p00f/nvim-ts-rainbow"] = {
         -- module = "nvim-treesitter",
         after = "nvim-treesitter",
         config = function()
-            require "plugins.conf.treesitter-rainbow"
+            require "plugins.treesitter-rainbow"
         end,
     },
 
     -- UTILITIES
-    ["nvim-lua/plenary.nvim"] = {
-        module = "plenary"
-    },
-    ["nvim-lua/popup.nvim"] = {
-        module = "popup",
-    },
-    ["lewis6991/impatient.nvim"] = {
-    },
-
-    ["antoinemadec/FixCursorHold.nvim"] = {
-    },
-
     ["nvim-telescope/telescope-fzf-native.nvim"] = {
         run = "make",
         after = "telescope.nvim",
         config = function()
-            require "plugins.conf.telescope-fzf-native"
+            require "plugins.telescope-fzf-native"
         end,
     },
-    ["mrjones2014/legendary.nvim"] = {},
+    ["mrjones2014/legendary.nvim"] = {
+        config = function()
+            require "plugins.legendary"
+        end,
+    },
     ["Weissle/persistent-breakpoints.nvim"] = {
     },
     ["dstein64/vim-startuptime"] = {
@@ -490,45 +500,45 @@ return {
     ["protex/better-digraphs.nvim"] = {
         module = "better-digraphs",
         config = function()
-            require "plugins.conf.better-digraphs"
+            require "plugins.better-digraphs"
         end,
     },
     ["lewis6991/spellsitter.nvim"] = {
         after = "nvim-treesitter",
         config = function()
-            require "plugins.conf.spellsitter"
+            require "plugins.spellsitter"
         end,
     },
     ["folke/twilight.nvim"] = {
         cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
         after = "zen-mode.nvim",
         config = function()
-            require "plugins.conf.twilight"
+            require "plugins.twilight"
         end,
     },
     ["folke/zen-mode.nvim"] = {
         after = "neorg",
         cmd = "ZenMode",
         config = function()
-            require "plugins.conf.zen-mode"
+            require "plugins.zen-mode"
         end,
     },
     ["nvim-treesitter/playground"] = {
         cmd = "TSPlaygroundToggle",
         config = function()
-            require "plugins.conf.playground"
+            require "plugins.playground"
         end,
     },
     ["karb94/neoscroll.nvim"] = {
         keys = { "<C-b>", "<C-f>", "<C-u>", "<C-d>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
         config = function()
-            require "plugins.conf.neoscroll"
+            require "plugins.neoscroll"
         end,
     },
     ["ziontee113/color-picker.nvim"] = {
         cmd = { "PickColor", "PickColorInsert" },
         config = function()
-            require "plugins.conf.color-picker"
+            require "plugins.color-picker"
         end,
     },
     ["kylechui/nvim-surround"] = {
@@ -536,13 +546,13 @@ return {
             require("core.lazy_load").on_file_open "nvim-surround"
         end,
         config = function()
-            require "plugins.conf.surround"
+            require "plugins.surround"
         end,
     },
     ["AckslD/nvim-trevJ.lua"] = {
         module = "trevj",
         config = function()
-            require "plugins.conf.trevJ"
+            require "plugins.trevJ"
         end,
     },
     ["mbbill/undotree"] = {
@@ -553,7 +563,7 @@ return {
     },
     ["lewis6991/satellite.nvim"] = {
         config = function()
-            require "plugins.conf.satellite"
+            require "plugins.satellite"
         end,
     },
     ["folke/trouble.nvim"] = {
@@ -561,16 +571,28 @@ return {
         cmd = "Trouble",
         module = "trouble",
         config = function()
-            require "plugins.conf.trouble"
+            require "plugins.trouble"
         end
     },
     ["lewis6991/hover.nvim"] = {
         module = "hover",
         config = function()
-            require "plugins.conf.hover"
+            require "plugins.hover"
         end
     },
     ["tpope/vim-dotenv"] = {
         cmd = "Dotenv",
+    },
+
+    -- VIM
+    ["nvim-lua/plenary.nvim"] = {
+        module = "plenary"
+    },
+    ["nvim-lua/popup.nvim"] = {
+        module = "popup",
+    },
+    ["lewis6991/impatient.nvim"] = {
+    },
+    ["antoinemadec/FixCursorHold.nvim"] = {
     },
 }

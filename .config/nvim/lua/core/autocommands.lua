@@ -1,5 +1,6 @@
 -- autocmdsa
 local autocmd = vim.api.nvim_create_autocmd
+local utils = require("core.utils")
 
 autocmd("InsertLeave", {
     callback = function()
@@ -11,7 +12,7 @@ autocmd("InsertLeave", {
     end,
 })
 
-autocmd("BufEnter", { command = "set foldexpr=nvim_treesitter#fold_expr()", once = true, })
+-- autocmd("BufEnter", { command = "set foldexpr=nvim_treesitter#foldexpr()", once = true, })
 autocmd("FileType", { pattern = "mason", command = "IndentBlanklineDisable" })
 
 -- autocmd("VimEnter", {
@@ -57,14 +58,42 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
 
 autocmd("InsertEnter", {
     pattern = "*",
-    callback = function ()
+    callback = function()
         vim.diagnostic.disable(0)
     end,
 })
 
 autocmd("InsertLeave", {
     pattern = "*",
-    callback = function ()
+    callback = function()
         vim.diagnostic.enable(0)
     end,
+})
+
+-- autocmd("BufWritePre", {
+--     callback = function()
+
+--         local cursor_pos = vim.api.nvim_win_get_cursor(0)
+
+--         -- delete trailing whitespace
+--         vim.cmd([[:keepjumps keeppatterns %s/\s\+$//e]])
+
+--         -- delete lines @ eof
+--         vim.cmd([[:keepjumps keeppatterns silent! 0;/^\%(\n*.\)\@!/,$d]])
+
+--         utils.reset_cursor_pos(cursor_pos)
+--     end
+-- })
+
+autocmd("BufEnter", {
+    callback = function()
+        if vim.g.providers.context == "gps" then
+            require "nvim-gps"
+        elseif vim.g.providers.context == "navic" then
+            require "nvim-navic"
+        elseif vim.g.providers.context == "treesitter" then
+            require "treesitter-context"
+        end
+    end,
+    once = true,
 })

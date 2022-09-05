@@ -16,3 +16,5 @@ gps.setup {
     },
     separator = " » ",
 }
+
+require("core.utils").load_context_provider(gps)

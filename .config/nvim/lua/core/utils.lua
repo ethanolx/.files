@@ -40,7 +40,6 @@ end
 utils.check_if_last_buffer = function()
     local bufferline_commands = require "bufferline.commands"
     local bufferline_state = require "bufferline.state"
-
     local current_buffer_index = bufferline_commands.get_current_element_index(bufferline_state)
     return current_buffer_index >= #bufferline_state.components
 end
@@ -73,11 +72,15 @@ utils.close_buffer = function(force)
     vim.cmd(close_cmd)
 end
 
-utils.load_mappings = function(mappings)
-    -- Register mappings using Which-Key only
-    require("legendary").setup()
+utils.load_alt_mappings = function (modes)
     local which_key = require("which-key")
+    for mode, mappings in pairs(modes) do
+        for key, details in pairs(mappings) do
+            local action, comment, opts = table.unpack(details)
 
+            which_key.register({ [string.format("<M-%s>")] =  })
+        end
+    end
     for category, section_mappings in pairs(mappings) do
         for mode, mode_mappings in pairs(section_mappings) do
             for keybind, mapping_info in pairs(mode_mappings) do
@@ -98,6 +101,26 @@ utils.load_mappings = function(mappings)
 
                 ::continue::
             end
+        end
+    end
+end
+
+utils.load_mappings = function(mappings)
+    require("legendary")
+
+    for section, modes in pairs(mappings) do
+        if section == "alt" then
+            utils.load_alt_mappings(modes)
+        elseif section == "ctl" then
+            utils.load_ctl_mappings(modes)
+        elseif section == "misc" then
+            utils.load_misc_mappings(modes)
+        elseif section == "overload" then
+            utils.load_overload_mappings(modes)
+        elseif section == "compatibility" then
+            utils.load_compatibility_mappings(modes)
+        else
+            utils.load_main_mappings(modes)
         end
     end
 end
@@ -156,6 +179,54 @@ utils.replace_with_trouble = function()
         set.relativenumber = false
         set.signcolumn = "no"
     end
+end
+
+utils.reset_cursor_pos = function(pos)
+    local num_rows = vim.api.nvim_buf_line_count(0)
+
+    --[[
+        if the row value in the original cursor
+        position tuple is greater than the
+        line count after empty line deletion
+        (meaning that the cursor was inside of
+        the group of empty lines at the end of
+        the file when they were deleted), set
+        the cursor row to the last line.
+    ]]
+    if pos[1] > num_rows then
+        pos[1] = num_rows
+    end
+
+    vim.api.nvim_win_set_cursor(0, pos)
+end
+
+utils.load_context_provider = function(context_provider)
+    local current_context = {
+        provider = function()
+            return context_provider.get_location()
+        end,
+        enabled = function()
+            return context_provider.is_available()
+        end,
+        hl = "WinBar"
+    }
+
+    require("feline").winbar.setup {
+        components = {
+            active = {
+                {},
+                { current_context },
+                {},
+            },
+            inactive = {},
+        }
+    }
+end
+
+utils.hover = function()
+    vim.cmd [[autocmd! CursorHold *]]
+    vim.lsp.buf.hover()
+    vim.cmd [[autocmd CursorMoved * ++once lua require("core.utils").activate_diagnostics()]]
 end
 
 return utils

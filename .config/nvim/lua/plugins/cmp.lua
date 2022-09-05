@@ -49,7 +49,7 @@ require("core.utils").load_highlights(
 
 cmp.setup {
     enabled = function()
-        return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+        return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or vim.bo.filetype == "dap-repl"
     end,
     window = {
         completion = {

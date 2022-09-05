@@ -4,6 +4,17 @@ if not present then
     return
 end
 
+require("core.utils").load_highlights(
+    function(colour_palette)
+        return {
+            IndentBlanklineContextChar = { fg = colour_palette.blue },
+            IndentBlanklineContextStart = { fg = "", bg = "", italic = true, underline = false },
+            IndentBlanklineContextSpaceChar = { fg = colour_palette.line },
+            IndentBlanklineChar = { fg = colour_palette.line },
+            IndentBlanklineSpaceChar = { fg = colour_palette.line },
+        }
+    end
+)
 
 indent_blankline.setup {
     enabled = true,
@@ -30,14 +41,4 @@ indent_blankline.setup {
     use_treesitter = true,
 }
 
-require("core.utils").load_highlights(
-    function(colour_palette)
-        return {
-            IndentBlanklineContextChar = { fg = colour_palette.blue },
-            IndentBlanklineContextStart = { --[[ fg = "", bg = "",  ]]italic = true, underline = false },
-            IndentBlanklineContextSpaceChar = { fg = colour_palette.line },
-            IndentBlanklineChar = { fg = colour_palette.line },
-            IndentBlanklineSpaceChar = { fg = colour_palette.line },
-        }
-    end
-)
+print('hello')

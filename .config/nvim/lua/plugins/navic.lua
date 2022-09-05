@@ -50,3 +50,5 @@ navic.setup {
     icons = padded_icons,
     separator = " » ",
 }
+
+require("core.utils").load_context_provider(navic)

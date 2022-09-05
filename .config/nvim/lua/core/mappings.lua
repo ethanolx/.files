@@ -3,102 +3,95 @@ local termcodes = utils.term_codes
 
 local mappings = {}
 
-mappings._utilities = {
+-- mappings._alt = {
+--     v = {
+--         j = { ": MoveBlock(1)<cr>", "  move lines down" },
+--         J = { "<cmd> lua require(\"trevj\").format_at_cursor() <cr>", "unwrap lines", },
+--         k = { ": MoveBlock(-1)<cr>", "  move lines up" },
+--     },
+--     n = {
+--         p = { "\"+p", "   paste from system clipboard" },
+--         P = { "\"+P", "   paste from system clipboard" },
+--         y = { "\"+y", "   paste from system clipboard" },
+--         Y = { "\"+Y", "   paste from system clipboard" },
+
+--         j = { "<cmd> MoveLine(1) <cr>", "  move line down" },
+--         k = { "<cmd> MoveLine(-1) <cr>", "  move line up" },
+
+--         J = { "<cmd> lua require(\"trevj\").format_at_cursor() <cr>", "unwrap lines", },
+
+--         t = { "<cmd> ToggleTerm direction=tab <cr>", "   toggle floating term", },
+--         f = { "<cmd> ToggleTerm direction=float <cr>", "   toggle floating term", },
+--         h = { "<cmd> ToggleTerm direction=horizontal <cr>", "   toggle horizontal term", },
+--         v = { "<cmd> ToggleTerm direction=vertical <cr>", "   toggle vertical term", },
+
+--         [","] = { "<cmd> BufferLineMovePrev <cr>", "move buffer left" },
+--         [";"] = { "<cmd> BufferLineMoveNext <cr>", "move buffer right" },
+--     }
+-- }
+
+-- mappings._ctl = {
+--     n = {
+--         up = { "<C-w>+", "ﱟ   increase window width" },
+--         down = { "<C-w>-", "ﱞ   decrease window width" },
+--         right = { "<C-w>>", "ﱟ   increase window width" },
+--         left = { "<C-w><", "ﱞ   decrease window width" },
+
+--         h = { "<C-w>h", "  window left" },
+--         l = { "<C-w>l", "  window right" },
+--         j = { "<C-w>j", "  window down" },
+--         k = { "<C-w>k", "  window up" },
+--         _ = { "<cmd> ToggleTerm <cr>", "   toggle floating term", },
+--     },
+--     t = {
+--         z = { termcodes "<C-\\><C-N>", "Escape terminal mode" },
+--         h = { termcodes "<C-\\><C-n><C-w>h", "Escape terminal mode" },
+--         j = { termcodes "<C-\\><C-n><C-w>j", "Escape terminal mode" },
+--         k = { termcodes "<C-\\><C-n><C-w>k", "Escape terminal mode" },
+--         l = { termcodes "<C-\\><C-n><C-w>l", "Escape terminal mode" },
+--     }
+-- }
+
+mappings._overload = {
     i = {
         ["<S-Tab>"] = { "<C-d>", "Undo indentation" },
-        ["<C-k><C-k>"] = { "<cmd> lua require'better-digraphs'.digraphs(\"i\")<cr>", "digraphs" },
-    },
-
-    v = {
-        -- ["<A-h>"] = { ": MoveHBlock(-1) <cr>", "  move lines up" },
-        ["<A-j>"] = { ": MoveBlock(1) <cr>", "  move lines down" },
-        ["<A-k>"] = { ": MoveBlock(-1) <cr>", "  move lines up" },
-        -- ["<A-l>"] = { ": MoveHBlock(1) <cr>", "  move lines down" },
     },
     n = {
-        ["<M-p>"] = { "\"+p", "   paste from system clipboard" },
-        ["<M-P>"] = { "\"+P", "   paste from system clipboard" },
-        ["<M-y>"] = { "\"+y", "   paste from system clipboard" },
-        ["<M-Y>"] = { "\"+Y", "   paste from system clipboard" },
-
-        ["<M-Up>"] = { "<C-w>+", "ﱟ   increase window width" },
-        ["<M-Down>"] = { "<C-w>-", "ﱞ   decrease window width" },
-        ["<M-Right>"] = { "<C-w>>", "ﱟ   increase window width" },
-        ["<M-Left>"] = { "<C-w><", "ﱞ   decrease window width" },
-
-        -- ["<A-h>"] = { "<cmd> MoveHChar(-1) <cr>", "  move line up" },
-        ["<M-j>"] = { "<cmd> MoveLine(1) <cr>", "  move line down" },
-        ["<M-k>"] = { "<cmd> MoveLine(-1) <cr>", "  move line up" },
-        -- ["<A-l>"] = { "<cmd> MoveHChar(1) <cr>", "  move line down" },
-
-        ["<leader><leader>"] = { "", "  main" },
-
         ["_"] = { "\"_", "" },
         ["<Esc>"] = {
             function()
                 vim.cmd "nohlsearch"
-                -- require("scrollbar.handlers.search").nohlsearch()
-                -- require("hlslens.main").refresh()
-                -- vim.o.winbar = "%{%v:lua.require'feline'.generate_winbar()%}"
                 vim.o.statusline = "%{%v:lua.require('feline').generate_statusline()%}"
             end,
             "  reset",
         },
-        -- ["n"] = { "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require(\"hlslens.main\").start()<cr>",
-        --     "jump to next occurrence", },
-        -- ["N"] = { "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require(\"hlslens.main\").start()<cr>",
-        --     "jump to prev occurrence", },
-        -- ["#"] = { "#<cmd>lua require(\"hlslens.main\").start()<cr>", "jump to next occurrence", },
-        -- ["g#"] = { "g#<cmd>lua require(\"hlslens.main\").start()<cr>", "jump to next occurrence", },
-        -- ["*"] = { "*<cmd>lua require(\"hlslens.main\").start()<cr>", "jump to next occurrence", },
-        -- ["g*"] = { "g*<cmd>lua require(\"hlslens.main\").start()<cr>", "jump to next occurrence", },
-
-        ["<M-,>"] = { "<cmd> BufferLineMovePrev <cr>", "move buffer left" },
-        ["<M-;>"] = { "<cmd> BufferLineMoveNext <cr>", "move buffer right" },
         ["<Tab>"] = { "<cmd> BufferLineCycleNext <cr>", "   cycle next buffer" },
         ["<S-Tab>"] = { "<cmd> BufferLineCyclePrev <cr>", "   cycle prev buffer" },
-
-        ["<C-h>"] = { "<C-w>h", "  window left" },
-        ["<C-l>"] = { "<C-w>l", "  window right" },
-        ["<C-j>"] = { "<C-w>j", "  window down" },
-        ["<C-k>"] = { "<C-w>k", "  window up" },
-
-        ["<C-_>"] = {
-            "<cmd> ToggleTerm <cr>",
-            "   toggle floating term",
-        },
-        -- toggle in normal mode
-        ["<M-t>"] = {
-            "<cmd> ToggleTerm direction=tab <cr>",
-            "   toggle floating term",
-        },
-        ["<M-f>"] = {
-            "<cmd> ToggleTerm direction=float <cr>",
-            "   toggle floating term",
+        ["gD"] = {
+            function()
+                vim.lsp.buf.declaration()
+            end,
+            "   lsp declaration",
         },
 
-        ["<M-h>"] = {
-            "<cmd> ToggleTerm direction=horizontal <cr>",
-            "   toggle horizontal term",
+        ["gd"] = {
+            function()
+                vim.lsp.buf.definition()
+            end,
+            "   lsp definition",
         },
+        ["K"] = { require("core.utils").hover, "   lsp hover", },
 
-        ["<M-v>"] = {
-            "<cmd> ToggleTerm direction=vertical <cr>",
-            "   toggle vertical term",
-        },
-    },
-
-    t = {
-        -- ["<Esc>"] = { termcodes "<C-\\><C-N>", "Escape terminal mode" },
-        ["<C-z>"] = { termcodes "<C-\\><C-N>", "Escape terminal mode" },
-        ["<C-h>"] = { termcodes "<C-\\><C-n><C-w>h", "Escape terminal mode" },
-        ["<C-j>"] = { termcodes "<C-\\><C-n><C-w>j", "Escape terminal mode" },
-        ["<C-k>"] = { termcodes "<C-\\><C-n><C-w>k", "Escape terminal mode" },
-        ["<C-l>"] = { termcodes "<C-\\><C-n><C-w>l", "Escape terminal mode" },
     }
 }
 
-mappings._compatibility = {
+mappings.misc = {
+    i = {
+        ["<C-k><C-k>"] = { "<cmd> lua require'better-digraphs'.digraphs(\"i\")<cr>", "digraphs" },
+    }
+}
+
+mappings.compatibility = {
     n = {
         ["<C-a>"] = { "<cmd> lua require(\"core.utils\").select_all() <cr>", "SELECT ALL" },
         ["<C-s>"] = { "<cmd> w <cr>", "SAVE" },
@@ -110,8 +103,6 @@ mappings._compatibility = {
         ["<C-o>"] = { ":e ", "open file" },
     }
 }
-
--- prefix: definition
 
 -- a:  autocomplete
 mappings.a = {
@@ -157,23 +148,9 @@ mappings.c = {
         -- Label
         ["<leader>c"] = { name = " comments /  palette" },
         ["<leader>cp"] = { "<cmd>PickColor<cr>", "colour picker" },
-
-        -- (f)ind todo comments
-        -- ["<leader>cf"] = { "<cmd> TodoTelescope <cr>", "  find todo comments" },
-        -- ["<leader>/"] = {
-        --     function()
-        --         require("Comment.api").toggle_current_linewise()
-        --     end,
-
-        --     "  toggle comment",
-        -- },
     },
 
     v = {
-        ["<leader>/"] = {
-            "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<cr>",
-            "  toggle comment",
-        },
     },
 }
 
@@ -228,6 +205,7 @@ mappings.e = {
         ["<leader><leader>e"] = { "<cmd> NvimTreeToggle <cr>", "" },
 
         -- (f)ocus the current buffer
+        ["<leader>ec"] = { "<cmd>NvimTreeCollapse<cr>", "פּ  focus nvimtree" },
         ["<leader>ef"] = { "<cmd> NvimTreeFindFile <cr>", "פּ  focus nvimtree" },
         ["<leader>er"] = { "<cmd> NvimTreeRefresh <cr>", "פּ  focus nvimtree" },
     },
@@ -288,7 +266,8 @@ mappings.g = {
         ["<leader>gC"] = {
             function()
 
-            end, "  commit" },
+            end, "  commit"
+        },
         ["<leader>ga"] = { "<cmd> Gitsigns stage_hunk <cr>", "  stage_hunk" },
         ["<leader>gA"] = { "<cmd> !git add % <cr>", "  stage this file" },
         ["<leader>gS"] = { "<cmd> Telescope git_status <cr>", "   git status" },
@@ -342,43 +321,11 @@ mappings.l = {
     -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
 
     n = {
-        ["gD"] = {
-            function()
-                vim.lsp.buf.declaration()
-            end,
-            "   lsp declaration",
-        },
-
-        ["gd"] = {
-            function()
-                vim.lsp.buf.definition()
-            end,
-            "   lsp definition",
-        },
-
-        -- ["K"] = {
-        --     require("hover").hover,
-        --     "hover",
-        -- },
-        ["K"] = {
-            function()
-                vim.cmd [[autocmd! CursorHold *]]
-                vim.lsp.buf.hover()
-                vim.cmd [[autocmd CursorMoved * ++once lua require("core.utils").activate_diagnostics()]]
-            end,
-            "   lsp hover",
-        },
-
         ["<leader>li"] = {
             function()
                 vim.lsp.buf.implementation()
             end,
             "   lsp implementation",
-        },
-
-        ["<M-J>"] = {
-            "<cmd> lua require(\"trevj\").format_at_cursor() <cr>",
-            "unwrap lines",
         },
 
         ["<leader>ls"] = {
@@ -394,8 +341,6 @@ mappings.l = {
             end,
             "   lsp definition type",
         },
-
-        -- ["<leader>lr"] = { ":Re ", "   lsp rename", },
 
         ["<leader>lr"] = { "<cmd> lua vim.lsp.buf.rename() <cr>", "LSP rename" },
 
@@ -622,7 +567,7 @@ mappings.w = {
     n = {
         -- Label
         ["<leader>w"] = { "", "   windows" },
-        ["<leader>wc"] = { "<cmd> q <cr>", "close window" },
+        ["<leader>wc"] = { "<cmd>q<cr>", "close window" },
     },
 }
 
@@ -656,5 +601,6 @@ mappings.z = {
         ["<leader>zt"] = { "<cmd> Twilight <cr>", "  toggle twilight" },
     }
 }
+
 
 utils.load_mappings(mappings)

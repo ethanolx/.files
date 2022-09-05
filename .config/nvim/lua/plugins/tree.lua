@@ -36,8 +36,8 @@ require("core.utils").load_highlights(
             NvimTreeGitModified = { fg = colour_palette.yellow },
             NvimTreeGitDirty = { fg = colour_palette.yellow },
             NvimTreeGitMerge = { fg = colour_palette.orange },
-            NvimTreeGitStaged = { fg = colour_palette.red },
-            NvimTreeGitNew = { fg = colour_palette.red },
+            NvimTreeGitStaged = { fg = colour_palette.vibrant_green },
+            NvimTreeGitNew = { fg = colour_palette.vibrant_green },
             NvimTreeGitDeleted = { fg = colour_palette.red },
             NvimTreeLiveFilterPrefix = { fg = colour_palette.dark_purple },
 
@@ -54,7 +54,6 @@ require("core.utils").load_highlights(
     end
 )
 
--- vim.wo.foldcolumn = "5"
 local icon_padding = ""
 if (vim.fn.has('unix') == 1 or vim.fn.has('macunix') == 1) then
     icon_padding = " "

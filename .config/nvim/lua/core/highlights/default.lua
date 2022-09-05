@@ -48,10 +48,11 @@ return function(colour_palette)
             fg = colour_palette.base0D,
         },
 
-        Error = {
-            fg = colour_palette.base00,
-            bg = colour_palette.base08,
-        },
+        Error = {},
+        -- Error = {
+        --     fg = colour_palette.base00,
+        --     bg = colour_palette.base08,
+        -- },
 
         ErrorMsg = {
             fg = colour_palette.base08,
@@ -63,7 +64,7 @@ return function(colour_palette)
         },
 
         FoldColumn = { fg = colour_palette.teal, bg = "" },
-        Folded = { fg = colour_palette.base03, bg = colour_palette.one_bg2 },
+        Folded = { fg = "", bg = colour_palette.one_bg2 },
 
         IncSearch = {
             fg = colour_palette.base01,
@@ -143,10 +144,7 @@ return function(colour_palette)
             bg = "NONE",
         },
 
-        Cursor = {
-            fg = colour_palette.base00,
-            bg = colour_palette.base05,
-        },
+        Cursor = { reverse = true },
 
         NonText = {
             fg = colour_palette.base03,
