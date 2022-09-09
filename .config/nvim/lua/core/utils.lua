@@ -72,55 +72,62 @@ utils.close_buffer = function(force)
     vim.cmd(close_cmd)
 end
 
-utils.load_alt_mappings = function (modes)
-    local which_key = require("which-key")
+utils.load_sub_mappings = function(registrar, prefix, modes)
+    local default_opts = {
+        silent = true,
+        noremap = true,
+    }
     for mode, mappings in pairs(modes) do
         for key, details in pairs(mappings) do
-            local action, comment, opts = table.unpack(details)
+            local action = details[1]
+            local description = details[2]
+            local override_opts = details[3] or {}
 
-            which_key.register({ [string.format("<M-%s>")] =  })
-        end
-    end
-    for category, section_mappings in pairs(mappings) do
-        for mode, mode_mappings in pairs(section_mappings) do
-            for keybind, mapping_info in pairs(mode_mappings) do
-                if category == "_compatibility" then
-                    local compatibility_mode = vim.g.compatibility_mode or 1
-                    if compatibility_mode == 0 then
-                        goto continue
-                    elseif compatibility_mode == 1 then
-                        keybind = "<leader>" .. keybind
-                    end
-                end
-
-                local opts = mapping_info[3] or { remap = false, silent = true, }
-                opts.mode = mode
-                mapping_info[3] = nil
-
-                which_key.register({ [keybind] = mapping_info }, opts)
-
-                ::continue::
+            if key == "_" then
+                key = "<leader>" .. prefix
+            elseif type(prefix) == "string" then
+                key = prefix .. key
+            elseif type(prefix) == "function" then
+                key = prefix(key)
             end
+
+            local opts = vim.tbl_extend("force", { mode = mode }, default_opts, override_opts)
+            registrar.register({ [key] = { action, description } }, opts)
         end
     end
 end
 
 utils.load_mappings = function(mappings)
+    -- Set up legendary and load which-key
     require("legendary")
+    local which_key = require("which-key")
 
-    for section, modes in pairs(mappings) do
+    -- Determine compatibility mode
+    local compatibility_mode = vim.g.compatibility_mode or 1
+
+    -- Fetch icons
+    local icons = require("core.icons").category
+
+    -- Consolidate categories
+    local categories = {}
+
+    for section, mode_mappings in pairs(mappings) do
         if section == "alt" then
-            utils.load_alt_mappings(modes)
+            utils.load_sub_mappings(which_key, function(key) return string.format("<M-%s>", key) end, mode_mappings)
         elseif section == "ctl" then
-            utils.load_ctl_mappings(modes)
+            utils.load_sub_mappings(which_key, function(key) return string.format("<C-%s>", key) end, mode_mappings)
         elseif section == "misc" then
-            utils.load_misc_mappings(modes)
+            utils.load_sub_mappings(which_key, nil, mode_mappings)
         elseif section == "overload" then
-            utils.load_overload_mappings(modes)
-        elseif section == "compatibility" then
-            utils.load_compatibility_mappings(modes)
+            utils.load_sub_mappings(which_key, nil, mode_mappings)
+        elseif section == "compatibility" and compatibility_mode == 1 then
+            utils.load_sub_mappings(which_key, "<leader>", mode_mappings)
+        elseif section == "compatibility" and compatibility_mode > 1 then
+            utils.load_sub_mappings(which_key, nil, mode_mappings)
         else
-            utils.load_main_mappings(modes)
+            local prefix = "<leader>" .. string.sub(section, 0, 1)
+            which_key.register({ [prefix] = { name = string.format("%s %s", icons[section], section) } }, { mode = "n", silent = true, noremap = true })
+            utils.load_sub_mappings(which_key, prefix, mode_mappings)
         end
     end
 end

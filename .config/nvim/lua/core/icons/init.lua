@@ -4,7 +4,7 @@ local icons = {}
 -- Declare default icon sets (nil: no options)
 local default_icon_sets = {
     buffer = "",
-    category = "nerdfont",
+    category = "",
     devicon = "",
     diagnostic = "outline",
     explorer = "outline",

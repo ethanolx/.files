@@ -3,85 +3,67 @@ local termcodes = utils.term_codes
 
 local mappings = {}
 
--- mappings._alt = {
---     v = {
---         j = { ": MoveBlock(1)<cr>", "  move lines down" },
---         J = { "<cmd> lua require(\"trevj\").format_at_cursor() <cr>", "unwrap lines", },
---         k = { ": MoveBlock(-1)<cr>", "  move lines up" },
---     },
---     n = {
---         p = { "\"+p", "   paste from system clipboard" },
---         P = { "\"+P", "   paste from system clipboard" },
---         y = { "\"+y", "   paste from system clipboard" },
---         Y = { "\"+Y", "   paste from system clipboard" },
+mappings.alt = {
+    v = {
+        j = { ": MoveBlock(1)<cr>", "  move lines down" },
+        J = { "<cmd> lua require(\"trevj\").format_at_cursor() <cr>", "unwrap lines", },
+        k = { ": MoveBlock(-1)<cr>", "  move lines up" },
+    },
+    n = {
+        p = { "\"+p", "   paste from system clipboard" },
+        P = { "\"+P", "   paste from system clipboard" },
+        y = { "\"+y", "   paste from system clipboard" },
+        Y = { "\"+Y", "   paste from system clipboard" },
 
---         j = { "<cmd> MoveLine(1) <cr>", "  move line down" },
---         k = { "<cmd> MoveLine(-1) <cr>", "  move line up" },
+        j = { "<cmd> MoveLine(1) <cr>", "  move line down" },
+        k = { "<cmd> MoveLine(-1) <cr>", "  move line up" },
 
---         J = { "<cmd> lua require(\"trevj\").format_at_cursor() <cr>", "unwrap lines", },
+        J = { "<cmd> lua require(\"trevj\").format_at_cursor() <cr>", "unwrap lines", },
 
---         t = { "<cmd> ToggleTerm direction=tab <cr>", "   toggle floating term", },
---         f = { "<cmd> ToggleTerm direction=float <cr>", "   toggle floating term", },
---         h = { "<cmd> ToggleTerm direction=horizontal <cr>", "   toggle horizontal term", },
---         v = { "<cmd> ToggleTerm direction=vertical <cr>", "   toggle vertical term", },
+        t = { "<cmd> ToggleTerm direction=tab <cr>", "   toggle floating term", },
+        f = { "<cmd> ToggleTerm direction=float <cr>", "   toggle floating term", },
+        h = { "<cmd> ToggleTerm direction=horizontal <cr>", "   toggle horizontal term", },
+        v = { "<cmd> ToggleTerm direction=vertical <cr>", "   toggle vertical term", },
 
---         [","] = { "<cmd> BufferLineMovePrev <cr>", "move buffer left" },
---         [";"] = { "<cmd> BufferLineMoveNext <cr>", "move buffer right" },
---     }
--- }
+        [","] = { "<cmd> BufferLineMovePrev <cr>", "move buffer left" },
+        [";"] = { "<cmd> BufferLineMoveNext <cr>", "move buffer right" },
+    }
+}
 
--- mappings._ctl = {
---     n = {
---         up = { "<C-w>+", "ﱟ   increase window width" },
---         down = { "<C-w>-", "ﱞ   decrease window width" },
---         right = { "<C-w>>", "ﱟ   increase window width" },
---         left = { "<C-w><", "ﱞ   decrease window width" },
+mappings.ctl = {
+    n = {
+        up = { "<C-w>+", "ﱟ   increase window width" },
+        down = { "<C-w>-", "ﱞ   decrease window width" },
+        right = { "<C-w>>", "ﱟ   increase window width" },
+        left = { "<C-w><", "ﱞ   decrease window width" },
 
---         h = { "<C-w>h", "  window left" },
---         l = { "<C-w>l", "  window right" },
---         j = { "<C-w>j", "  window down" },
---         k = { "<C-w>k", "  window up" },
---         _ = { "<cmd> ToggleTerm <cr>", "   toggle floating term", },
---     },
---     t = {
---         z = { termcodes "<C-\\><C-N>", "Escape terminal mode" },
---         h = { termcodes "<C-\\><C-n><C-w>h", "Escape terminal mode" },
---         j = { termcodes "<C-\\><C-n><C-w>j", "Escape terminal mode" },
---         k = { termcodes "<C-\\><C-n><C-w>k", "Escape terminal mode" },
---         l = { termcodes "<C-\\><C-n><C-w>l", "Escape terminal mode" },
---     }
--- }
+        h = { "<C-w>h", "  window left" },
+        l = { "<C-w>l", "  window right" },
+        j = { "<C-w>j", "  window down" },
+        k = { "<C-w>k", "  window up" },
+    },
+    t = {
+        z = { termcodes "<C-\\><C-N>", "Escape terminal mode" },
+        h = { termcodes "<C-\\><C-n><C-w>h", "Escape terminal mode" },
+        j = { termcodes "<C-\\><C-n><C-w>j", "Escape terminal mode" },
+        k = { termcodes "<C-\\><C-n><C-w>k", "Escape terminal mode" },
+        l = { termcodes "<C-\\><C-n><C-w>l", "Escape terminal mode" },
+    }
+}
 
-mappings._overload = {
+mappings.overload = {
     i = {
         ["<S-Tab>"] = { "<C-d>", "Undo indentation" },
     },
     n = {
-        ["_"] = { "\"_", "" },
-        ["<Esc>"] = {
-            function()
-                vim.cmd "nohlsearch"
-                vim.o.statusline = "%{%v:lua.require('feline').generate_statusline()%}"
-            end,
-            "  reset",
-        },
+        ["<Esc>"] = { function() vim.cmd "nohlsearch" vim.o.statusline = "%{%v:lua.require('feline').generate_statusline()%}" end, "  reset", },
+
         ["<Tab>"] = { "<cmd> BufferLineCycleNext <cr>", "   cycle next buffer" },
         ["<S-Tab>"] = { "<cmd> BufferLineCyclePrev <cr>", "   cycle prev buffer" },
-        ["gD"] = {
-            function()
-                vim.lsp.buf.declaration()
-            end,
-            "   lsp declaration",
-        },
 
-        ["gd"] = {
-            function()
-                vim.lsp.buf.definition()
-            end,
-            "   lsp definition",
-        },
+        ["gd"] = { function() vim.lsp.buf.definition() end, "   lsp definition", },
+        ["gD"] = { function() vim.lsp.buf.declaration() end, "   lsp declaration", },
         ["K"] = { require("core.utils").hover, "   lsp hover", },
-
     }
 }
 
@@ -104,194 +86,163 @@ mappings.compatibility = {
     }
 }
 
--- a:  autocomplete
-mappings.a = {
+-- a:  autocompletion
+mappings.autocompletion = {
     n = {
-        ["<leader>a"] = { name = "autocomplete", },
-        ["<leader>as"] = { "<cmd>CmpStatus<cr>", "check autocomplete status" },
+        --[""] = { name = "autocomplete", },
+        s = { "<cmd>CmpStatus<cr>", "check autocomplete status" },
     },
 }
 
 -- b:  buffers
-mappings.b = {
+mappings.buffer = {
     n = {
         -- Label
-        ["<leader>b"] = { "", "﬘   buffers" },
+        --[""] = { "", "﬘   buffers" },
 
         -- (j)ump to buffer
-        ["<leader>bj"] = { "<cmd> BufferLinePick <cr>", "go to buffer" },
+        j = { "<cmd> BufferLinePick <cr>", "go to buffer" },
 
         -- move buffers
 
         -- (q)uit all buffers
-        ["<leader>bC"] = { "<cmd> BufferLineCloseLeft <CR> <cmd> BufferLineCloseRight <CR> <cmd> bp|sp|bn|bd <CR>",
+        C = { "<cmd> BufferLineCloseLeft <CR> <cmd> BufferLineCloseRight <CR> <cmd> bp|sp|bn|bd <CR>",
             "close all buffers" },
 
         -- cycle through buffers
 
         -- close buffer + hide terminal buffer
-        ["<leader>bc"] = {
+        c = {
             function()
                 require("core.utils").close_buffer()
             end,
             "   close buffer",
         },
 
-        ["<leader>bg"] = { "<cmd> BufferLineGroupToggle pinned<cr>", "toggle buffer pin" },
-        ["<leader>bp"] = { "<cmd> BufferLineTogglePin <cr>", "toggle buffer pin" },
+        g = { "<cmd> BufferLineGroupToggle pinned<cr>", "toggle buffer pin" },
+        p = { "<cmd> BufferLineTogglePin <cr>", "toggle buffer pin" },
     },
 }
 
 -- c:  comments/colour picker
-mappings.c = {
+mappings.colour = {
     n = {
-        -- Label
-        ["<leader>c"] = { name = " comments /  palette" },
-        ["<leader>cp"] = { "<cmd>PickColor<cr>", "colour picker" },
-    },
-
-    v = {
+        ["p"] = { "<cmd>PickColor<cr>", "colour picker" },
     },
 }
 
+mappings.comment = { }
+
 -- d:  diagnostics/debugging
-mappings.d = {
+mappings.debugging = {
     n = {
-        -- Label
-        ["<leader>d"] = { "", " diagnostics /  debugging" },
-
-        ["<leader>dn"] = { "<cmd> lua vim.diagnostic.goto_next({ float = { border = \"rounded\" } }) <cr>",
-            " ﭡ go to next diagnostic" },
-        ["<leader>dp"] = { "<cmd> lua vim.diagnostic.goto_prev({ float = { border = \"rounded\" } }) <cr>",
-            " ﭣ go to previous diagnostic" },
-
-        ["<leader>dc"] = { "<cmd> DapContinue <cr>", "  begin debugging session" },
-        ["<leader>di"] = { "<cmd> DapStepInto <cr>", "  begin debugging session" },
-        ["<leader>do"] = { "<cmd> DapStepOut <cr>", "  begin debugging session" },
-        ["<leader>dv"] = { "<cmd> DapStepOver <cr>", "  begin debugging session" },
-        ["<leader>dk"] = { "<cmd> DapTerminate <cr>", " ﰸ kill debugging session" },
-        ["<leader>db"] = { "<cmd> DapToggleBreakpoint <cr>", "  toggle breakpoint" },
-        -- ["<leader>dB"] = { "<cmd> conditional breakpoint <cr>", "  toggle breakpoint" },
-        ["<leader>de"] = { "<cmd> lua require('dapui').eval() <cr>", "  inspect variable" },
-        ["<leader>du"] = { "<cmd> lua require('dapui').toggle() <cr>", "toggle ui" },
-        ["<leader>dq"] = {
-            function()
-                vim.diagnostic.setqflist()
-            end,
-            "   diagnostics to quickfix",
-        },
-        ["<leader>dl"] = {
-            function()
-                vim.diagnostic.setloclist()
-            end,
-            "   diagnostic to location list",
-        },
-
-
-        ["<leader>df"] = {
-            function()
-                vim.diagnostic.open_float({ border = "rounded", focusable = true, })
-            end,
-            "   focus diagnostic",
-        },
+        c = { "<cmd> DapContinue <cr>", "  begin debugging session" },
+        i = { "<cmd> DapStepInto <cr>", "  begin debugging session" },
+        o = { "<cmd> DapStepOut <cr>", "  begin debugging session" },
+        v = { "<cmd> DapStepOver <cr>", "  begin debugging session" },
+        k = { "<cmd> DapTerminate <cr>", " ﰸ kill debugging session" },
+        b = { "<cmd> DapToggleBreakpoint <cr>", "  toggle breakpoint" },
+        B = { "<cmd> conditional breakpoint <cr>", "  toggle breapoint" },
+        e = { "<cmd> lua require('dapui').eval() <cr>", "  inspect variable" },
+        u = { "<cmd> lua require('dapui').toggle() <cr>", "toggle ui" },
+    }
+}
+mappings.diagnostic = {
+    n = {
+        n = { "<cmd> lua vim.diagnostic.goto_next({ float = { border = \"rounded\" } }) <cr>", " ﭡ go to next diagnostic" },
+        p = { "<cmd> lua vim.diagnostic.goto_prev({ float = { border = \"rounded\" } }) <cr>", " ﭣ go to previous diagnostic" },
+        q = { function() vim.diagnostic.setqflist() end, "   diagnostics to quickfix", },
+        l = { function() vim.diagnostic.setloclist() end, "   diagnostic to location list", },
+        f = { function() vim.diagnostic.open_float({ border = "rounded", focusable = true, }) end, "   focus diagnostic", },
     },
 }
 
 -- e:  explorer/file tree/nvim tree
 mappings.e = {
     n = {
-        -- Label
-        ["<leader>e"] = { "", "פּ   explorer" },
-        ["<leader><leader>e"] = { "<cmd> NvimTreeToggle <cr>", "" },
+        _ = { "<cmd> NvimTreeToggle <cr>", "" },
 
         -- (f)ocus the current buffer
-        ["<leader>ec"] = { "<cmd>NvimTreeCollapse<cr>", "פּ  focus nvimtree" },
-        ["<leader>ef"] = { "<cmd> NvimTreeFindFile <cr>", "פּ  focus nvimtree" },
-        ["<leader>er"] = { "<cmd> NvimTreeRefresh <cr>", "פּ  focus nvimtree" },
+        c = { "<cmd>NvimTreeCollapse<cr>", "פּ  focus nvimtree" },
+        f = { "<cmd> NvimTreeFindFile <cr>", "פּ  focus nvimtree" },
+        r = { "<cmd> NvimTreeRefresh <cr>", "פּ  focus nvimtree" },
     },
 }
 
 -- f:  find/telescope
 mappings.f = {
     n = {
-        -- Label
-        ["<leader>f"] = { "", "   find" },
-        ["<leader><leader>f"] = { "<cmd> Telescope builtin include_extensions=true <cr>", "   activate finder" },
+        _ = { "<cmd> Telescope builtin include_extensions=true <cr>", "   activate finder" },
 
-        ["<leader>fb"] = { "<cmd> Telescope current_buffer_fuzzy_find <cr>", "  find in current buffer" },
-        ["<leader>fB"] = { "<cmd> Telescope buffers <cr>", "  find buffers" },
-        ["<leader>fc"] = { "<cmd> TodoTelescope <cr>", "find comments" },
-        ["<leader>fdg"] = { "<cmd> Telescope diagnostics <cr>", "  find all diagnostics" },
-        ["<leader>fdf"] = { "<cmd> Telescope dap frames <cr>", "  find all diagnostics" },
-        ["<leader>fdb"] = { "<cmd> Telescope dap list_breakpoints <cr>", "  find all diagnostics" },
-        ["<leader>fdv"] = { "<cmd> Telescope dap variables <cr>", "  find all diagnostics" },
-        ["<leader>fe"] = { "<cmd> Telescope file_browser path=%:p:h select_buffer=true <cr>", "file browser" },
-        ["<leader>fE"] = { "<cmd> Telescope file_browser <cr>", "file browser" },
-        ["<leader>ff"] = { "<cmd> Telescope find_files <cr>", "  find files" },
-        ["<leader>fF"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <cr>", "  find all" },
-        ["<leader>fgb"] = { "<cmd> Telescope git_branches <cr>", "   git branches" },
-        ["<leader>fgc"] = { "<cmd> Telescope git_commits <cr>", "   git commits" },
-        ["<leader>fgf"] = { "<cmd> Telescope git_files <cr>", "   git files" },
-        ["<leader>fgs"] = { "<cmd> Telescope git_status <cr>", "  git status" },
-        ["<leader>fh"] = { "<cmd> Telescope help_tags <cr>", "  help page" },
-        ["<leader>fj"] = { "<cmd> Telescope jumplist <cr>", "jumplist" },
-        ["<leader>fk"] = { "<cmd> Telescope keymaps <cr>", "   show keys" },
-        ["<leader>fld"] = { "<cmd> Telescope lsp_definitions <cr>", " lsp stuff" },
-        ["<leader>flr"] = { "<cmd> Telescope lsp_references <cr>", " lsp stuff" },
-        ["<leader>fli"] = { "<cmd> Telescope lsp_implementations <cr>", " lsp stuff" },
-        ["<leader>fll"] = { "<cmd> Telescope loclist <cr>", "location list" },
-        ["<leader>flt"] = { "<cmd> Telescope lsp_type_definitions <cr>", " lsp stuff" },
-        ["<leader>fls"] = { "<cmd> Telescope lsp_document_symbols <cr>", " lsp stuff" },
-        ["<leader>flS"] = { "<cmd> Telescope lsp_workspace_symbols <cr>", " lsp stuff" },
-        ["<leader>fm"] = { "<cmd> Telescope marks <cr>", "marks" },
-        ["<leader>fn"] = { "<cmd> Telescope notify <cr>", "notifications" },
-        ["<leader>fo"] = { "<cmd> Telescope oldfiles <cr>", "   find oldfiles" },
-        ["<leader>fq"] = { "<cmd> Telescope quickfix <cr>", "   show keys" },
-        ["<leader>fr"] = { "<cmd> Telescope registers <cr>", "   show keys" },
-        ["<leader>fs"] = { "<cmd> Telescope persisted <cr>", "sessions" },
-        ["<leader>ft"] = { "<cmd> Telescope treesitter <cr>", "treesitter" },
-        ["<leader>fx"] = { "<cmd> Telescope live_grep grep_open_files=true <cr>", "   live grep" },
-        ["<leader>fX"] = { "<cmd> Telescope live_grep <cr>", "   live grep" },
+        b = { "<cmd> Telescope current_buffer_fuzzy_find <cr>", "  find in current buffer" },
+        B = { "<cmd> Telescope buffers <cr>", "  find buffers" },
+        c = { "<cmd> TodoTelescope <cr>", "find comments" },
+        dg = { "<cmd> Telescope diagnostics <cr>", "  find all diagnostics" },
+        df = { "<cmd> Telescope dap frames <cr>", "  find all diagnostics" },
+        db = { "<cmd> Telescope dap list_breakpoints <cr>", "  find all diagnostics" },
+        dv = { "<cmd> Telescope dap variables <cr>", "  find all diagnostics" },
+        e = { "<cmd> Telescope file_browser path=%:p:h select_buffer=true <cr>", "file browser" },
+        E = { "<cmd> Telescope file_browser <cr>", "file browser" },
+        f = { "<cmd> Telescope find_files <cr>", "  find files" },
+        F = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <cr>", "  find all" },
+        gb = { "<cmd> Telescope git_branches <cr>", "   git branches" },
+        gc = { "<cmd> Telescope git_commits <cr>", "   git commits" },
+        gf = { "<cmd> Telescope git_files <cr>", "   git files" },
+        gs = { "<cmd> Telescope git_status <cr>", "  git status" },
+        h = { "<cmd> Telescope help_tags <cr>", "  help page" },
+        j = { "<cmd> Telescope jumplist <cr>", "jumplist" },
+        k = { "<cmd> Telescope keymaps <cr>", "   show keys" },
+        ld = { "<cmd> Telescope lsp_definitions <cr>", " lsp stuff" },
+        lr = { "<cmd> Telescope lsp_references <cr>", " lsp stuff" },
+        li = { "<cmd> Telescope lsp_implementations <cr>", " lsp stuff" },
+        ll = { "<cmd> Telescope loclist <cr>", "location list" },
+        lt = { "<cmd> Telescope lsp_type_definitions <cr>", " lsp stuff" },
+        ls = { "<cmd> Telescope lsp_document_symbols <cr>", " lsp stuff" },
+        lS = { "<cmd> Telescope lsp_workspace_symbols <cr>", " lsp stuff" },
+        m = { "<cmd> Telescope marks <cr>", "marks" },
+        n = { "<cmd> Telescope notify <cr>", "notifications" },
+        o = { "<cmd> Telescope oldfiles <cr>", "   find oldfiles" },
+        q = { "<cmd> Telescope quickfix <cr>", "   show keys" },
+        r = { "<cmd> Telescope registers <cr>", "   show keys" },
+        s = { "<cmd> Telescope persisted <cr>", "sessions" },
+        t = { "<cmd> Telescope treesitter <cr>", "treesitter" },
+        x = { "<cmd> Telescope live_grep grep_open_files=true <cr>", "   live grep" },
+        X = { "<cmd> Telescope live_grep <cr>", "   live grep" },
     },
 }
 
 -- g:  git
 mappings.g = {
     n = {
-        -- Label
-        ["<leader>g"] = { "", "   git" },
-        ["<leader><leader>g"] = { "<cmd> Neogit <cr>", "git main" },
-
-
-        ["<leader>gC"] = {
+        _ = { "<cmd> Neogit <cr>", "git main" },
+        C = {
             function()
 
             end, "  commit"
         },
-        ["<leader>ga"] = { "<cmd> Gitsigns stage_hunk <cr>", "  stage_hunk" },
-        ["<leader>gA"] = { "<cmd> !git add % <cr>", "  stage this file" },
-        ["<leader>gS"] = { "<cmd> Telescope git_status <cr>", "   git status" },
-        ["<leader>gU"] = { "<cmd> silent!git reset % <cr>", "   git reset this file" },
-        ["<leader>gu"] = { "<cmd> Gitsigns undo_stage_hunk <cr>", "   undo git staging this hunk" },
-        ["<leader>gR"] = { "<cmd> silent!git restore % <cr>", "   git restore this file" },
-        ["<leader>gr"] = { "<cmd> Gitsigns reset_hunk <cr>", "   git reset this hunk" },
-        ["<leader>gb"] = { "<cmd> Gitsigns blame_line <cr>", "   git blame" },
-        ["<leader>gB"] = { "<cmd> !git branch <cr>", "   list branches" },
-        ["<leader>gl"] = { "<cmd> !git log -10 --graph --oneline <cr>", "   git log summary" },
-        ["<leader>gL"] = { "<cmd> !git log -10 <cr>", "   git log" },
-        ["<leader>gq"] = { "<cmd> Gitsigns setqflist <cr>", "   git quickfix" },
-        ["<leader>gd"] = { "<cmd> Gitsigns preview_hunk <cr>", "   view hunk diff" },
-        ["<leader>gD"] = { "<cmd> Gitsigns diffthis <cr>", "   view file diff" },
-        ["<leader>gn"] = { "<cmd> Gitsigns next_hunk <cr>", "   go to next hunk" },
-        ["<leader>gp"] = { "<cmd> Gitsigns prev_hunk <cr>", "   go to previous hunk" },
+        a = { "<cmd> Gitsigns stage_hunk <cr>", "  stage_hunk" },
+        A = { "<cmd> !git add % <cr>", "  stage this file" },
+        S = { "<cmd> Telescope git_status <cr>", "   git status" },
+        U = { "<cmd> silent!git reset % <cr>", "   git reset this file" },
+        u = { "<cmd> Gitsigns undo_stage_hunk <cr>", "   undo git staging this hunk" },
+        R = { "<cmd> silent!git restore % <cr>", "   git restore this file" },
+        r = { "<cmd> Gitsigns reset_hunk <cr>", "   git reset this hunk" },
+        b = { "<cmd> Gitsigns blame_line <cr>", "   git blame" },
+        B = { "<cmd> !git branch <cr>", "   list branches" },
+        l = { "<cmd> !git log -10 --graph --oneline <cr>", "   git log summary" },
+        L = { "<cmd> !git log -10 <cr>", "   git log" },
+        q = { "<cmd> Gitsigns setqflist <cr>", "   git quickfix" },
+        d = { "<cmd> Gitsigns preview_hunk <cr>", "   view hunk diff" },
+        D = { "<cmd> Gitsigns diffthis <cr>", "   view file diff" },
+        n = { "<cmd> Gitsigns next_hunk <cr>", "   go to next hunk" },
+        p = { "<cmd> Gitsigns prev_hunk <cr>", "   go to previous hunk" },
     },
 }
 
 -- h:  health
 mappings.h = {
     n = {
-        ["<leader>h"] = { name = "health" },
-        ["<leader><leader>h"] = { "<cmd>checkhealth<cr>", "check health" },
+        _ = { "<cmd>checkhealth<cr>", "check health" },
     }
 }
 
@@ -308,11 +259,7 @@ mappings.j = {
 -- k:  keymaps
 mappings.k = {
     n = {
-        ["<leader>k"] = { name = "keymaps" },
-        ["<leader><leader>k"] = {
-            "<cmd> WhichKey <cr>",
-            "   which-key all keymaps",
-        },
+        _ = { "<cmd> WhichKey <cr>", "   which-key all keymaps", },
     }
 }
 
@@ -321,30 +268,11 @@ mappings.l = {
     -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
 
     n = {
-        ["<leader>li"] = {
-            function()
-                vim.lsp.buf.implementation()
-            end,
-            "   lsp implementation",
-        },
-
-        ["<leader>ls"] = {
-            function()
-                vim.lsp.buf.signature_help()
-            end,
-            "   lsp signature_help",
-        },
-
-        ["<leader>lt"] = {
-            function()
-                vim.lsp.buf.type_definition()
-            end,
-            "   lsp definition type",
-        },
-
-        ["<leader>lr"] = { "<cmd> lua vim.lsp.buf.rename() <cr>", "LSP rename" },
-
-        ["<leader>la"] = {
+        i = { function() vim.lsp.buf.implementation() end, "   lsp implementation", },
+        s = { function() vim.lsp.buf.signature_help() end, "   lsp signature_help", },
+        t = { function() vim.lsp.buf.type_definition() end, "   lsp definition type", },
+        r = { "<cmd> lua vim.lsp.buf.rename() <cr>", "LSP rename" },
+        a = {
             function()
                 vim.cmd [[autocmd! CursorHold *]]
                 vim.lsp.buf.code_action()
@@ -354,33 +282,15 @@ mappings.l = {
             "   lsp code_action",
         },
 
-        ["<leader>lR"] = {
-            function()
-                vim.lsp.buf.references()
-            end,
-            "   lsp references",
-        },
-
-        ["<leader>lf"] = {
-            function()
-                if vim.lsp.buf.format ~= nil then
-                    vim.lsp.buf.format { async = true, }
-                else
-                    vim.lsp.buf.formatting()
-                end
-            end,
-            "   lsp formatting",
-        },
-
-        ["<leader>lo"] = { "<cmd>lopen<cr>", "loclist open" },
-        ["<leader>lc"] = { "<cmd>lclose<cr>", "loclist close" },
-        ["<leader>ln"] = { "<cmd>lnext<cr>", "loclist next" },
-        ["<leader>lp"] = { "<cmd>lprevious<cr>", "loclist previous" },
+        R = { function() vim.lsp.buf.references() end, "   lsp references", },
+        f = { function() vim.lsp.buf.format { async = true, } end, "   lsp formatting", },
+        o = { "<cmd>lopen<cr>", "loclist open" },
+        c = { "<cmd>lclose<cr>", "loclist close" },
+        n = { "<cmd>lnext<cr>", "loclist next" },
+        p = { "<cmd>lprevious<cr>", "loclist previous" },
     },
-
     v = {
-
-        ["<leader>lf"] = {
+        f = {
             function()
                 vim.lsp.buf.range_formatting()
             end,
@@ -392,17 +302,14 @@ mappings.l = {
 -- m:  multi cursor
 mappings.m = {
     n = {
-        ["<leader>mt"] = { "<cmd> MarksToggleSigns <cr>", "toggle marks" },
+        t = { "<cmd>MarksToggleSigns<cr>", "toggle marks" },
     },
 }
 
--- n:  navigation or notes
+-- n:  notes
 mappings.n = {
     n = {
-        -- Label
-        ["<leader>n"] = { "", "   navigation" },
-
-        ["<leader><leader>n"] = {
+        _ = {
             function()
                 local cwd = vim.fn.getcwd()
                 local neorg_not_loaded, _ = pcall(vim.cmd, "NeorgStart")
@@ -415,59 +322,52 @@ mappings.n = {
             end,
             "Open notes"
         },
-        ["<leader>nv"] = { "<cmd>Neorg gtd views<cr>", "notes overview" },
-        ["<leader>nr"] = {
+        v = { "<cmd>Neorg gtd views<cr>", "notes overview" },
+        r = {
             function()
                 vim.cmd "Neorg return "
                 vim.cmd("cd " .. vim.g.prev_cwd)
             end,
             "Return to cwd",
         },
-        ["<leader>np"] = { "<cmd> Neorg presenter start <cr>", "start presentation" },
+        p = { "<cmd> Neorg presenter start <cr>", "start presentation" },
     },
 }
 
 -- o:  outline
 mappings.o = {
     n = {
-        ["<leader>o"] = { "", "פּ   toggle outline" },
-        -- ["<leader>oo"] = { "<cmd> SymbolsOutlineOpen <cr>", "פּ   open outline" },
-        -- ["<leader>oc"] = { "<cmd> SymbolsOutlineClose <cr>", "פּ   close outline" },
-        ["<leader><leader>o"] = { "<cmd> AerialToggle <cr>", "פּ   toggle outline" },
+        o = { "<cmd> SymbolsOutlineOpen <cr>", "פּ   open outline" },
+        c = { "<cmd> SymbolsOutlineClose <cr>", "פּ   close outline" },
+    }
+}
+
+-- package
+mappings.package = {
+    n = {
+
     }
 }
 
 -- p:  plugins
 mappings.p = {
     n = {
-        -- -- Label
-        -- ["<leader>p"] = { "", "   projects" },
-
-        -- -- (r)estore last session
-        -- ["<leader>pr"] = { "<cmd> SessionLoad <cr>", "  restore last session" },
-
-        -- -- (s)ave current session
-        -- ["<leader>ps"] = { "<cmd> SessionSave <cr>", "  save current session" },
-        ["<leader><leader>p"] = { "", "packer" },
-
-        ["<leader>ps"] = { "<cmd> PackerStatus <cr>", "" },
-        ["<leader>pc"] = { "<cmd> PackerClean <cr>", "" },
-        ["<leader>pi"] = { "<cmd> PackerInstall <cr>", "" },
-        ["<leader>pp"] = { "<cmd> PackerProfile <cr>", "" },
-        ["<leader>pu"] = { "<cmd> PackerUpdate <cr>", "" },
+        s = { "<cmd> PackerStatus <cr>", "" },
+        c = { "<cmd> PackerClean <cr>", "" },
+        i = { "<cmd> PackerInstall <cr>", "" },
+        p = { "<cmd> PackerProfile <cr>", "" },
+        u = { "<cmd> PackerUpdate <cr>", "" },
     },
 }
 
 -- q:  quickfix
 mappings.q = {
     n = {
-        ["<leader>q"] = { "", "   quickfix" },
-
-        ["<leader><leader>q"] = { "<cmd> TroubleToggle quickfix <cr>", "" },
-        ["<leader>qc"] = { "<cmd> TroubleClose <cr>", "close quickfix" },
-        ["<leader>qo"] = { "<cmd> Trouble quickfix <cr>", "open quickfix" },
-        ["<leader>qn"] = { "<cmd> cnext <cr>", "next item in quickfix" },
-        ["<leader>qp"] = { "<cmd> cprevious <cr>", "prev item in quickfix" },
+        _ = { "<cmd> TroubleToggle quickfix <cr>", "" },
+        c = { "<cmd> TroubleClose <cr>", "close quickfix" },
+        o = { "<cmd> Trouble quickfix <cr>", "open quickfix" },
+        n = { "<cmd> cnext <cr>", "next item in quickfix" },
+        p = { "<cmd> cprevious <cr>", "prev item in quickfix" },
     },
 }
 
@@ -480,61 +380,31 @@ mappings.r = {
 -- s:  sessions
 mappings.s = {
     n = {
-        -- Label
-        ["<leader>s"] = { "", "   sessions" },
-
         -- (r)estore last session
-        ["<leader>sr"] = { "<cmd> SessionLoad <cr>", "  restore last session" },
+        r = { "<cmd>SessionLoad<cr>", "  restore last session" },
 
         -- (s)ave current session
-        ["<leader>ss"] = { "<cmd> SessionSave <cr>", "  save current session" },
+        s = { "<cmd>SessionSave<cr>", "  save current session" },
     },
 }
 
 -- t:  terminal/testing
 mappings.t = {
-
     n = {
-        ["<leader>t"] = { name = " terminal /  testing" },
-        ["<leader>tl"] = {
+        --[""] = { name = " terminal /  testing" },
+        l = {
             "<cmd> ToggleTermSendCurrentLine <cr>",
             ""
         },
     },
     v = {
-        ["<leader>tl"] = {
+        l = {
             "<cmd> ToggleTermSendVisualLines <cr>",
             ""
         },
-        ["<leader>tv"] = {
+        v = {
             "<cmd> ToggleTermSendVisualSelection <cr>",
             ""
-        },
-    },
-    t = {
-        ["<C-_>"] = {
-            "<cmd> ToggleTerm <cr>",
-            "   toggle floating term",
-        },
-
-        -- toggle in terminal mode
-        ["<M-t>"] = {
-            "<cmd> ToggleTerm direction=tab <cr>",
-            "   toggle floating term",
-        },
-        ["<M-f>"] = {
-            "<cmd> ToggleTerm direction=float <cr>",
-            "   toggle floating term",
-        },
-
-        ["<M-h>"] = {
-            "<cmd> ToggleTerm direction=horizontal <cr>",
-            "   toggle horizontal term",
-        },
-
-        ["<M-v>"] = {
-            "<cmd> ToggleTerm direction=vertical <cr>",
-            "   toggle vertical term",
         },
     },
 }
@@ -542,23 +412,21 @@ mappings.t = {
 -- u:  - (undo)
 mappings.u = {
     n = {
-        ["<leader>u"] = { "", "undotree" },
+        -- [""] = { "", "undotree" },
+        _ = { "<cmd> UndotreeToggle <cr>", "undotree" },
 
-        ["<leader>uo"] = { "<cmd> UndotreeShow <cr>", "undotree" },
-        ["<leader>uf"] = { "<cmd> UndotreeFocus <cr>", "undotree" },
-        ["<leader>uc"] = { "<cmd> UndotreeHide <cr>", "undotree" },
-        ["<leader>ut"] = { "<cmd> UndotreeToggle <cr>", "undotree" },
-
-        ["<leader><leader>u"] = { "<cmd> UndotreeToggle <cr>", "undotree" },
+        o = { "<cmd> UndotreeShow <cr>", "undotree" },
+        f = { "<cmd> UndotreeFocus <cr>", "undotree" },
+        c = { "<cmd> UndotreeHide <cr>", "undotree" },
+        t = { "<cmd> UndotreeToggle <cr>", "undotree" },
     },
 }
 
 -- v:  - (visual)
 mappings.v = {
     n = {
-        ["<leader><leader>v"] = { "<cmd> luafile $nvim/init.lua <cr>", "Reload neovim config" },
-        ["<leader>vx"] = { "<cmd> qa <cr>", "Exit neovim" },
-        ["<leader>vX"] = { "<cmd> wqa <cr>", "save and Exit neovim" },
+        x = { "<cmd> qa <cr>", "Exit neovim" },
+        X = { "<cmd> wqa <cr>", "save and Exit neovim" },
     },
 }
 
@@ -566,15 +434,15 @@ mappings.v = {
 mappings.w = {
     n = {
         -- Label
-        ["<leader>w"] = { "", "   windows" },
-        ["<leader>wc"] = { "<cmd>q<cr>", "close window" },
+        --[""] = { "", "   windows" },
+        c = { "<cmd>q<cr>", "close window" },
     },
 }
 
 -- x:  context
 mappings.x = {
     n = {
-        ["<leader>xj"] = {
+        j = {
             function()
                 local ok, start = require("indent_blankline.utils").get_current_context(
                     vim.g.indent_blankline_context_patterns,
@@ -595,10 +463,8 @@ mappings.x = {
 -- z:  zen mode
 mappings.z = {
     n = {
-        ["<leader><leader>z"] = { "<cmd> ZenMode <cr>", " toggle zen-mode" },
-
-        ["<leader>zz"] = { "<cmd> ZenMode <cr>", "  toggle zen-mode" },
-        ["<leader>zt"] = { "<cmd> Twilight <cr>", "  toggle twilight" },
+        z = { "<cmd> ZenMode <cr>", "  toggle zen-mode" },
+        t = { "<cmd> Twilight <cr>", "  toggle twilight" },
     }
 }
 

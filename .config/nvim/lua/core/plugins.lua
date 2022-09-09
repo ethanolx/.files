@@ -1,5 +1,3 @@
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1e222a" })
-
 -- Bootstrap packer.nvim installation
 local fresh_install = false
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"

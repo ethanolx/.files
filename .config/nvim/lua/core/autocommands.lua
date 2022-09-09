@@ -1,90 +1,17 @@
--- autocmdsa
-local autocmd = vim.api.nvim_create_autocmd
+-- Load utility functions
 local utils = require("core.utils")
 
-autocmd("InsertLeave", {
+-- Alias for creating autocommands
+local autocmd = vim.api.nvim_create_autocmd
+
+-- Cursor*
+autocmd("CursorHold", {
     callback = function()
-        if require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-            and not require("luasnip").session.jump_active
-        then
-            require("luasnip").unlink_current()
-        end
-    end,
+        vim.diagnostic.open_float({ focusable = false, border = "rounded" })
+    end
 })
 
--- autocmd("BufEnter", { command = "set foldexpr=nvim_treesitter#foldexpr()", once = true, })
-autocmd("FileType", { pattern = "mason", command = "IndentBlanklineDisable" })
-
--- autocmd("VimEnter", {
---     callback = function()
---         vim.cmd "profile start $nvim/profile.log"
---         vim.cmd "profile func *"
---         vim.cmd "profile! file *"
---     end,
---     once = true,
--- })
-
--- autocmd("BufWritePost", {
---     callback = function()
---         vim.cmd "profile dump"
---     end,
--- })
-
--- Quit Neovim if the only open window is NvimTree
-vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
-
--- Show diagnostics upon hovering
-vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float({ focusable = false, border = "rounded" })]]
--- require("core.utils").activate_diagnostics()
-
--- Disable signcolumn for git commits
-vim.cmd [[autocmd FileType gitcommit setlocal signcolumn=no]]
-vim.cmd [[autocmd FileType Outline setlocal signcolumn=no]]
-
-autocmd({ "BufEnter", "BufWinEnter" }, {
-    pattern = "quickfix",
-    callback = require("core.utils").replace_with_trouble,
-})
--- autocmd({ "BufEnter" }, {
---     pattern = "*",
---     callback = function()
---         if vim.bo.filetype == "qf" then
---             vim.wo.winbar = ""
---             vim.cmd "cclose"
---             vim.cmd "Trouble quickfix"
---         end
---     end,
--- })
-
-autocmd("InsertEnter", {
-    pattern = "*",
-    callback = function()
-        vim.diagnostic.disable(0)
-    end,
-})
-
-autocmd("InsertLeave", {
-    pattern = "*",
-    callback = function()
-        vim.diagnostic.enable(0)
-    end,
-})
-
--- autocmd("BufWritePre", {
---     callback = function()
-
---         local cursor_pos = vim.api.nvim_win_get_cursor(0)
-
---         -- delete trailing whitespace
---         vim.cmd([[:keepjumps keeppatterns %s/\s\+$//e]])
-
---         -- delete lines @ eof
---         vim.cmd([[:keepjumps keeppatterns silent! 0;/^\%(\n*.\)\@!/,$d]])
-
---         utils.reset_cursor_pos(cursor_pos)
---     end
--- })
-
+-- Buf*
 autocmd("BufEnter", {
     callback = function()
         if vim.g.providers.context == "gps" then
@@ -97,3 +24,37 @@ autocmd("BufEnter", {
     end,
     once = true,
 })
+autocmd({ "BufEnter", "BufWinEnter" }, { pattern = "quickfix", callback = require("core.utils").replace_with_trouble, })
+autocmd("BufWritePre", {
+    callback = function()
+
+        local cursor_pos = vim.api.nvim_win_get_cursor(0)
+
+        -- delete trailing whitespace
+        vim.cmd([[:keepjumps keeppatterns %s/\s\+$//e]])
+
+        -- delete lines @ eof
+        vim.cmd([[:keepjumps keeppatterns silent! 0;/^\%(\n*.\)\@!/,$d]])
+
+        utils.reset_cursor_pos(cursor_pos)
+    end
+})
+
+-- Insert*
+autocmd("InsertEnter", {
+    pattern = "*",
+    callback = function()
+        vim.diagnostic.disable(0)
+    end,
+})
+autocmd("InsertLeave", {
+    pattern = "*",
+    callback = function()
+        vim.diagnostic.enable(0)
+    end,
+})
+
+-- FileType
+autocmd("FileType", { pattern = "gitcommit", callback = function() vim.wo.signcolumn = "no" end, })
+autocmd("FileType", { pattern = "Outline", callback = function() vim.wo.signcolumn = "no" end, })
+autocmd("FileType", { pattern = "mason", command = "IndentBlanklineDisable" })
