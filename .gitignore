@@ -19,7 +19,8 @@
 
 # Images
 !Pictures/
-!Pictures/Wallpapers/**
+!Pictures/Wallpapers/
+!Pictures/Wallpapers/desktop.png
 
 # Fonts
 !.local/share/fonts/
