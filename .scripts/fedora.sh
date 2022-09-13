@@ -38,10 +38,9 @@ sudo dnf install -y i3-gaps
 # I3 Screen Locker
 sudo dnf install -y xss-lock
 sudo dnf install -y autoconf cairo-devel fontconfig libev-devel libjpeg-turbo-devel libXinerama libxkbcommon-devel libxkbcommon-x11-devel libXrandr pam-devel pkgconf xcb-util-image-devel xcb-util-xrm-devel
-sudo dnf remove i3lock
+sudo dnf remove -y i3lock
 git clone https://github.com/Raymo111/i3lock-color.git
 cd i3lock-color
-./install-i3lock-color.sh
 cd ~/Downloads/
 
 # Neomutt
@@ -65,5 +64,14 @@ sudo dnf install -y alacritty kitty
 # Terminal Multiplexers (tmux)
 sudo dnf install -y tmux
 
-# Miscellaneous Tools (fd, rg)
-sudo dnf install -y fd-find ripgrep rofi feh picom blueberry pavucontrol brightnessctl
+# Miscellaneous Tools
+sudo dnf install -y fd-find ripgrep rofi feh picom blueberry pavucontrol brightnessctl ncdu timeshift htop
+
+# Instantiate Configuration Files
+git clone git@github.com:ethanolx/.files.git
+cd .files/
+mv .git ~
+cd ~
+git restore .
+rm -rf ~/Downloads/.files/
+cd ~/Downloads/
