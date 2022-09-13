@@ -17,6 +17,10 @@
 !.scripts/
 !.scripts/**
 
+# Images
+!Pictures/
+!Pictures/Wallpapers/**
+
 # Fonts
 !.local/share/fonts/
 !.local/share/fonts/**

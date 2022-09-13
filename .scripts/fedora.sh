@@ -75,3 +75,8 @@ cd ~
 git restore .
 rm -rf ~/Downloads/.files/
 cd ~/Downloads/
+
+# Copy X11 Configuration Files
+cd /etc/X11/
+sudo cp -r ~/.root/etc/X11/* .
+cd ~/Downloads/

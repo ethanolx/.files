@@ -24,7 +24,7 @@ exec --no-startup-id picom -bf
 exec --no-startup-id ~/.scripts/battery-warning.sh -L 25 -l 10 -m "Low Battery" -t 5m -n -i 
 
 # Load background image
-exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/neon-technology.jpg
+exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/desktop.png
 
 # Load status bar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
