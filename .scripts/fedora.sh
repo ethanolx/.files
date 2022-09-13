@@ -64,8 +64,11 @@ sudo dnf install -y alacritty kitty
 # Terminal Multiplexers (tmux)
 sudo dnf install -y tmux
 
+# Notes (neorg)
+mkdir ~/Documents/Notes/
+
 # Miscellaneous Tools
-sudo dnf install -y fd-find ripgrep rofi feh picom blueberry pavucontrol brightnessctl ncdu timeshift htop
+sudo dnf install -y fd-find ripgrep rofi feh picom blueberry pavucontrol brightnessctl ncdu timeshift htop thunderbird
 
 # Instantiate Configuration Files
 git clone git@github.com:ethanolx/.files.git
@@ -78,5 +81,5 @@ cd ~/Downloads/
 
 # Copy X11 Configuration Files
 cd /etc/X11/
-sudo cp -r ~/.root/etc/X11/* .
+sudo cp -rf ~/.root/etc/X11/* .
 cd ~/Downloads/

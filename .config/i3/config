@@ -260,8 +260,8 @@ exec i3-msg 'workspace 3;exec kitty --title terminal'
 for_window [class="tty" title="terminal"] move container to workspace $wst
 
 # Mail
-exec i3-msg 'workspace 7;exec alacritty -t neomutt --command neomutt'
-for_window [class="tty" title="neomutt"] move container to workspace $wsm
+exec i3-msg 'workspace 7;exec thunderbird'
+for_window [class="thunderbird"] move container to workspace $wsm
 
 # Notes
 exec i3-msg 'workspace 8;exec alacritty -t notes --command nvim +NeorgStart'
