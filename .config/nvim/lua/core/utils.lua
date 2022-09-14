@@ -126,6 +126,11 @@ utils.load_mappings = function(mappings)
             utils.load_sub_mappings(which_key, nil, mode_mappings)
         else
             local prefix = "<leader>" .. string.sub(section, 0, 1)
+            if categories[prefix] ~= nil then
+                categories[prefix][section] = mode_mappings
+            else
+                categories[prefix] = { [section] = mode_mappings }
+            end
             which_key.register({ [prefix] = { name = string.format("%s %s", icons[section], section) } }, { mode = "n", silent = true, noremap = true })
             utils.load_sub_mappings(which_key, prefix, mode_mappings)
         end
