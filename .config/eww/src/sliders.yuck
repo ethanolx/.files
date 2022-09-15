@@ -1,0 +1,17 @@
+; Define Widget
+(defwidget sliders []
+    (box :class "sliders" :space-evenly true :orientation "v"
+        (slider :prefix "" :class "sliderVolume" :value 30 :onchange "")
+        (slider :prefix "" :class "sliderBrightness" :value 30 :onchange "")
+    )
+)
+
+; Define Window
+(defwindow sliders
+    :geometry
+    (geometry :x "-28px"
+              :y "70px"
+              :anchor "right top")
+    :stacking "fg"
+    :wm-ignore true
+    (sliders))

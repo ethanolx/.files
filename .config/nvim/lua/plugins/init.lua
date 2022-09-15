@@ -241,7 +241,7 @@ return {
     -- FOLD
     ["kevinhwang91/nvim-ufo"] = {
         requires = "kevinhwang91/promise-async",
-        setup = function()
+        config = function()
             require "plugins.ufo"
         end
     },
@@ -594,5 +594,9 @@ return {
     ["lewis6991/impatient.nvim"] = {
     },
     ["antoinemadec/FixCursorHold.nvim"] = {
+    },
+
+    -- Yuck
+    ["elkowar/yuck.vim"] = {
     },
 }

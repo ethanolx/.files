@@ -1,0 +1,13 @@
+// Unset all default styles
+* {
+    all: unset;
+}
+
+// Variables
+@import "scss/variables.scss";
+
+// Colour Palette
+@import "scss/themes/#{$theme}.scss";
+
+// Widget Styles
+@import "scss/sliders.scss";

@@ -1,0 +1,59 @@
+// General Slider Styles
+.sliders {
+    padding: 2.5rem;
+    border-radius: 12px;
+    background-color: $black;
+}
+
+.slider {
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.sliderPrefix {
+    font-family:  'UbuntuMono NF';
+    font-size: 2.2rem;
+    padding: 0.3rem 0.9rem;
+    margin-right: 1.8rem;
+    color: $black;
+    border-radius: 50%;
+}
+
+.sliderRange {
+    border-radius: 15px;
+}
+
+// Individual Slider Styles
+label.sliderVolume.sliderPrefix {
+    background-color: $blue;
+}
+
+scale.sliderVolume.sliderRange trough {
+    min-height: 0.5rem;
+    background-color: $lightGrey;
+    border-color: $lightGrey;
+    border-radius: 15px;
+}
+
+scale.sliderVolume.sliderRange trough highlight {
+    background-color: $blue;
+    border-color: $blue;
+    border-radius: 15px;
+}
+
+label.sliderBrightness.sliderPrefix {
+    background-color: $yellow;
+}
+
+scale.sliderBrightness.sliderRange trough {
+    min-height: 0.5rem;
+    background-color: $lightGrey;
+    border-color: $lightGrey;
+    border-radius: 15px;
+}
+
+scale.sliderBrightness.sliderRange trough highlight {
+    background-color: $yellow;
+    border-color: $yellow;
+    border-radius: 15px;
+}

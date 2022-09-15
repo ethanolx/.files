@@ -27,7 +27,13 @@ mappings.alt = {
 
         [","] = { "<cmd> BufferLineMovePrev <cr>", "move buffer left" },
         [";"] = { "<cmd> BufferLineMoveNext <cr>", "move buffer right" },
-    }
+    },
+    t = {
+        t = { "<cmd> ToggleTerm direction=tab <cr>", "   toggle floating term", },
+        f = { "<cmd> ToggleTerm direction=float <cr>", "   toggle floating term", },
+        h = { "<cmd> ToggleTerm direction=horizontal <cr>", "   toggle horizontal term", },
+        v = { "<cmd> ToggleTerm direction=vertical <cr>", "   toggle vertical term", },
+    },
 }
 
 mappings.ctl = {

@@ -44,6 +44,10 @@
 !.config/polybar/
 !.config/polybar/**
 
+# Widgets (eww)
+!.config/eww/
+!.config/eww/**
+
 # Runner (rofi)
 !.config/rofi/
 !.config/rofi/**

@@ -1,0 +1,11 @@
+; Variables
+(include './variables.yuck')
+
+; Base Widgets
+(include './src/base.yuck')
+
+; Sliders (volume, brightness, battery)
+(include './src/sliders.yuck')
+
+; Dropdowns (bluetooth, wifi)
+(include './src/dropdowns.yuck')

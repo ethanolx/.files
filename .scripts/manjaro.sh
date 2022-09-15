@@ -20,7 +20,7 @@ sh -c 'curl https://download.mono-project.com/repo/centos8-stable.repo | tee /et
 sudo pacman -S mono-devel
 
 # JS/TS
-sudo pacman -S nodejs
+sudo pacman -S nodejs npm
 
 # RS
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
