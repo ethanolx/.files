@@ -6,70 +6,65 @@
 cd ~/Downloads/
 
 # Snap Store
-sudo dnf install -y snapd
+sudo pacman -S snapd
 sudo snap install snap-store
 
 # Make Utilities
-sudo dnf install -y make cmake automake
+sudo pacman -S make cmake automake
 # C/C++
-sudo dnf install -y gcc clang
+sudo pacman -S gcc clang
 
 # C#
 rpm --import "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
 sh -c 'curl https://download.mono-project.com/repo/centos8-stable.repo | tee /etc/yum.repos.d/mono-centos8-stable.repo'
-sudo dnf update -y
-sudo dnf install -y mono-devel
+sudo pacman -S mono-devel
 
 # JS/TS
-sudo dnf install -y nodejs
+sudo pacman -S nodejs
 
 # RS
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # PY
-sudo dnf install -y python3
+sudo pacman -S python3
 
 # RB
-sudo dnf install -y ruby
+sudo pacman -S ruby
 
 # I3 Window Manager
-sudo dnf install -y i3-gaps
+sudo pacman -S i3-gaps
 
 # I3 Screen Locker
-sudo dnf install -y xss-lock
-sudo dnf install -y autoconf cairo-devel fontconfig libev-devel libjpeg-turbo-devel libXinerama libxkbcommon-devel libxkbcommon-x11-devel libXrandr pam-devel pkgconf xcb-util-image-devel xcb-util-xrm-devel
-sudo dnf remove -y i3lock
+sudo pacman -S xss-lock
+sudo pacman -S autoconf cairo-devel fontconfig libev-devel libjpeg-turbo-devel libXinerama libxkbcommon-devel libxkbcommon-x11-devel libXrandr pam-devel pkgconf xcb-util-image-devel xcb-util-xrm-devel
 git clone https://github.com/Raymo111/i3lock-color.git
 cd i3lock-color
 ./install-i3lock-color.sh
 cd ~/Downloads/
 
 # Neomutt
-sudo dnf copr enable flatcap/neomutt
-sudo dnf install -y neomutt
+sudo pacman -S neomutt
 
 # Neovim (nightly)
-sudo dnf copr enable agriffis/neovim-nightly
-sudo dnf install -y neovim python3-neovim
+sudo pacman -S neovim
 
 # Lazygit
-sudo dnf copr enable atim/lazygit
-sudo dnf install -y lazygit
+sudo pacman -S lazygit
 
 # Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Terminal Emulators (alacritty, kitty)
-sudo dnf install -y alacritty kitty
+sudo pacman -S alacritty kitty
 
 # Terminal Multiplexers (tmux)
-sudo dnf install -y tmux
+sudo pacman -S tmux
 
 # Notes (neorg)
 mkdir ~/Documents/Notes/
 
 # Miscellaneous Tools
-sudo dnf install -y fd-find ripgrep rofi feh picom blueberry pavucontrol brightnessctl ncdu timeshift htop thunderbird
+sudo pacman -S fd ripgrep rofi feh picom blueberry bluez bluez-utils pavucontrol brightnessctl ncdu timeshift htop thunderbird
 
 # Instantiate Configuration Files
 git clone git@github.com:ethanolx/.files.git
