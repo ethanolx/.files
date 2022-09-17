@@ -64,7 +64,7 @@ sudo pacman -S tmux
 mkdir ~/Documents/Notes/
 
 # Miscellaneous Tools
-sudo pacman -S fd ripgrep rofi feh picom blueberry bluez bluez-utils pavucontrol brightnessctl ncdu timeshift htop thunderbird
+sudo pacman -S fd ripgrep rofi feh picom blueberry bluez bluez-utils pavucontrol brightnessctl ncdu timeshift htop thunderbird pamixer
 
 # Instantiate Configuration Files
 git clone git@github.com:ethanolx/.files.git

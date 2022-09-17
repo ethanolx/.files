@@ -69,7 +69,7 @@ sudo dnf install -y tmux
 mkdir ~/Documents/Notes/
 
 # Miscellaneous Tools
-sudo dnf install -y fd-find ripgrep rofi feh picom blueberry pavucontrol brightnessctl ncdu timeshift htop thunderbird
+sudo dnf install -y fd-find ripgrep rofi feh picom blueberry pavucontrol brightnessctl ncdu timeshift htop thunderbird pamixer
 
 # Instantiate Configuration Files
 git clone git@github.com:ethanolx/.files.git

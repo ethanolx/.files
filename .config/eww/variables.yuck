@@ -1,20 +1,11 @@
-(defpoll time :interval "1s"
-    "date +'%H:%M'")
+; Sliders
+(defpoll volume :interval "0.01s"
+    "pamixer --get-volume")
 
-(defpoll date :interval "1s"
-    "date +'%a, %d %m %y'")
+(defpoll brightness :interval "0.05s"
+    "brightnessctl -m | awk -F , '{print $4}' | tr -d %")
 
-; sliders
-(defpoll head_vol :interval "1s"
-  "scripts/get_headvol")
+(defpoll battery :interval "1s"
+    "upower -i `upower -e | grep BAT` | grep percentage | awk -F : '{print $2}' | tr -d \"[:space:]%\"")
 
-(defpoll mic_vol :interval "1s"
-  "scripts/get_micvol")
-
-; wifi iwdgtk btn
-(defpoll wifi :interval "1s"
-    "scripts/wifi")
-
-; brightness slider
-(defpoll brightness :interval "1s"
-  "scripts/get_brightness")
+; Dropdowns

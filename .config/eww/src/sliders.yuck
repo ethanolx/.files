@@ -1,8 +1,9 @@
 ; Define Widget
 (defwidget sliders []
     (box :class "sliders" :space-evenly true :orientation "v"
-        (slider :prefix "" :class "sliderVolume" :value 30 :onchange "")
-        (slider :prefix "" :class "sliderBrightness" :value 30 :onchange "")
+        (slider :prefix "" :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle" :class "sliderVolume" :value volume :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%")
+        (slider :prefix "" :class "sliderBrightness" :value brightness :onchange "brightnessctl set {}%")
+        (slider :prefix "" :class "sliderBattery" :value battery)
     )
 )
 
@@ -10,7 +11,7 @@
 (defwindow sliders
     :geometry
     (geometry :x "-28px"
-              :y "70px"
+              :y "80px"
               :anchor "right top")
     :stacking "fg"
     :wm-ignore true

@@ -1,26 +1,16 @@
 ; Slider
-(defwidget slider [prefix class value ?onchange]
+(defwidget slider [prefix ?onclick class value ?onchange]
     (box :orientation "h" :class "slider" :space-evenly false
-        ; (label :text prefix :class "sliderPrefix")
-        ; (box :class class :orientation "h" :space-evenly true
-        ;     (scale
-        ;         :class "sliderRange"
-        ;         :min 0
-        ;         :max 101
-        ;         :active true
-        ;         :value value
-        ;         :onchange onchange
-        ;         :orientation "h"
-        ;         :flipped false
-        ;         )
-        ;     )
-        (sliderPrefix :prefix prefix :class class)
+        (sliderPrefix :class class :prefix prefix :onclick onclick)
         (sliderRange :class class :value value :onchange onchange)
     )
 )
 
-(defwidget sliderPrefix [prefix class]
-    (label :text prefix :class "sliderPrefix ${class}")
+(defwidget sliderPrefix [class prefix ?onclick]
+    (button
+        :onclick onclick
+        (label :class "sliderPrefix ${class}" :text prefix)
+    )
 )
 
 (defwidget sliderRange [class value ?onchange]
@@ -29,7 +19,7 @@
         :min 0
         :max 101
         :width 120
-        :active true
+        :active {onchange == "" ? false : true}
         :value value
         :onchange onchange
         :orientation "h"

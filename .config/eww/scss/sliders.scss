@@ -1,8 +1,9 @@
 // General Slider Styles
 .sliders {
     padding: 2.5rem;
-    border-radius: 12px;
     background-color: $black;
+    border-radius: 20px;
+    border: 2px solid $lightGrey;
 }
 
 .slider {
@@ -24,12 +25,14 @@
 }
 
 // Individual Slider Styles
+
+// Volume
 label.sliderVolume.sliderPrefix {
     background-color: $blue;
 }
 
 scale.sliderVolume.sliderRange trough {
-    min-height: 0.5rem;
+    min-height: 0.7rem;
     background-color: $lightGrey;
     border-color: $lightGrey;
     border-radius: 15px;
@@ -41,12 +44,13 @@ scale.sliderVolume.sliderRange trough highlight {
     border-radius: 15px;
 }
 
+// Brightness
 label.sliderBrightness.sliderPrefix {
     background-color: $yellow;
 }
 
 scale.sliderBrightness.sliderRange trough {
-    min-height: 0.5rem;
+    min-height: 0.7rem;
     background-color: $lightGrey;
     border-color: $lightGrey;
     border-radius: 15px;
@@ -55,5 +59,23 @@ scale.sliderBrightness.sliderRange trough {
 scale.sliderBrightness.sliderRange trough highlight {
     background-color: $yellow;
     border-color: $yellow;
+    border-radius: 15px;
+}
+
+// Battery
+label.sliderBattery.sliderPrefix {
+    background-color: $purple;
+}
+
+scale.sliderBattery.sliderRange trough {
+    min-height: 0.7rem;
+    background-color: $lightGrey;
+    border-color: $lightGrey;
+    border-radius: 15px;
+}
+
+scale.sliderBattery.sliderRange trough highlight {
+    background-color: $purple;
+    border-color: $purple;
     border-radius: 15px;
 }
