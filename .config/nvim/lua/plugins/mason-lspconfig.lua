@@ -9,18 +9,18 @@ mason_lspconfig.setup {
 
     ensure_installed = {
         "clangd",
-        "cssls",
         "csharp_ls",
+        "cssls",
         "html",
         "intelephense",
         "jdtls",
-        "pyright",
         "jsonls",
         "prosemd_lsp",
+        "pyright",
+        "rust_analyzer",
         "sqlls",
-        "tsserver",
         "sumneko_lua",
+        "tsserver",
         "vimls",
     }
 }
-

@@ -62,7 +62,8 @@ mappings.overload = {
         ["<S-Tab>"] = { "<C-d>", "Undo indentation" },
     },
     n = {
-        ["<Esc>"] = { function() vim.cmd "nohlsearch" vim.o.statusline = "%{%v:lua.require('feline').generate_statusline()%}" end, "  reset", },
+        ["<Esc>"] = { function() vim.cmd "nohlsearch" vim.o.statusline = "%{%v:lua.require('feline').generate_statusline()%}" end,
+            "  reset", },
 
         ["<Tab>"] = { "<cmd> BufferLineCycleNext <cr>", "   cycle next buffer" },
         ["<S-Tab>"] = { "<cmd> BufferLineCyclePrev <cr>", "   cycle prev buffer" },
@@ -75,20 +76,21 @@ mappings.overload = {
 
 mappings.misc = {
     i = {
-        ["<C-k><C-k>"] = { "<cmd> lua require'better-digraphs'.digraphs(\"i\")<cr>", "digraphs" },
+        ["<C-k><C-k>"] = { "<cmd>lua require'better-digraphs'.digraphs(\"i\")<cr>", "digraphs" },
     }
 }
 
 mappings.compatibility = {
     n = {
-        ["<C-a>"] = { "<cmd> lua require(\"core.utils\").select_all() <cr>", "SELECT ALL" },
-        ["<C-s>"] = { "<cmd> w <cr>", "SAVE" },
-        ["<C-z>"] = { "<cmd> normal \"u\" <cr>", "UNDO" },
-        ["<C-c>"] = { "\"*y", "copy to system clipboard" },
-        ["<C-v>"] = { "\"*p", "paste from system clipboard" },
-        ["<C-f>"] = { "/", "search" },
-        ["<C-b>"] = { "<cmd> NvimTreeToggle <cr>", "explorer" },
-        ["<C-o>"] = { ":e ", "open file" },
+        ["<C-a>"] = { "<cmd>lua require(\"core.utils\").select_all() <cr>", "SELECT ALL" },
+        ["<C-b>"] = { "<cmd>NvimTreeToggle<cr>", "TOGGLE EXPLORER" },
+        ["<C-c>"] = { "\"*y", "COPY" },
+        ["<C-f>"] = { "/", "FIND" },
+        ["<C-g>"] = { ":", "GO TO LINE" },
+        ["<C-o>"] = { ":e ", "OPEN FILE" },
+        ["<C-s>"] = { "<cmd>w<cr>", "SAVE" },
+        ["<C-v>"] = { "\"*p", "PASTE" },
+        ["<C-z>"] = { "<cmd>normal \"u\"<cr>", "UNDO" },
     }
 }
 
@@ -136,11 +138,29 @@ mappings.colour = {
         ["p"] = { "<cmd>PickColor<cr>", "colour picker" },
     },
 }
+mappings.comment = {}
+mappings.context = {
+    n = {
+        j = {
+            function()
+                local ok, start = require("indent_blankline.utils").get_current_context(
+                    vim.g.indent_blankline_context_patterns,
+                    vim.g.indent_blankline_use_treesitter_scope
+                )
 
-mappings.comment = { }
+                if ok then
+                    vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
+                    vim.cmd "silent normal ^"
+                end
+            end,
+
+            "  Jump to current_context",
+        },
+    }
+}
 
 -- d:  diagnostics/debugging
-mappings.debugging = {
+mappings.debug = {
     n = {
         c = { "<cmd> DapContinue <cr>", "  begin debugging session" },
         i = { "<cmd> DapStepInto <cr>", "  begin debugging session" },
@@ -155,16 +175,18 @@ mappings.debugging = {
 }
 mappings.diagnostic = {
     n = {
-        n = { "<cmd> lua vim.diagnostic.goto_next({ float = { border = \"rounded\" } }) <cr>", " ﭡ go to next diagnostic" },
-        p = { "<cmd> lua vim.diagnostic.goto_prev({ float = { border = \"rounded\" } }) <cr>", " ﭣ go to previous diagnostic" },
+        n = { "<cmd> lua vim.diagnostic.goto_next({ float = { border = \"rounded\" } }) <cr>",
+            " ﭡ go to next diagnostic" },
+        p = { "<cmd> lua vim.diagnostic.goto_prev({ float = { border = \"rounded\" } }) <cr>",
+            " ﭣ go to previous diagnostic" },
         q = { function() vim.diagnostic.setqflist() end, "   diagnostics to quickfix", },
         l = { function() vim.diagnostic.setloclist() end, "   diagnostic to location list", },
         f = { function() vim.diagnostic.open_float({ border = "rounded", focusable = true, }) end, "   focus diagnostic", },
     },
 }
 
--- e:  explorer/file tree/nvim tree
-mappings.e = {
+-- e:  explorer
+mappings.explorer = {
     n = {
         _ = { "<cmd> NvimTreeToggle <cr>", "" },
 
@@ -176,7 +198,7 @@ mappings.e = {
 }
 
 -- f:  find/telescope
-mappings.f = {
+mappings.find = {
     n = {
         _ = { "<cmd> Telescope builtin include_extensions=true <cr>", "   activate finder" },
 
@@ -218,7 +240,7 @@ mappings.f = {
 }
 
 -- g:  git
-mappings.g = {
+mappings.git = {
     n = {
         _ = { "<cmd> Neogit <cr>", "git main" },
         C = {
@@ -246,31 +268,29 @@ mappings.g = {
 }
 
 -- h:  health
-mappings.h = {
+mappings.health = {
     n = {
         _ = { "<cmd>checkhealth<cr>", "check health" },
     }
 }
 
--- i:  - (insert)
-mappings.i = {
+-- i:
+-- mappings.i = { }
 
-}
-
--- j:  - (move down)
-mappings.j = {
+-- j:  jump
+mappings.jump = {
 
 }
 
 -- k:  keymaps
-mappings.k = {
+mappings.keymap = {
     n = {
         _ = { "<cmd> WhichKey <cr>", "   which-key all keymaps", },
     }
 }
 
 -- l: LSP
-mappings.l = {
+mappings.lsp = {
     -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
 
     n = {
@@ -305,15 +325,15 @@ mappings.l = {
     }
 }
 
--- m:  multi cursor
-mappings.m = {
+-- m:  mark
+mappings.mark = {
     n = {
         t = { "<cmd>MarksToggleSigns<cr>", "toggle marks" },
     },
 }
 
 -- n:  notes
-mappings.n = {
+mappings.note = {
     n = {
         _ = {
             function()
@@ -341,22 +361,20 @@ mappings.n = {
 }
 
 -- o:  outline
-mappings.o = {
+mappings.outline = {
     n = {
         o = { "<cmd> SymbolsOutlineOpen <cr>", "פּ   open outline" },
         c = { "<cmd> SymbolsOutlineClose <cr>", "פּ   close outline" },
     }
 }
 
--- package
+-- p:  package
 mappings.package = {
     n = {
 
     }
 }
-
--- p:  plugins
-mappings.p = {
+mappings.plugin = {
     n = {
         s = { "<cmd> PackerStatus <cr>", "" },
         c = { "<cmd> PackerClean <cr>", "" },
@@ -367,7 +385,7 @@ mappings.p = {
 }
 
 -- q:  quickfix
-mappings.q = {
+mappings.quickfix = {
     n = {
         _ = { "<cmd> TroubleToggle quickfix <cr>", "" },
         c = { "<cmd> TroubleClose <cr>", "close quickfix" },
@@ -378,13 +396,13 @@ mappings.q = {
 }
 
 -- r:  run (for programs, or debugging)
-mappings.r = {
+mappings.run = {
     n = {
     },
 }
 
--- s:  sessions
-mappings.s = {
+-- s:  session
+mappings.session = {
     n = {
         -- (r)estore last session
         r = { "<cmd>SessionLoad<cr>", "  restore last session" },
@@ -394,8 +412,8 @@ mappings.s = {
     },
 }
 
--- t:  terminal/testing
-mappings.t = {
+-- t:  terminal
+mappings.terminal = {
     n = {
         --[""] = { name = " terminal /  testing" },
         l = {
@@ -414,9 +432,12 @@ mappings.t = {
         },
     },
 }
+mappings.test = {
 
--- u:  - (undo)
-mappings.u = {
+}
+
+-- u:  undo
+mappings.undo = {
     n = {
         -- [""] = { "", "undotree" },
         _ = { "<cmd> UndotreeToggle <cr>", "undotree" },
@@ -428,16 +449,16 @@ mappings.u = {
     },
 }
 
--- v:  - (visual)
-mappings.v = {
+-- v:  vim
+mappings.vim = {
     n = {
         x = { "<cmd> qa <cr>", "Exit neovim" },
         X = { "<cmd> wqa <cr>", "save and Exit neovim" },
     },
 }
 
--- w:  windows
-mappings.w = {
+-- w:  window
+mappings.window = {
     n = {
         -- Label
         --[""] = { "", "   windows" },
@@ -445,29 +466,11 @@ mappings.w = {
     },
 }
 
--- x:  context
-mappings.x = {
-    n = {
-        j = {
-            function()
-                local ok, start = require("indent_blankline.utils").get_current_context(
-                    vim.g.indent_blankline_context_patterns,
-                    vim.g.indent_blankline_use_treesitter_scope
-                )
+-- x:
+-- mappings.x = { }
 
-                if ok then
-                    vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
-                    vim.cmd "silent normal ^"
-                end
-            end,
-
-            "  Jump to current_context",
-        },
-    }
-}
-
--- z:  zen mode
-mappings.z = {
+-- z:  zen
+mappings.zen = {
     n = {
         z = { "<cmd> ZenMode <cr>", "  toggle zen-mode" },
         t = { "<cmd> Twilight <cr>", "  toggle twilight" },

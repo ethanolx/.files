@@ -390,7 +390,7 @@ return {
     },
 
     -- SQL
-    ["tpope/vim-dadbod"] = {
+    ["ethanolx/vim-dadbod"] = {
         ft = "sql",
         cmd = { "DB", "DBUI" },
         config = function()

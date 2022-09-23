@@ -97,6 +97,15 @@ utils.load_sub_mappings = function(registrar, prefix, modes)
     end
 end
 
+utils.load_main_mappings = function (registrar, prefix, icon, modes)
+    for mode, keymaps in pairs(modes) do
+        for keymap, mapping in pairs(keymaps) do
+            modes[mode][keymap][2] = string.format("%s %s", icon, mapping[2])
+        end
+    end
+    utils.load_sub_mappings(registrar, prefix, modes)
+end
+
 utils.load_mappings = function(mappings)
     -- Set up legendary and load which-key
     require("legendary")
@@ -109,7 +118,7 @@ utils.load_mappings = function(mappings)
     local icons = require("core.icons").category
 
     -- Consolidate categories
-    local categories = {}
+    local main_mappings = {}
 
     for section, mode_mappings in pairs(mappings) do
         if section == "alt" then
@@ -125,14 +134,24 @@ utils.load_mappings = function(mappings)
         elseif section == "compatibility" and compatibility_mode > 1 then
             utils.load_sub_mappings(which_key, nil, mode_mappings)
         else
-            local prefix = "<leader>" .. string.sub(section, 0, 1)
-            if categories[prefix] ~= nil then
-                categories[prefix][section] = mode_mappings
+            local prefix = string.sub(section, 0, 1)
+            if main_mappings[prefix] ~= nil then
+                main_mappings[prefix][section] = mode_mappings
             else
-                categories[prefix] = { [section] = mode_mappings }
+                main_mappings[prefix] = { [section] = mode_mappings }
             end
-            which_key.register({ [prefix] = { name = string.format("%s %s", icons[section], section) } }, { mode = "n", silent = true, noremap = true })
-            utils.load_sub_mappings(which_key, prefix, mode_mappings)
+        end
+    end
+
+    for prefix, categories in pairs(main_mappings) do
+        local labels = {}
+        for category, mode_mappings in pairs(categories) do
+            table.insert(labels, string.format("%s %s", icons[category], category))
+            utils.load_main_mappings(which_key, "<leader>" .. prefix, icons[category], mode_mappings)
+        end
+        if #labels > 0 then
+            which_key.register({ ["<leader>" .. prefix] = { name = table.concat(labels, " / ") } },
+                { mode = "n", silent = true, noremap = true })
         end
     end
 end

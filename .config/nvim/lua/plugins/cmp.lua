@@ -82,11 +82,11 @@ cmp.setup {
                 end
             end
             item.kind = string.format(" %s %s", icons[string.lower(item.kind)], item.kind)
-            item.menu = ""
-            item.word = string.gsub(item.word, "%s+$", "")
-            if entry.completion_item.insertText ~= nil then
-                entry.completion_item.insertText = string.gsub(entry.completion_item.insertText, "%s+$", "")
-            end
+            -- item.menu = ""
+            -- item.word = string.gsub(item.word, "%s+$", "")
+            -- if entry.completion_item.insertText ~= nil then
+            --     entry.completion_item.insertText = string.gsub(entry.completion_item.insertText, "%s+$", "")
+            -- end
             return item
         end,
     },
