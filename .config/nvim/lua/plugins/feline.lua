@@ -42,8 +42,9 @@ function(colour_palette)
 end
 )
 
+local colour_palette = utils.get_colour_palette() or {}
 local options = {
-    colours = require("core.themes." .. vim.g.colour_scheme).base_30,
+    colours = vim.tbl_extend("force", colour_palette.base_30, colour_palette.base_16),
     lsp = require "feline.providers.lsp",
     lsp_severity = vim.diagnostic.severity,
 }
@@ -107,14 +108,6 @@ options.current_mode_pad = {
         bg = options.colours.lightbg,
     },
 }
-
--- options.directory_icon = {
---     provider = " " .. icons.lsp.folder,
---     hl = {
---         fg = options.colours.white,
---         bg = options.colours.lightbg,
---     },
--- }
 
 options.directory_name = {
     provider = function()
@@ -228,19 +221,19 @@ options.empty_space = {
 options.diff = {
     add = {
         provider = "git_diff_added",
-        hl = "DiffAdd",
+        hl = { fg = options.colours.vibrant_green },
         icon = " " .. icons.git.diff.add .. " ",
     },
 
     change = {
         provider = "git_diff_changed",
-        hl = "DiffChange",
+        hl = { fg = options.colours.yellow },
         icon = " " .. icons.git.diff.change .. " ",
     },
 
     remove = {
         provider = "git_diff_removed",
-        hl = "DiffDelete",
+        hl = { fg = options.colours.red },
         icon = " " .. icons.git.diff.delete .. " ",
     },
 }
@@ -252,7 +245,7 @@ options.diagnostics = {
             return options.lsp.diagnostics_exist(options.lsp_severity.ERROR)
         end,
 
-        hl = "DiagnosticError",
+        hl = { fg = options.colours.red },
         icon = " " .. icons.diagnostic.error .. " ",
     },
 
@@ -261,7 +254,7 @@ options.diagnostics = {
         enabled = function()
             return options.lsp.diagnostics_exist(options.lsp_severity.WARN)
         end,
-        hl = "DiagnosticWarn",
+        hl = { fg = options.colours.base09 },
         icon = " " .. icons.diagnostic.warn .. " ",
     },
 
@@ -270,7 +263,7 @@ options.diagnostics = {
         enabled = function()
             return options.lsp.diagnostics_exist(options.lsp_severity.HINT)
         end,
-        hl = "DiagnosticHint",
+        hl = { fg = options.colours.purple },
         icon = " " .. icons.diagnostic.hint .. " ",
     },
 
@@ -279,7 +272,7 @@ options.diagnostics = {
         enabled = function()
             return options.lsp.diagnostics_exist(options.lsp_severity.INFO)
         end,
-        hl = "DiagnosticInfo",
+        hl = { fg = options.colours.base0C },
         icon = " " .. icons.diagnostic.info .. " ",
     },
 }

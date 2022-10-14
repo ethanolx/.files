@@ -55,7 +55,27 @@ require("mason-lspconfig").setup_handlers {
             on_attach = on_attach,
         }
     end,
+    html = function()
+        lspconfig.html.setup {
+            filetypes = { "html", "htmldjango" },
+        }
+    end,
+    emmet_ls = function()
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+        lspconfig.emmet_ls.setup {
+            capabilities = capabilities,
+            filetypes = { "html", "htmldjango", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
+            init_options = {
+                html = {
+                    options = {
+                        ["bem.enabled"] = true,
+                    },
+                },
+            }
+        }
+    end,
     sumneko_lua = function()
         lspconfig.sumneko_lua.setup {
             on_attach = on_attach,

@@ -249,7 +249,7 @@ mappings.git = {
             end, "  commit"
         },
         a = { "<cmd> Gitsigns stage_hunk <cr>", "  stage_hunk" },
-        A = { "<cmd> !git add % <cr>", "  stage this file" },
+        A = { "<cmd> !git add \"%\" <cr>", "  stage this file" },
         S = { "<cmd> Telescope git_status <cr>", "   git status" },
         U = { "<cmd> silent!git reset % <cr>", "   git reset this file" },
         u = { "<cmd> Gitsigns undo_stage_hunk <cr>", "   undo git staging this hunk" },

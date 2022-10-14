@@ -17,8 +17,8 @@ local default_plugins = {
     "getscriptplugin",
     "gzip",
     "logipat",
-    "netrw",
-    "netrwplugin",
+    -- "netrw",
+    -- "netrwplugin",
     "netrwsettings",
     "netrwfilehandlers",
     "matchit",
@@ -59,7 +59,9 @@ end
 vim.g.colour_scheme = "onedark"
 
 -- Icon Sets
-vim.g.icon_sets = {}
+vim.g.icon_sets = {
+    git = "square_solid",
+}
 
 -- Providers
 vim.g.providers = {

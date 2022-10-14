@@ -143,7 +143,7 @@ return {
         end,
     },
     ["editorconfig/editorconfig-vim"] = {
-        setup = function ()
+        setup = function()
             require("core.lazy_load").on_file_open "editorconfig-vim"
         end,
     },
@@ -202,7 +202,7 @@ return {
         end,
     },
     ["chentoast/marks.nvim"] = {
-	cmd = "MarksToggle",
+        cmd = "MarksToggle",
         config = function()
             require "plugins.marks"
         end,
@@ -218,7 +218,11 @@ return {
 
     -- EXPLORER
     ["kyazdani42/nvim-tree.lua"] = {
-        cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+        cmd = {
+            "NvimTreeToggle",
+            "NvimTreeFocus",
+            "NvimTreeFindFile",
+        },
         config = function()
             require "plugins.tree"
         end,
@@ -271,7 +275,7 @@ return {
     -- JUMP
     ["rlane/pounce.nvim"] = {
         cmd = "Pounce",
-        config = function ()
+        config = function()
             require "plugins.pounce"
         end,
     },
@@ -287,7 +291,7 @@ return {
     -- LSP
     ["williamboman/mason-lspconfig.nvim"] = {
         after = "mason-tool-installer.nvim",
-        config = function ()
+        config = function()
             require "plugins.mason-lspconfig"
         end,
     },
@@ -350,20 +354,19 @@ return {
 
     -- PACKAGE
     ["williamboman/mason.nvim"] = {
-        event = "UIEnter",
-        config = function ()
+        config = function()
             require "plugins.mason"
         end,
     },
     ["WhoIsSethDaniel/mason-tool-installer.nvim"] = {
         after = "mason.nvim",
-        config = function ()
+        config = function()
             require "plugins.mason-tool-installer"
         end,
     },
 
     -- PLUGIN
-    ["wbthomason/packer.nvim"] = { },
+    ["wbthomason/packer.nvim"] = {},
 
     -- SESSION
     ["olimorris/persisted.nvim"] = {

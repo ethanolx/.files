@@ -24,7 +24,7 @@ toggleterm.setup {
     persist_mode = false,
     direction = "tab",
     close_on_exit = true,
-    shell = vim.loop.os_uname().sysname == "Linux" and "zsh" or "powershell",
+    shell = vim.loop.os_uname().sysname == "Linux" and "zsh" or "pwsh",
     on_open = function (terminal)
         vim.cmd "normal i"
     end,

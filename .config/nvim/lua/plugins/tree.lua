@@ -62,8 +62,8 @@ end
 local options = {
     create_in_closed_folder = false,
     auto_reload_on_write = false,
-    disable_netrw = true,
-    hijack_netrw = true,
+    disable_netrw = false,
+    hijack_netrw = false,
     open_on_tab = false,
     hijack_cursor = true,
     hijack_unnamed_buffer_when_opening = false,
