@@ -11,7 +11,7 @@ mason_lspconfig.setup {
         "clangd",
         "csharp_ls",
         "cssls",
-        "docker_ls",
+        "dockerls",
         "html",
         "intelephense",
         "jdtls",

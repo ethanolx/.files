@@ -47,7 +47,7 @@ packer.startup(function(use)
 
     for plugin, opts in pairs(plugins) do
         table.insert(opts, plugin)
-	use(opts)
+    use(opts)
     end
 
     -- Install latest plugins if fresh installation

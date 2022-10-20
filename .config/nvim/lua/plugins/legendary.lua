@@ -4,4 +4,6 @@ if not present then
     return
 end
 
-legendary.setup {}
+legendary.setup {
+    auto_register_which_key = true
+}

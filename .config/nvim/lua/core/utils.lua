@@ -108,7 +108,7 @@ end
 
 utils.load_mappings = function(mappings)
     -- Set up legendary and load which-key
-    require("legendary")
+    require("legendary").setup { auto_register_which_key = true }
     local which_key = require("which-key")
 
     -- Determine compatibility mode

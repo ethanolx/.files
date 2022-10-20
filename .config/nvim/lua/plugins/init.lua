@@ -302,7 +302,6 @@ return {
         end,
     },
     ["jose-elias-alvarez/null-ls.nvim"] = {
-        after = "nvim-lspconfig",
         setup = function()
             require "plugins.null-ls"
         end,
@@ -354,6 +353,7 @@ return {
 
     -- PACKAGE
     ["williamboman/mason.nvim"] = {
+        event = "UIEnter",
         config = function()
             require "plugins.mason"
         end,
@@ -488,9 +488,9 @@ return {
         end,
     },
     ["mrjones2014/legendary.nvim"] = {
-        config = function()
-            require "plugins.legendary"
-        end,
+        -- config = function()
+        --     require "plugins.legendary"
+        -- end,
     },
     ["Weissle/persistent-breakpoints.nvim"] = {
     },
