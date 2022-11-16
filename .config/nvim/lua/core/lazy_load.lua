@@ -23,51 +23,36 @@ M.lazy_load = function(tb)
     })
 end
 
-vim.api.nvim_create_autocmd("UIEnter", {
-    callback = function()
-        vim.notify = function(msg, level, opts)
-            vim.notify = require("notify")
-            vim.notify(msg, level, opts)
-        end
+-- vim.api.nvim_create_autocmd("UIEnter", {
+--     callback = function()
+--         vim.g.ui_input = vim.ui.input
+--         vim.g.ui_select = vim.ui.select
 
-        vim.notify_once = function(msg, level, opts)
-            vim.notify = require("notify")
-            vim.notify_once(msg, level, opts)
-        end
-    end,
-    once = true,
-})
+--         vim.ui.input = function(opts, on_confirm)
+--             vim.ui.input = vim.g.ui_input
+--             vim.g.ui_input = nil
 
-vim.api.nvim_create_autocmd("UIEnter", {
-    callback = function()
-        vim.g.ui_input = vim.ui.input
-        vim.g.ui_select = vim.ui.select
+--             vim.ui.select = vim.g.ui_select
+--             vim.g.ui_select = nil
 
-        vim.ui.input = function(opts, on_confirm)
-            vim.ui.input = vim.g.ui_input
-            vim.g.ui_input = nil
+--             require "dressing"
 
-            vim.ui.select = vim.g.ui_select
-            vim.g.ui_select = nil
+--             vim.ui.input(opts, on_confirm)
+--         end
+--         vim.ui.select = function(items, opts, on_choice)
+--             vim.ui.input = vim.g.ui_input
+--             vim.g.ui_input = nil
 
-            require "dressing"
+--             vim.ui.select = vim.g.ui_select
+--             vim.g.ui_select = nil
 
-            vim.ui.input(opts, on_confirm)
-        end
-        vim.ui.select = function(items, opts, on_choice)
-            vim.ui.input = vim.g.ui_input
-            vim.g.ui_input = nil
+--             require "dressing"
 
-            vim.ui.select = vim.g.ui_select
-            vim.g.ui_select = nil
-
-            require "dressing"
-
-            vim.ui.select(items, opts, on_choice)
-        end
-    end,
-    once = true,
-})
+--             vim.ui.select(items, opts, on_choice)
+--         end
+--     end,
+--     once = true,
+-- })
 
 vim.api.nvim_create_autocmd("BufEnter", {
     callback = function()

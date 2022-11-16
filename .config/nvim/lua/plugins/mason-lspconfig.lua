@@ -16,6 +16,7 @@ mason_lspconfig.setup {
         "intelephense",
         "jdtls",
         "jsonls",
+        "powershell_es",
         "prosemd_lsp",
         "pyright",
         "rust_analyzer",

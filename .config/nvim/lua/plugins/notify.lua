@@ -37,13 +37,3 @@ notify.setup {
         vim.api.nvim_win_set_option(win, "wrap", true)
     end,
 }
-
-vim.notify = notify
-
-local telescope_present, telescope = pcall(require, "telescope")
-
-if not telescope_present then
-    return
-end
-
-telescope.load_extension "notify"

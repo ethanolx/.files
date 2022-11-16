@@ -8,6 +8,8 @@ mappings.alt = {
         j = { ": MoveBlock(1)<cr>", "  move lines down" },
         J = { "<cmd> lua require(\"trevj\").format_at_cursor() <cr>", "unwrap lines", },
         k = { ": MoveBlock(-1)<cr>", "  move lines up" },
+        y = { "\"+y", "   paste from system clipboard" },
+        Y = { "\"+Y", "   paste from system clipboard" },
     },
     n = {
         p = { "\"+p", "   paste from system clipboard" },
@@ -371,7 +373,7 @@ mappings.outline = {
 -- p:  package
 mappings.package = {
     n = {
-
+        a = { "<cmd>Mason<cr>", "All packages" },
     }
 }
 mappings.plugin = {
@@ -467,7 +469,11 @@ mappings.window = {
 }
 
 -- x:
--- mappings.x = { }
+mappings.xperimental = {
+    n = {
+        r = { "<plug>RestNvim", "Rest Client" },
+    }
+}
 
 -- z:  zen
 mappings.zen = {

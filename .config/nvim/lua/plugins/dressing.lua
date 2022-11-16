@@ -27,5 +27,3 @@ dressing.setup {
     },
     select = {},
 }
-
-require "telescope"

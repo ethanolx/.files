@@ -290,7 +290,7 @@ return {
 
     -- LSP
     ["williamboman/mason-lspconfig.nvim"] = {
-        after = "mason-tool-installer.nvim",
+        event = "UIEnter",
         config = function()
             require "plugins.mason-lspconfig"
         end,
@@ -345,7 +345,6 @@ return {
     ["nvim-neorg/neorg"] = {
         ft = "norg",
         cmd = "NeorgStart",
-        after = "nvim-treesitter",
         config = function()
             require "plugins.neorg"
         end,
@@ -458,15 +457,11 @@ return {
         end,
     },
     ["stevearc/dressing.nvim"] = {
-        module = "dressing",
-        fn = { "vim.ui.input", "vim.ui.select" },
         config = function()
             require "plugins.dressing"
         end,
     },
     ["rcarriga/nvim-notify"] = {
-        module = "notify",
-        fn = "vim.notify",
         config = function()
             require "plugins.notify"
         end,
@@ -496,6 +491,12 @@ return {
     },
     ["dstein64/vim-startuptime"] = {
         cmd = "StartupTime",
+    },
+    ["rest-nvim/rest.nvim"] = {
+        keys = "<space>xr",
+        config = function ()
+            require "plugins.rest"
+        end,
     },
     ["tpope/vim-abolish"] = {
         cmd = { "Abolish", "Subvert" },
