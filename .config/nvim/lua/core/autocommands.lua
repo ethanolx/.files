@@ -55,6 +55,18 @@ autocmd("InsertLeave", {
 })
 
 -- FileType
-autocmd("FileType", { pattern = "gitcommit", callback = function() vim.wo.signcolumn = "no" end, })
-autocmd("FileType", { pattern = "Outline", callback = function() vim.wo.signcolumn = "no" end, })
+autocmd("FileType", {
+    pattern = "gitcommit",
+    callback = function()
+        vim.wo.signcolumn = "no"
+    end,
+})
+autocmd("FileType", {
+    pattern = "Outline",
+    callback = function()
+        vim.wo.signcolumn = "no"
+        vim.wo.foldcolumn = "0"
+        vim.wo.foldenable = false
+    end,
+})
 -- autocmd("FileType", { pattern = "mason", command = "IndentBlanklineDisable" })

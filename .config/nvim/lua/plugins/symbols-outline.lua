@@ -44,8 +44,6 @@ for k, v in pairs(symbol_highlights) do
     }
 end
 
-print(symbols)
-
 require("core.utils").load_highlights(
     function(colour_palette)
         return {
