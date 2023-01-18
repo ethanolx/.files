@@ -18,6 +18,11 @@ neorg.setup {
         -- ["core.norg.esupports.metagen"] = {},
         -- ["core.norg.news"] = {},
         -- ["core.tangle"] = {},
+        ["core.export"] = {
+            config = {
+
+            }
+        },
         ["core.keybinds"] = {
             config = {
                 hook = function(keybinds)

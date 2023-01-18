@@ -49,15 +49,14 @@ local options = {
     lsp_severity = vim.diagnostic.severity,
 }
 
-local os = vim.bo.fileformat:lower()
-if vim.fn.has('linux') then
+if vim.fn.has('win32') or vim.fn.has('win64') then
+    options.os_icon = icons.os.main.windows
+elseif vim.fn.has('linux') then
     options.os_icon = icons.os.main.linux
 elseif vim.fn.has('bsd') then
     options.os_icon = icons.os.main.bsd
 elseif vim.fn.has('mac') then
     options.os_icon = icons.os.main.mac
-elseif vim.fn.has('win32') or vim.fn.has('win64') then
-    options.os_icon = icons.os.main.windows
 end
 
 options.mode_icon = icons.generic.main

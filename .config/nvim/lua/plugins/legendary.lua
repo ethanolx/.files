@@ -5,5 +5,8 @@ if not present then
 end
 
 legendary.setup {
-    auto_register_which_key = true
+    which_key = {
+        auto_register = true,
+        do_bindings = false,
+    }
 }

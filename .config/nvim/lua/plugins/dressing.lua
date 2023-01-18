@@ -17,12 +17,14 @@ require("core.utils").load_highlights(
 
 dressing.setup {
     input = {
-        winblend = 0,
+        win_options = {
+            winblend = 0,
+        },
         prompt_align = "center",
         default_prompt = "Input",
         relative = "editor",
         prefer_width = 80,
-        get_config = function(opts)
+        get_config = function(_)
         end
     },
     select = {},

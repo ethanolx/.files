@@ -174,7 +174,7 @@ return {
             require("core.utils").load_highlight "visual-multi"
         end,
     },
-    ["fedepujol/move.nvim"] = {
+    ["ethanolx/move.nvim"] = {
         cmd = { "MoveLine", "MoveBlock" },
     },
     ["ZhiyuanLck/smart-pairs"] = {
@@ -245,6 +245,9 @@ return {
     -- FOLD
     ["kevinhwang91/nvim-ufo"] = {
         requires = "kevinhwang91/promise-async",
+        setup = function()
+            require("core.lazy_load").on_file_open "nvim-ufo"
+        end,
         config = function()
             require "plugins.ufo"
         end
@@ -252,9 +255,7 @@ return {
 
     -- GIT
     ["lewis6991/gitsigns.nvim"] = {
-        setup = function()
-            require("core.lazy_load").on_file_open "gitsigns.nvim"
-        end,
+        event = "BufAdd",
         config = function()
             require "plugins.gitsigns"
         end,
@@ -282,7 +283,6 @@ return {
 
     -- KEYMAP
     ["folke/which-key.nvim"] = {
-        after = "legendary.nvim",
         config = function()
             require "plugins.which-key"
         end,
@@ -290,7 +290,7 @@ return {
 
     -- LSP
     ["williamboman/mason-lspconfig.nvim"] = {
-        event = "UIEnter",
+        after = "mason.nvim",
         config = function()
             require "plugins.mason-lspconfig"
         end,
@@ -302,7 +302,8 @@ return {
         end,
     },
     ["jose-elias-alvarez/null-ls.nvim"] = {
-        setup = function()
+        event = "BufAdd",
+        config = function()
             require "plugins.null-ls"
         end,
     },
@@ -310,8 +311,11 @@ return {
 
     -- OUTLINE
     ["simrat39/symbols-outline.nvim"] = {
-        cmd = "SymbolsOutline",
+        cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
         module = "symbols-outline",
+        config = function()
+            require "plugins.symbols-outline"
+        end
     },
     ["stevearc/aerial.nvim"] = {
         cmd = "AerialToggle",
@@ -344,7 +348,7 @@ return {
     -- NOTES
     ["nvim-neorg/neorg"] = {
         ft = "norg",
-        cmd = "NeorgStart",
+        cmd = "Neorg",
         config = function()
             require "plugins.neorg"
         end,
@@ -409,7 +413,6 @@ return {
 
     -- STATUS LINE
     ["feline-nvim/feline.nvim"] = {
-        after = "nvim-web-devicons",
         config = function()
             require "plugins.feline"
         end,
@@ -483,9 +486,9 @@ return {
         end,
     },
     ["mrjones2014/legendary.nvim"] = {
-        -- config = function()
-        --     require "plugins.legendary"
-        -- end,
+        config = function()
+            require "plugins.legendary"
+        end,
     },
     ["Weissle/persistent-breakpoints.nvim"] = {
     },
@@ -494,7 +497,7 @@ return {
     },
     ["rest-nvim/rest.nvim"] = {
         keys = "<space>xr",
-        config = function ()
+        config = function()
             require "plugins.rest"
         end,
     },

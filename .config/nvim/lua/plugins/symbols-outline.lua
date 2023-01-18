@@ -1,4 +1,10 @@
-local symbol_icons = require("core.icons").lspkind
+local present, symbols_outline = pcall(require, "symbols-outline")
+
+if not present then
+    return
+end
+
+local symbol_icons = require("core.icons").lsp
 
 local symbol_highlights = {
     File = "TSURI",
@@ -33,17 +39,12 @@ local symbols = {}
 
 for k, v in pairs(symbol_highlights) do
     symbols[k] = {
-        icon = symbol_icons[k],
+        icon = symbol_icons[string.lower(k)],
         hl = v,
     }
 end
 
-vim.g.symbols_outline = {
-    highlight_hovered_item = true,
-    auto_preview = false,
-    border = "rounded",
-    symbols = symbols,
-}
+print(symbols)
 
 require("core.utils").load_highlights(
     function(colour_palette)
@@ -52,3 +53,10 @@ require("core.utils").load_highlights(
         }
     end
 )
+
+symbols_outline.setup {
+    highlight_hovered_item = true,
+    auto_preview = false,
+    border = "rounded",
+    symbols = symbols,
+}

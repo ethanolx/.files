@@ -72,7 +72,8 @@ mappings.overload = {
 
         ["gd"] = { function() vim.lsp.buf.definition() end, "   lsp definition", },
         ["gD"] = { function() vim.lsp.buf.declaration() end, "   lsp declaration", },
-        ["K"] = { require("core.utils").hover, "   lsp hover", },
+        ["K"] = { require("core.utils").hover(), "   lsp hover", },
+        ["gK"] = { require("core.utils").hover(true), "   lsp hover (options)", },
     }
 }
 
@@ -211,7 +212,7 @@ mappings.find = {
         df = { "<cmd> Telescope dap frames <cr>", "  find all diagnostics" },
         db = { "<cmd> Telescope dap list_breakpoints <cr>", "  find all diagnostics" },
         dv = { "<cmd> Telescope dap variables <cr>", "  find all diagnostics" },
-        e = { "<cmd> Telescope file_browser path=%:p:h select_buffer=true <cr>", "file browser" },
+        e = { "<cmd> Telescope file_browser path=%:p:h select_buffer=true hidden=true <cr>", "file browser" },
         E = { "<cmd> Telescope file_browser <cr>", "file browser" },
         f = { "<cmd> Telescope find_files <cr>", "  find files" },
         F = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <cr>", "  find all" },
@@ -253,9 +254,9 @@ mappings.git = {
         a = { "<cmd> Gitsigns stage_hunk <cr>", "  stage_hunk" },
         A = { "<cmd> !git add \"%\" <cr>", "  stage this file" },
         S = { "<cmd> Telescope git_status <cr>", "   git status" },
-        U = { "<cmd> silent!git reset % <cr>", "   git reset this file" },
+        U = { "<cmd> !git reset % <cr>", "   git reset this file" },
         u = { "<cmd> Gitsigns undo_stage_hunk <cr>", "   undo git staging this hunk" },
-        R = { "<cmd> silent!git restore % <cr>", "   git restore this file" },
+        R = { "<cmd> !git restore % <cr>", "   git restore this file" },
         r = { "<cmd> Gitsigns reset_hunk <cr>", "   git reset this hunk" },
         b = { "<cmd> Gitsigns blame_line <cr>", "   git blame" },
         B = { "<cmd> !git branch <cr>", "   list branches" },
@@ -340,20 +341,15 @@ mappings.note = {
         _ = {
             function()
                 local cwd = vim.fn.getcwd()
-                local neorg_not_loaded, _ = pcall(vim.cmd, "NeorgStart")
-                local neorg_loaded = not neorg_not_loaded
-                if neorg_loaded then
-                    vim.cmd "Neorg workspace notes"
-                else
-                    vim.g.prev_cwd = cwd
-                end
+                vim.cmd "Neorg workspace notes"
+                vim.g.prev_cwd = cwd
             end,
             "Open notes"
         },
         v = { "<cmd>Neorg gtd views<cr>", "notes overview" },
         r = {
             function()
-                vim.cmd "Neorg return "
+                vim.cmd("Neorg return")
                 vim.cmd("cd " .. vim.g.prev_cwd)
             end,
             "Return to cwd",

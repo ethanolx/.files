@@ -97,7 +97,7 @@ utils.load_sub_mappings = function(registrar, prefix, modes)
     end
 end
 
-utils.load_main_mappings = function (registrar, prefix, icon, modes)
+utils.load_main_mappings = function(registrar, prefix, icon, modes)
     for mode, keymaps in pairs(modes) do
         for keymap, mapping in pairs(keymaps) do
             modes[mode][keymap][2] = string.format("%s %s", icon, mapping[2])
@@ -108,7 +108,7 @@ end
 
 utils.load_mappings = function(mappings)
     -- Set up legendary and load which-key
-    require("legendary").setup { auto_register_which_key = true }
+    require("legendary")
     local which_key = require("which-key")
 
     -- Determine compatibility mode
@@ -254,10 +254,21 @@ utils.load_context_provider = function(context_provider)
     }
 end
 
-utils.hover = function()
-    vim.cmd [[autocmd! CursorHold *]]
-    vim.lsp.buf.hover()
-    vim.cmd [[autocmd CursorMoved * ++once lua require("core.utils").activate_diagnostics()]]
+utils.hover = function(alt)
+    alt = alt or false
+    return function()
+        if vim.g.providers.hover == "native" then
+            vim.cmd [[autocmd! CursorHold *]]
+            vim.lsp.buf.hover()
+            vim.cmd [[autocmd CursorMoved * ++once lua require("core.utils").activate_diagnostics()]]
+        else
+            if alt then
+                require("hover").hover_select()
+            else
+                require("hover").hover()
+            end
+        end
+    end
 end
 
 return utils

@@ -66,7 +66,7 @@ vim.g.icon_sets = {
 -- Providers
 vim.g.providers = {
     -- hover/native
-    hover = "native",
+    hover = "hover",
 
     -- gps/navic/treesitter
     context = "navic",

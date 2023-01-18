@@ -8,6 +8,7 @@ return {
         column = "",
         constant = "",
         constructor = "",
+        container = "",
         enum = "",
         enummember = "",
         event = "",

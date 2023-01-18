@@ -4,16 +4,16 @@ if not present then
     return
 end
 
-local icons = require("core.icons").lspkind
+local icons = require("core.icons").lsp
+
+local padded_icons = {}
+
+for item, icon in pairs(icons) do
+    padded_icons[require("core.utils").capitalize(item) .. "-name"] = icon .. " "
+end
 
 gps.setup {
-    icons = {
-        ["class-name"] = icons.Class,
-		["function-name"] = icons.Function,
-		["method-name"] = icons.Method,
-		["container-name"] = icons.Object,
-		["tag-name"] = icons.Tag,
-    },
+    icons = padded_icons,
     separator = " » ",
 }
 

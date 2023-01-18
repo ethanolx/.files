@@ -6,6 +6,8 @@ end
 
 local icons = require "core.icons"
 
+vim.notify = notify
+
 notify.setup {
     fps = 30,
     icons = {

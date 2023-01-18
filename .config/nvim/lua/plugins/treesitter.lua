@@ -223,6 +223,7 @@ local options = {
         "scss",
         "tsx",
         "typescript",
+        "yaml",
         "vim",
     },
     indent = {
