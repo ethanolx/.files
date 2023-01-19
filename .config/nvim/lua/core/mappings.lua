@@ -282,7 +282,9 @@ mappings.health = {
 
 -- j:  jump
 mappings.jump = {
-
+    n = {
+        _ = { "<cmd>Pounce<cr>", "  Fuzzy jump" },
+    }
 }
 
 -- k:  keymaps

@@ -72,7 +72,7 @@ vim.g.providers = {
     context = "navic",
 
     -- aerial/symbols
-    outline = "aerial",
+    outline = "symbols",
 }
 
 -- Mappings

@@ -99,8 +99,10 @@ cmp.setup {
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-z>"] = cmp.mapping.close(),
-        ["<CR>"] = cmp.mapping(function()
-            if not cmp.confirm({ select = false }) then
+        ["<CR>"] = cmp.mapping(function(fallback)
+            if vim.bo.filetype == "DressingInput" then
+                fallback()
+            elseif not cmp.confirm({ select = false }) then
                 require("pairs.enter").type()
             end
         end),

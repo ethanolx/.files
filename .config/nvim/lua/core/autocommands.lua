@@ -69,4 +69,17 @@ autocmd("FileType", {
         vim.wo.foldenable = false
     end,
 })
+autocmd("FileType", {
+    pattern = "NeogitStatus",
+    callback = function()
+        vim.wo.foldcolumn = "0"
+    end,
+})
+-- autocmd("FileType", {
+--     pattern = "norg",
+--     callback = function()
+--         vim.wo.foldcolumn = "auto:6"
+--         vim.wo.signcolumn = "yes:1"
+--     end,
+-- })
 -- autocmd("FileType", { pattern = "mason", command = "IndentBlanklineDisable" })

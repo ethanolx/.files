@@ -267,6 +267,7 @@ return {
         end,
     },
     ["TimUntersberger/neogit"] = {
+        requires = "nvim-lua/plenary.nvim",
         cmd = "Neogit",
         config = function()
             require "plugins.neogit"

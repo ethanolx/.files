@@ -23,37 +23,6 @@ M.lazy_load = function(tb)
     })
 end
 
--- vim.api.nvim_create_autocmd("UIEnter", {
---     callback = function()
---         vim.g.ui_input = vim.ui.input
---         vim.g.ui_select = vim.ui.select
-
---         vim.ui.input = function(opts, on_confirm)
---             vim.ui.input = vim.g.ui_input
---             vim.g.ui_input = nil
-
---             vim.ui.select = vim.g.ui_select
---             vim.g.ui_select = nil
-
---             require "dressing"
-
---             vim.ui.input(opts, on_confirm)
---         end
---         vim.ui.select = function(items, opts, on_choice)
---             vim.ui.input = vim.g.ui_input
---             vim.g.ui_input = nil
-
---             vim.ui.select = vim.g.ui_select
---             vim.g.ui_select = nil
-
---             require "dressing"
-
---             vim.ui.select(items, opts, on_choice)
---         end
---     end,
---     once = true,
--- })
-
 vim.api.nvim_create_autocmd("BufEnter", {
     callback = function()
         if vim.g.scrollbar_provider == "nvim-scrollbar" then

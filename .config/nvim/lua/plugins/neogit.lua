@@ -4,10 +4,9 @@ if not present then
    return
 end
 
-vim.cmd "PackerLoad nvim-treesitter"
-
 neogit.setup {
     kind = "tab",
+    commit_popup = "split",
     signs = {
         -- { CLOSED, OPENED }
         section = { "", "" },
