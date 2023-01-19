@@ -254,15 +254,15 @@ utils.load_context_provider = function(context_provider)
     }
 end
 
-utils.hover = function(alt)
-    alt = alt or false
+utils.hover = function(select)
+    select = select or false
     return function()
         if vim.g.providers.hover == "native" then
             vim.cmd [[autocmd! CursorHold *]]
             vim.lsp.buf.hover()
             vim.cmd [[autocmd CursorMoved * ++once lua require("core.utils").activate_diagnostics()]]
         else
-            if alt then
+            if select then
                 require("hover").hover_select()
             else
                 require("hover").hover()

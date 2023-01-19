@@ -74,6 +74,7 @@ mappings.overload = {
         ["gD"] = { function() vim.lsp.buf.declaration() end, "   lsp declaration", },
         ["K"] = { require("core.utils").hover(), "   lsp hover", },
         ["gK"] = { require("core.utils").hover(true), "   lsp hover (options)", },
+        ["gV"] = { "'[v']", "select last paste" }
     }
 }
 

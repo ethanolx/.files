@@ -202,7 +202,7 @@ return {
         end,
     },
     ["chentoast/marks.nvim"] = {
-        cmd = "MarksToggle",
+        cmd = "MarksToggleSigns",
         config = function()
             require "plugins.marks"
         end,
