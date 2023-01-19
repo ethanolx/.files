@@ -261,11 +261,33 @@ utils.hover = function(select)
             vim.cmd [[autocmd! CursorHold *]]
             vim.lsp.buf.hover()
             vim.cmd [[autocmd CursorMoved * ++once lua require("core.utils").activate_diagnostics()]]
-        else
+        elseif vim.g.providers.hover == "hover" then
             if select then
                 require("hover").hover_select()
             else
                 require("hover").hover()
+            end
+        end
+    end
+end
+
+utils.outline = function(action)
+    return function()
+        if vim.g.providers.outline == "aerial" then
+            if action == nil then
+                vim.cmd "AerialToggle"
+            elseif action == "open" then
+                vim.cmd "AerialOpen"
+            elseif action == "close" then
+                vim.cmd "AerialClose"
+            end
+        elseif vim.g.providers.outline == "symbols" then
+            if action == nil then
+                vim.cmd "SymbolsOutline"
+            elseif action == "open" then
+                vim.cmd "SymbolsOutlineOpen"
+            elseif action == "close" then
+                vim.cmd "SymbolsOutlineClose"
             end
         end
     end

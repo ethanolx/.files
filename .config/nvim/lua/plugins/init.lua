@@ -319,7 +319,7 @@ return {
         end
     },
     ["stevearc/aerial.nvim"] = {
-        cmd = "AerialToggle",
+        cmd = { "AerialToggle", "AerialOpen", "AerialClose" },
         config = function()
             require "plugins.aerial"
         end,

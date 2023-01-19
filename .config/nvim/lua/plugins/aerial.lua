@@ -5,5 +5,9 @@ if not present then
 end
 
 aerial.setup {
-    backends = { "lsp", "treesitter", "markdown" },
+    backends = { "treesitter", "lsp", "markdown" },
+    layout = {
+        max_width = 40,
+        min_width = 30,
+    },
 }

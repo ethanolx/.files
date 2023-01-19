@@ -72,8 +72,8 @@ mappings.overload = {
 
         ["gd"] = { function() vim.lsp.buf.definition() end, "   lsp definition", },
         ["gD"] = { function() vim.lsp.buf.declaration() end, "   lsp declaration", },
-        ["K"] = { require("core.utils").hover(), "   lsp hover", },
-        ["gK"] = { require("core.utils").hover(true), "   lsp hover (options)", },
+        ["K"] = { utils.hover(), "   lsp hover", },
+        ["gK"] = { utils.hover(true), "   lsp hover (options)", },
         ["gV"] = { "'[v']", "select last paste" }
     }
 }
@@ -364,8 +364,9 @@ mappings.note = {
 -- o:  outline
 mappings.outline = {
     n = {
-        o = { "<cmd> SymbolsOutlineOpen <cr>", "פּ   open outline" },
-        c = { "<cmd> SymbolsOutlineClose <cr>", "פּ   close outline" },
+        _ = { utils.outline(), "פּ   toggle outline" },
+        o = { utils.outline("open"), "פּ   open outline" },
+        c = { utils.outline("close"), "פּ   close outline" },
     }
 }
 
