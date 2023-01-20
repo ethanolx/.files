@@ -12,6 +12,7 @@ mason_lspconfig.setup {
         "csharp_ls",
         "cssls",
         "dockerls",
+        "emmet_ls",
         "html",
         "intelephense",
         "jdtls",
