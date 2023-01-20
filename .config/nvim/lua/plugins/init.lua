@@ -165,7 +165,16 @@ return {
         end,
     },
     ["mg979/vim-visual-multi"] = {
-        keys = { "<M-n>", "<M-Up>", "<M-Down>", "\\\\\\", "\\\\A", "\\\\/" },
+        keys = {
+            "<M-n>",
+            "<M-Up>",
+            "<M-Down>",
+            "<C-LeftMouse>",
+            "<C-RightMouse>",
+            "\\\\\\",
+            "\\\\A",
+            "\\\\/",
+        },
         setup = function()
             require "plugins.visual-multi"
         end,
@@ -251,7 +260,7 @@ return {
 
     -- GIT
     ["lewis6991/gitsigns.nvim"] = {
-        event = "BufAdd",
+        event = "BufEnter",
         config = function()
             require "plugins.gitsigns"
         end,
