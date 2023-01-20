@@ -25,20 +25,20 @@ autocmd("BufEnter", {
     once = true,
 })
 autocmd({ "BufEnter", "BufWinEnter" }, { pattern = "quickfix", callback = require("core.utils").replace_with_trouble, })
-autocmd("BufWritePre", {
-    callback = function()
+-- autocmd("BufWritePre", {
+--     callback = function()
 
-        local cursor_pos = vim.api.nvim_win_get_cursor(0)
+--         local cursor_pos = vim.api.nvim_win_get_cursor(0)
 
-        -- delete trailing whitespace
-        vim.cmd([[:keepjumps keeppatterns %s/\s\+$//e]])
+--         -- delete trailing whitespace
+--         vim.cmd([[:keepjumps keeppatterns %s/\s\+$//e]])
 
-        -- delete lines @ eof
-        vim.cmd([[:keepjumps keeppatterns silent! 0;/^\%(\n*.\)\@!/,$d]])
+--         -- delete lines @ eof
+--         vim.cmd([[:keepjumps keeppatterns silent! 0;/^\%(\n*.\)\@!/,$d]])
 
-        utils.reset_cursor_pos(cursor_pos)
-    end
-})
+--         utils.reset_cursor_pos(cursor_pos)
+--     end
+-- })
 
 -- Insert*
 autocmd("InsertEnter", {

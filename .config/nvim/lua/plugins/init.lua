@@ -165,13 +165,9 @@ return {
         end,
     },
     ["mg979/vim-visual-multi"] = {
-        keys = { "<M-n>", "<C-Up>", "<C-Down>", "\\\\\\", "\\\\A", "\\\\/" },
+        keys = { "<M-n>", "<M-Up>", "<M-Down>", "\\\\\\", "\\\\A", "\\\\/" },
         setup = function()
             require "plugins.visual-multi"
-        end,
-        config = function()
-            -- require "plugins.visual-multi"
-            require("core.utils").load_highlight "visual-multi"
         end,
     },
     ["ethanolx/move.nvim"] = {

@@ -19,9 +19,7 @@ local icons = require("core.icons")
 packer.init {
     auto_clean = true,
     compile_on_sync = true,
-    git = {
-        clone_timeout = 6000
-    },
+    snapshot_path = vim.fn.stdpath("data") .. "/snapshot/",
     display = {
         -- Symbols
         working_sym = icons.progress.static.pending .. " ",

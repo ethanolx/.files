@@ -31,6 +31,7 @@ vim.opt.fillchars = {
 
 vim.opt.list = true
 vim.opt.listchars = {
+    extends = "…",
     tab = "",
     space = " ",
     lead = "·",
