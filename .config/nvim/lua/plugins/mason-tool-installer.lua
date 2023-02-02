@@ -5,9 +5,8 @@ if not present then
 end
 
 mason_tool_installer.setup {
-    auto_update = true,
-    run_on_start = true,
-    start_delay = 3000,
+    auto_update = false,
+    run_on_start = false,
 
     ensure_installed = {
         "debugpy",

@@ -250,9 +250,7 @@ return {
     -- FOLD
     ["kevinhwang91/nvim-ufo"] = {
         requires = "kevinhwang91/promise-async",
-        setup = function()
-            require("core.lazy_load").on_file_open "nvim-ufo"
-        end,
+        event = "BufEnter",
         config = function()
             require "plugins.ufo"
         end
@@ -368,7 +366,7 @@ return {
         end,
     },
     ["WhoIsSethDaniel/mason-tool-installer.nvim"] = {
-        after = "mason.nvim",
+        cmd = { "MasonToolsUpdate", "MasonToolsInstall" },
         config = function()
             require "plugins.mason-tool-installer"
         end,
@@ -444,7 +442,7 @@ return {
 
     -- UI
     ["kyazdani42/nvim-web-devicons"] = {
-        event = { "UIEnter", },
+        event = "UIEnter",
         config = function()
             require "plugins.web-devicons"
         end,

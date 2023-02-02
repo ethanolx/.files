@@ -51,6 +51,7 @@ cmp.setup {
     enabled = function()
         return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or vim.bo.filetype == "dap-repl"
     end,
+    preselect = cmp.PreselectMode.None,
     window = {
         completion = {
             border = "rounded",
