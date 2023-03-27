@@ -1,5 +1,9 @@
 return function(colour_palette)
     return {
+        ["@text.danger"] = {
+            fg = colour_palette.red,
+        },
+
         Whitespace = { fg = colour_palette.line },
         MatchWord = {
             bg = colour_palette.grey,
@@ -20,7 +24,7 @@ return function(colour_palette)
 
         -- floating windows
         FloatBorder = { fg = colour_palette.grey },
-        NormalFloat = {  },
+        NormalFloat = {},
 
         NvimInternalError = { fg = colour_palette.red },
         WinSeparator = { fg = colour_palette.line },
@@ -48,11 +52,10 @@ return function(colour_palette)
             fg = colour_palette.base0D,
         },
 
-        Error = {},
-        -- Error = {
-        --     fg = colour_palette.base00,
-        --     bg = colour_palette.base08,
-        -- },
+        Error = {
+            fg = colour_palette.base00,
+            bg = colour_palette.base08,
+        },
 
         ErrorMsg = {
             fg = colour_palette.base08,

@@ -18,7 +18,7 @@ neorg.setup {
         ["core.norg.dirman"] = {
             config = {
                 workspaces = {
-                    notes = "~/Documents/Notes",
+                    notes = vim.fn.has("win64") == 1 and "D:\\Data\\Notes\\Neorg" or "~/notes",
                 },
             },
         },
@@ -45,53 +45,53 @@ neorg.setup {
                     todo = {
                         enabled = true,
 
-                        done = {
-                            enabled = true,
-                            icon = "",
-                            query = "(todo_item_done) @icon",
-                        },
+                        -- done = {
+                        --     enabled = true,
+                        --     icon = "",
+                        --     query = "(todo_item_done) @icon",
+                        -- },
 
-                        pending = {
-                            enabled = true,
-                            icon = "",
-                            query = "(todo_item_pending) @icon",
-                        },
+                        -- pending = {
+                        --     enabled = true,
+                        --     icon = "",
+                        --     query = "(todo_item_pending) @icon",
+                        -- },
 
-                        undone = {
-                            enabled = true,
-                            highlight = "@neorg.todo_items.undone",
-                            query = "(todo_item_undone) @icon",
-                        },
+                        -- undone = {
+                        --     enabled = true,
+                        --     highlight = "@neorg.todo_items.undone",
+                        --     query = "(todo_item_undone) @icon",
+                        -- },
 
-                        uncertain = {
-                            enabled = true,
-                            icon = "",
-                            query = "(todo_item_uncertain) @icon",
-                        },
+                        -- uncertain = {
+                        --     enabled = true,
+                        --     icon = "",
+                        --     query = "(todo_item_uncertain) @icon",
+                        -- },
 
-                        on_hold = {
-                            enabled = true,
-                            icon = "",
-                            query = "(todo_item_on_hold) @icon",
-                        },
+                        -- on_hold = {
+                        --     enabled = true,
+                        --     icon = "",
+                        --     query = "(todo_item_on_hold) @icon",
+                        -- },
 
-                        cancelled = {
-                            enabled = true,
-                            icon = "",
-                            query = "(todo_item_cancelled) @icon",
-                        },
+                        -- cancelled = {
+                        --     enabled = true,
+                        --     icon = "",
+                        --     query = "(todo_item_cancelled) @icon",
+                        -- },
 
-                        recurring = {
-                            enabled = true,
-                            icon = "",
-                            query = "(todo_item_recurring) @icon",
-                        },
+                        -- recurring = {
+                        --     enabled = true,
+                        --     icon = "",
+                        --     query = "(todo_item_recurring) @icon",
+                        -- },
 
-                        urgent = {
-                            enabled = true,
-                            icon = "",
-                            query = "(todo_item_urgent) @icon",
-                        },
+                        -- urgent = {
+                        --     enabled = true,
+                        --     icon = "",
+                        --     query = "(todo_item_urgent) @icon",
+                        -- },
                     },
                 }
             },

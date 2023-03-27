@@ -76,17 +76,13 @@ return {
     -- COMMENT
     ["numToStr/Comment.nvim"] = {
         module = "Comment",
-        setup = function()
-            require("core.lazy_load").on_file_open "Comment.nvim"
-        end,
+        event = "BufRead",
         config = function()
             require "plugins.comment"
         end,
     },
     ["folke/todo-comments.nvim"] = {
-        setup = function()
-            require("core.lazy_load").on_file_open "todo-comments.nvim"
-        end,
+        event = "BufRead",
         config = function()
             require "plugins.todo-comments"
         end,
@@ -126,9 +122,7 @@ return {
     -- EDIT
     ["nvim-treesitter/nvim-treesitter"] = {
         module = "nvim-treesitter",
-        setup = function()
-            require("core.lazy_load").on_file_open "nvim-treesitter"
-        end,
+        event = "BufRead",
         cmd = {
             "TSInstall",
             "TSBufEnable",
@@ -154,9 +148,7 @@ return {
         end,
     },
     ["wellle/targets.vim"] = {
-        setup = function()
-            require("core.lazy_load").on_file_open "targets.vim"
-        end,
+        event = "BufRead",
     },
     ["nvim-treesitter/nvim-treesitter-textobjects"] = {
         after = "nvim-treesitter",
@@ -250,7 +242,7 @@ return {
     -- FOLD
     ["kevinhwang91/nvim-ufo"] = {
         requires = "kevinhwang91/promise-async",
-        event = "BufEnter",
+        event = "BufRead",
         config = function()
             require "plugins.ufo"
         end
@@ -258,7 +250,7 @@ return {
 
     -- GIT
     ["lewis6991/gitsigns.nvim"] = {
-        event = "BufEnter",
+        event = "BufRead",
         config = function()
             require "plugins.gitsigns"
         end,
@@ -294,13 +286,11 @@ return {
 
     -- LSP
     ["williamboman/mason-lspconfig.nvim"] = {
-        after = "mason.nvim",
         config = function()
             require "plugins.mason-lspconfig"
         end,
     },
     ["neovim/nvim-lspconfig"] = {
-        after = "mason-lspconfig.nvim",
         config = function()
             require "plugins.lspconfig"
         end,
@@ -360,13 +350,13 @@ return {
 
     -- PACKAGE
     ["williamboman/mason.nvim"] = {
-        event = "UIEnter",
         config = function()
             require "plugins.mason"
         end,
     },
     ["WhoIsSethDaniel/mason-tool-installer.nvim"] = {
         cmd = { "MasonToolsUpdate", "MasonToolsInstall" },
+        run = { ":MasonToolsInstall", ":MasonToolsUpdate" },
         config = function()
             require "plugins.mason-tool-installer"
         end,
@@ -442,15 +432,12 @@ return {
 
     -- UI
     ["kyazdani42/nvim-web-devicons"] = {
-        event = "UIEnter",
         config = function()
             require "plugins.web-devicons"
         end,
     },
     ["lukas-reineke/indent-blankline.nvim"] = {
-        setup = function()
-            require("core.lazy_load").on_file_open "indent-blankline.nvim"
-        end,
+        event = "BufRead",
         config = function()
             require "plugins.indent-blankline"
         end,
@@ -553,9 +540,7 @@ return {
         end,
     },
     ["kylechui/nvim-surround"] = {
-        setup = function()
-            require("core.lazy_load").on_file_open "nvim-surround"
-        end,
+        event = "BufRead",
         config = function()
             require "plugins.surround"
         end,

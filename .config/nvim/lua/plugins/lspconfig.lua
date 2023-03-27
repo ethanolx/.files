@@ -70,23 +70,25 @@ require("mason-lspconfig").setup_handlers {
             init_options = {
                 html = {
                     options = {
-                        ["bem.enabled"] = true,
+                            ["bem.enabled"] = true,
                     },
                 },
             }
         }
     end,
-    sumneko_lua = function()
-        lspconfig.sumneko_lua.setup {
+    lua_ls = function()
+        lspconfig.lua_ls.setup {
             on_attach = on_attach,
             settings = {
                 Lua = {
                     diagnostics = {
                         globals = { "vim", "packer_plugins" },
                     },
-                    workspace = { library = { [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-                        [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-                    },
+                    workspace = {
+                        library = {
+                            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+                                [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+                        },
                         maxPreload = 100000,
                         preloadFileSize = 10000,
                     },
@@ -94,4 +96,38 @@ require("mason-lspconfig").setup_handlers {
             },
         }
     end,
+    jdtls = function()
+        local os
+        if vim.fn.has("win64") == 1 then
+            os = "win"
+        elseif vim.fn.has("mac") then
+            os = "mac"
+        else
+            os = "linux"
+        end
+        local jar_path = vim.fn.glob(vim.fn.stdpath("data") ..
+        "/packages/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")
+        local config_path = vim.fn.stdpath("data") .. "/packages/packages/jdtls/config_" .. os
+        local workspace_path = vim.fn.stdpath("data") .. "/packages/packages/jdtls/workspace"
+        lspconfig.jdtls.setup {
+            on_attach = on_attach,
+            cmd = {
+                "java",
+                "-jar",
+                jar_path,
+                "-configuration",
+                config_path,
+                "-data",
+                workspace_path,
+            },
+            init_options = {
+                jvm_args = {},
+                workspace = workspace_path
+            },
+            root_dir = function(fname)
+                return require("lspconfig").util.root_pattern("pom.xml", "gradle.build", ".git", ".gitignore")(fname) or
+                    vim.fn.getcwd()
+            end
+        }
+    end
 }

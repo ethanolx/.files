@@ -111,6 +111,7 @@ vim.opt.completeopt = "menuone,noselect"
 vim.opt.cursorcolumn = false
 vim.opt.cursorline = false
 vim.opt.shortmess:append "sI"
+vim.cmd "language en_SG"
 
 -- Spellchecking
 vim.opt.autoread = true

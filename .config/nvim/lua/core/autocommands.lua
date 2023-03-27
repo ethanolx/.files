@@ -24,6 +24,7 @@ autocmd("BufEnter", {
     end,
     once = true,
 })
+
 autocmd({ "BufEnter", "BufWinEnter" }, { pattern = "quickfix", callback = require("core.utils").replace_with_trouble, })
 -- autocmd("BufWritePre", {
 --     callback = function()

@@ -9,6 +9,7 @@ mason_tool_installer.setup {
     run_on_start = false,
 
     ensure_installed = {
+        "black",
         "debugpy",
         "prettierd",
     },

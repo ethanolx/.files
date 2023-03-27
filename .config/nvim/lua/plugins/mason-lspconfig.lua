@@ -22,7 +22,8 @@ mason_lspconfig.setup {
         "pyright",
         "rust_analyzer",
         "sqlls",
-        "sumneko_lua",
+        "lua_ls",
+        "taplo",
         "tsserver",
         "vimls",
     }

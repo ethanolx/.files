@@ -23,24 +23,6 @@ M.lazy_load = function(tb)
     })
 end
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    callback = function()
-        if vim.g.scrollbar_provider == "nvim-scrollbar" then
-            require "scrollbar"
-        end
-    end,
-    once = true,
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    callback = function()
-        if vim.g.scrollbar_provider == "satellite.nvim" then
-            require "satellite"
-        end
-    end,
-    once = true,
-})
-
 M.bufferline = function()
     M.lazy_load {
         events = { "BufNewFile", "BufRead", "TabEnter" },

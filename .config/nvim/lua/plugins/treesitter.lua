@@ -12,6 +12,10 @@ require("core.utils").load_highlights(
                 sp = "none",
             },
 
+            ["@attribute"] = {
+                link = "TSAttribute"
+            },
+
             TSAttribute = {
                 fg = colour_palette.base0A,
                 sp = "none",
@@ -20,6 +24,10 @@ require("core.utils").load_highlights(
             TSCharacter = {
                 fg = colour_palette.base08,
                 sp = "none",
+            },
+
+            TSConstant = {
+                link = "Constant",
             },
 
             TSConstBuiltin = {
@@ -111,6 +119,10 @@ require("core.utils").load_highlights(
                 sp = "none",
             },
 
+            TSString = {
+                link = "String",
+            },
+
             TSStringRegex = {
                 fg = colour_palette.base0C,
                 sp = "none",
@@ -162,6 +174,10 @@ require("core.utils").load_highlights(
                 underline = true,
             },
 
+            TSType = {
+                link = "Type",
+            },
+
             TSTypeBuiltin = {
                 fg = colour_palette.base0A,
                 sp = "none",
@@ -183,7 +199,7 @@ require("core.utils").load_highlights(
                 bold = true,
             },
 
-            luaTSField = {
+            TSField = {
                 fg = colour_palette.base0D,
             },
 
