@@ -15,14 +15,14 @@ neorg.setup {
                 end,
             }
         },
-        ["core.norg.dirman"] = {
+        ["core.dirman"] = {
             config = {
                 workspaces = {
                     notes = vim.fn.has("win64") == 1 and "D:\\Data\\Notes\\Neorg" or "~/notes",
                 },
             },
         },
-        ["core.norg.completion"] = {
+        ["core.completion"] = {
             config = {
                 engine = "nvim-cmp",
                 name = "[neorg]",
@@ -33,68 +33,12 @@ neorg.setup {
                 zen_mode = "zen-mode",
             },
         },
-        ["core.norg.journal"] = {
+        ["core.journal"] = {
             config = {
                 strategy = "flat", -- NOTE: Avoid "nested" for OS-compatibility reasons
             },
         },
-        ["core.norg.manoeuvre"] = {},
-        ["core.norg.concealer"] = {
-            config = {
-                icons = {
-                    todo = {
-                        enabled = true,
-
-                        -- done = {
-                        --     enabled = true,
-                        --     icon = "",
-                        --     query = "(todo_item_done) @icon",
-                        -- },
-
-                        -- pending = {
-                        --     enabled = true,
-                        --     icon = "",
-                        --     query = "(todo_item_pending) @icon",
-                        -- },
-
-                        -- undone = {
-                        --     enabled = true,
-                        --     highlight = "@neorg.todo_items.undone",
-                        --     query = "(todo_item_undone) @icon",
-                        -- },
-
-                        -- uncertain = {
-                        --     enabled = true,
-                        --     icon = "",
-                        --     query = "(todo_item_uncertain) @icon",
-                        -- },
-
-                        -- on_hold = {
-                        --     enabled = true,
-                        --     icon = "",
-                        --     query = "(todo_item_on_hold) @icon",
-                        -- },
-
-                        -- cancelled = {
-                        --     enabled = true,
-                        --     icon = "",
-                        --     query = "(todo_item_cancelled) @icon",
-                        -- },
-
-                        -- recurring = {
-                        --     enabled = true,
-                        --     icon = "",
-                        --     query = "(todo_item_recurring) @icon",
-                        -- },
-
-                        -- urgent = {
-                        --     enabled = true,
-                        --     icon = "",
-                        --     query = "(todo_item_urgent) @icon",
-                        -- },
-                    },
-                }
-            },
-        },
+        ["core.manoeuvre"] = {},
+        ["core.concealer"] = {},
     },
 }

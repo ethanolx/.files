@@ -24,6 +24,7 @@ return function(colour_palette)
         DevIconMd = { fg = "#822D06" },
         DevIconMp3 = { fg = colour_palette.white },
         DevIconMp4 = { fg = colour_palette.white },
+        DevIconNorg = { fg = colour_palette.sun },
         DevIconOut = { fg = colour_palette.white },
         DevIconPng = { fg = colour_palette.dark_purple },
         DevIconPy = { fg = colour_palette.cyan },
@@ -36,6 +37,7 @@ return function(colour_palette)
         DevIconWoff = { fg = colour_palette.white },
         DevIconWoff2 = { fg = colour_palette.white },
         DevIconXz = { fg = colour_palette.sun },
+        DevIconZig = { fg = colour_palette.base09 },
         DevIconZip = { fg = colour_palette.sun },
     }
 end

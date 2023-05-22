@@ -123,6 +123,10 @@ return {
         icon = "",
         name = "xz",
     },
+    zig = {
+        icon = "",
+        name = "zig",
+    },
     zip = {
         icon = "",
         name = "zip",
