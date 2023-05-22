@@ -136,11 +136,6 @@ return {
             require "plugins.treesitter"
         end,
     },
-    ["editorconfig/editorconfig-vim"] = {
-        setup = function()
-            require("core.lazy_load").on_file_open "editorconfig-vim"
-        end,
-    },
     ["nacro90/numb.nvim"] = {
         event = "CmdlineEnter",
         config = function()

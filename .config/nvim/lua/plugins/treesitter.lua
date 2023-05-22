@@ -241,6 +241,7 @@ local options = {
         "typescript",
         "yaml",
         "vim",
+        "zig",
     },
     indent = {
         enable = true,

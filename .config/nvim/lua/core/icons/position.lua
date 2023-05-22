@@ -1,22 +1,22 @@
 return {
     hexagon_outline = {
         symbol = "",
-        top = "",
-        bottom = "",
+        top = "󰁡",
+        bottom = "󰁉",
     },
     square_solid = {
         symbol = "",
-        top = "ﰶ",
-        bottom = "ﰭ",
+        top = "󰜸",
+        bottom = "󰜯",
     },
     circle_outline = {
         symbol = "",
-        top = "",
-        bottom = "",
+        top = "󰁠",
+        bottom = "󰁈",
     },
     square_outline = {
-        symbol = "",
-        top = "ﰷ",
-        bottom = "ﰮ",
+        symbol = "",
+        top = "",
+        bottom = "",
     },
 }

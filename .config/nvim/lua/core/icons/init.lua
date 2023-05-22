@@ -15,7 +15,7 @@ local default_icon_sets = {
     lsp = "nerdfont",
     os = "",
     position = "hexagon_outline",
-    progress = "circle",
+    progress = "pie",
     separator = "arrow",
 }
 

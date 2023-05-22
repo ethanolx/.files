@@ -4,15 +4,15 @@ return {
         warn = "",
         hint = "",
         info = "",
-        debug = "",
+        debug = "",
         trace = "",
     },
     outline = {
-        error = "",
-        warn = "",
-        hint = "",
+        error = "",
+        warn = "",
+        hint = "",
         info = "",
-        debug = "",
+        debug = "",
         trace = "",
     }
 }

@@ -1,5 +1,5 @@
 return {
-    close = "",
+    close = "",
     modified = "",
     left_truncation = "",
     right_truncation = "",

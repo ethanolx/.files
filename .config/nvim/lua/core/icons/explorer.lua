@@ -1,8 +1,8 @@
 return {
     outline = {
-        filter = "",
+        filter = "󰈳",
     },
     solid = {
-        filter = "",
+        filter = "󰈲",
     },
 }
