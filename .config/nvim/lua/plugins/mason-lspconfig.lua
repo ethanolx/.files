@@ -8,6 +8,7 @@ mason_lspconfig.setup {
     automatic_installation = true,
 
     ensure_installed = {
+        "asm_lsp",
         "clangd",
         "csharp_ls",
         "cssls",

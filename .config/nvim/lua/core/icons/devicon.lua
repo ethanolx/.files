@@ -7,6 +7,10 @@ return {
         icon = "",
         name = "EditorConfig",
     },
+    asm = {
+        icon = "󰐱",
+        name = "asm",
+    },
     c = {
         icon = "",
         name = "c",
@@ -78,6 +82,10 @@ return {
     png = {
         icon = "",
         name = "png",
+    },
+    ps1 = {
+        icon = "",
+        name = "ps1",
     },
     py = {
         icon = "",

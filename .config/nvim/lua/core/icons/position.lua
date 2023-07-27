@@ -1,6 +1,6 @@
 return {
     hexagon_outline = {
-        symbol = "",
+        symbol = "",
         top = "󰁡",
         bottom = "󰁉",
     },

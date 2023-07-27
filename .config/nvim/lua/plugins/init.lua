@@ -23,7 +23,10 @@ return {
         end,
     },
     ["rafamadriz/friendly-snippets"] = {
-        event = { "InsertEnter", "CmdlineEnter" },
+        event = {
+            "InsertEnter",
+            "CmdlineEnter",
+        },
     },
     ["hrsh7th/cmp-nvim-lsp"] = {
         after = "nvim-cmp",
@@ -66,7 +69,7 @@ return {
 
     -- BUFFER
     ["akinsho/bufferline.nvim"] = {
-        tag = "v2.*",
+        tag = "v4.*",
         after = "nvim-web-devicons",
         config = function()
             require "plugins.bufferline"
@@ -95,7 +98,10 @@ return {
 
     -- DAP
     ["mfussenegger/nvim-dap"] = {
-        cmd = { "DapContinue", "DapToggleBreakpoint" },
+        cmd = {
+            "DapContinue",
+            "DapToggleBreakpoint",
+        },
         config = function()
             require "plugins.dap"
         end,
@@ -169,10 +175,15 @@ return {
     ["ethanolx/move.nvim"] = {
         cmd = { "MoveLine", "MoveBlock" },
     },
-    ["ZhiyuanLck/smart-pairs"] = {
-        event = "InsertEnter",
-        config = function()
-            require "plugins.smart-pairs"
+    -- ["ZhiyuanLck/smart-pairs"] = {
+    --     event = "InsertEnter",
+    --     config = function()
+    --         require "plugins.smart-pairs"
+    --     end,
+    -- },
+    ["LunarWatcher/auto-pairs"] = {
+        setup = function ()
+            require "plugins.auto-pairs"
         end,
     },
     ["SmiteshP/nvim-gps"] = {
@@ -205,8 +216,6 @@ return {
             require "plugins.treesitter-unit"
         end,
     },
-    ["ThePrimeagen/harpoon"] = {
-    },
 
     -- EXPLORER
     ["kyazdani42/nvim-tree.lua"] = {
@@ -235,13 +244,6 @@ return {
         end,
     },
     -- FOLD
-    ["kevinhwang91/nvim-ufo"] = {
-        requires = "kevinhwang91/promise-async",
-        event = "BufRead",
-        config = function()
-            require "plugins.ufo"
-        end
-    },
 
     -- GIT
     ["lewis6991/gitsigns.nvim"] = {
@@ -252,7 +254,7 @@ return {
     },
     ["rhysd/git-messenger.vim"] = {
         after = "gitsigns.nvim",
-        config = function()
+        setup = function()
             require "plugins.git-messenger"
         end,
     },
@@ -281,11 +283,13 @@ return {
 
     -- LSP
     ["williamboman/mason-lspconfig.nvim"] = {
+        after = "mason.nvim",
         config = function()
             require "plugins.mason-lspconfig"
         end,
     },
     ["neovim/nvim-lspconfig"] = {
+        after = "mason-lspconfig.nvim",
         config = function()
             require "plugins.lspconfig"
         end,
@@ -300,39 +304,28 @@ return {
 
     -- OUTLINE
     ["simrat39/symbols-outline.nvim"] = {
-        cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
+        cmd = {
+            "SymbolsOutline",
+            "SymbolsOutlineOpen",
+            "SymbolsOutlineClose",
+        },
         module = "symbols-outline",
         config = function()
             require "plugins.symbols-outline"
         end
     },
     ["stevearc/aerial.nvim"] = {
-        cmd = { "AerialToggle", "AerialOpen", "AerialClose" },
+        cmd = {
+            "AerialToggle",
+            "AerialOpen",
+            "AerialClose",
+        },
         config = function()
             require "plugins.aerial"
         end,
     },
-    ["nvim-treesitter/nvim-treesitter-refactor"] = {
-        module = "refactor",
-        config = function()
-            require "plugins.treesitter-refactor"
-        end,
-    },
-    ["ThePrimeagen/refactoring.nvim"] = {
-        disable = true,
-        module = "refactoring",
-        setup = function()
-            require "plugins.refactoring"
-        end
-    },
 
     -- MISCELLANEOUS
-    ["jbyuki/instant.nvim"] = {
-        opt = true,
-        config = function()
-            require "plugins.instant"
-        end,
-    },
 
     -- NOTES
     ["nvim-neorg/neorg"] = {
@@ -379,10 +372,6 @@ return {
     },
 
     -- PYTHON
-    ["jmcantrell/vim-virtualenv"] = {
-        ft = "python",
-        cmd = "VirtualEnvList",
-    },
 
     -- SQL
     ["ethanolx/vim-dadbod"] = {
@@ -411,7 +400,6 @@ return {
     ["akinsho/toggleterm.nvim"] = {
         cmd = "ToggleTerm",
         tag = "v2.*",
-        -- keys = "<leader>t",
         config = function()
             require "plugins.toggleterm"
         end,
@@ -426,7 +414,7 @@ return {
     },
 
     -- UI
-    ["kyazdani42/nvim-web-devicons"] = {
+    ["nvim-tree/nvim-web-devicons"] = {
         config = function()
             require "plugins.web-devicons"
         end,
@@ -456,7 +444,6 @@ return {
         end,
     },
     ["p00f/nvim-ts-rainbow"] = {
-        -- module = "nvim-treesitter",
         after = "nvim-treesitter",
         config = function()
             require "plugins.treesitter-rainbow"
@@ -471,21 +458,10 @@ return {
             require "plugins.telescope-fzf-native"
         end,
     },
-    ["mrjones2014/legendary.nvim"] = {
-        config = function()
-            require "plugins.legendary"
-        end,
-    },
     ["Weissle/persistent-breakpoints.nvim"] = {
     },
     ["dstein64/vim-startuptime"] = {
         cmd = "StartupTime",
-    },
-    ["rest-nvim/rest.nvim"] = {
-        keys = "<space>xr",
-        config = function()
-            require "plugins.rest"
-        end,
     },
     ["tpope/vim-abolish"] = {
         cmd = { "Abolish", "Subvert" },
@@ -494,12 +470,6 @@ return {
         module = "better-digraphs",
         config = function()
             require "plugins.better-digraphs"
-        end,
-    },
-    ["lewis6991/spellsitter.nvim"] = {
-        after = "nvim-treesitter",
-        config = function()
-            require "plugins.spellsitter"
         end,
     },
     ["folke/twilight.nvim"] = {
@@ -520,12 +490,6 @@ return {
         cmd = "TSPlaygroundToggle",
         config = function()
             require "plugins.playground"
-        end,
-    },
-    ["karb94/neoscroll.nvim"] = {
-        keys = { "<C-b>", "<C-f>", "<C-u>", "<C-d>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
-        config = function()
-            require "plugins.neoscroll"
         end,
     },
     ["ziontee113/color-picker.nvim"] = {
@@ -581,13 +545,5 @@ return {
     },
     ["nvim-lua/popup.nvim"] = {
         module = "popup",
-    },
-    ["lewis6991/impatient.nvim"] = {
-    },
-    ["antoinemadec/FixCursorHold.nvim"] = {
-    },
-
-    -- Yuck
-    ["elkowar/yuck.vim"] = {
     },
 }

@@ -28,5 +28,6 @@ return {
     undo = "",
     vim = "",
     window = "",
+    x = "󱉕",
     zen = "",
 }

@@ -5,7 +5,7 @@ if not present then
 end
 
 satellite.setup {
-    current_only = false,
+    current_only = true,
     winblend = 50,
     zindex = 40,
     excluded_filetypes = {},

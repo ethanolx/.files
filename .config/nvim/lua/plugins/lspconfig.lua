@@ -55,6 +55,20 @@ require("mason-lspconfig").setup_handlers {
             on_attach = on_attach,
         }
     end,
+    pyright = function ()
+        lspconfig.pyright.setup {
+            on_attach = on_attach,
+            settings = {
+                python = {
+                    analysis = {
+                        autoSearchPaths = true,
+                        diagnosticMode = "openFilesOnly",
+                        useLibraryCodeForTypes = true,
+                    }
+                }
+            }
+        }
+    end,
     html = function()
         lspconfig.html.setup {
             filetypes = { "html", "htmldjango" },
@@ -86,7 +100,7 @@ require("mason-lspconfig").setup_handlers {
                     },
                     workspace = {
                         library = {
-                            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+                                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
                                 [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
                         },
                         maxPreload = 100000,
@@ -106,7 +120,7 @@ require("mason-lspconfig").setup_handlers {
             os = "linux"
         end
         local jar_path = vim.fn.glob(vim.fn.stdpath("data") ..
-        "/packages/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")
+            "/packages/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")
         local config_path = vim.fn.stdpath("data") .. "/packages/packages/jdtls/config_" .. os
         local workspace_path = vim.fn.stdpath("data") .. "/packages/packages/jdtls/workspace"
         lspconfig.jdtls.setup {
@@ -128,6 +142,26 @@ require("mason-lspconfig").setup_handlers {
                 return require("lspconfig").util.root_pattern("pom.xml", "gradle.build", ".git", ".gitignore")(fname) or
                     vim.fn.getcwd()
             end
+        }
+    end,
+    rust_analyzer = function()
+        lspconfig.rust_analyzer.setup {
+            on_attach = on_attach,
+            settings = {
+                ["rust-analyzer"] = {
+                    rustfmt = {
+                        extraArgs = { "--config", "control_brace_style=ClosingNextLine" }
+                    }
+                }
+            }
+        }
+    end,
+    zls = function()
+        lspconfig.zls.setup {
+            on_attach = on_attach,
+            settings = {
+                enable_autofix = false,
+            }
         }
     end
 }

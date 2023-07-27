@@ -288,7 +288,7 @@ options.lsp_progress = {
             local ms = vim.loop.hrtime() / 1000000
             local frame = math.floor(ms / 120) % (#icons.progress.dynamic - 1)
 
-            if percentage >= 70 then
+            if percentage >= 90 then
                 return string.format(" %%<%s %s %s (%s%%%%) ", icons.progress.dynamic[#icons.progress.dynamic], title, msg, percentage)
             end
 

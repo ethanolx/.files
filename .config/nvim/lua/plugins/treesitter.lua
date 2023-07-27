@@ -240,6 +240,7 @@ local options = {
         "tsx",
         "typescript",
         "yaml",
+        "yuck",
         "vim",
         "zig",
     },
@@ -248,12 +249,6 @@ local options = {
     },
     incremental_selection = {
         enable = true,
-        keymaps = {
-            init_selection = "<leader>xv",
-            node_incremental = "<leader>xi",
-            scope_incremental = "<leader>xs",
-            node_decremental = "<leader>xd",
-        },
     },
 }
 

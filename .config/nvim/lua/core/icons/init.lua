@@ -40,6 +40,9 @@ end
 
 -- Inject icon dependencies
 
+-- category
+icons.category.location = icons.position.symbol
+
 -- devicon --
 icons.devicon.default_icon = {
     icon = icons.filesystem.file,

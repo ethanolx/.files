@@ -100,39 +100,41 @@ end
 utils.load_main_mappings = function(registrar, prefix, icon, modes)
     for mode, keymaps in pairs(modes) do
         for keymap, mapping in pairs(keymaps) do
-            modes[mode][keymap][2] = string.format("%s %s", icon, mapping[2])
+            if #modes[mode][keymap] == 2 then
+                modes[mode][keymap][2] = string.format("%s %s", icon, mapping[2])
+            else
+                registrar.register({ [prefix .. keymap] = { name = mapping[1] } })
+            end
         end
     end
     utils.load_sub_mappings(registrar, prefix, modes)
 end
 
 utils.load_mappings = function(mappings)
-    -- Set up legendary and load which-key
-    require("legendary")
-    local which_key = require("which-key")
+    local registrar = require("which-key")
 
     -- Determine compatibility mode
     local compatibility_mode = vim.g.compatibility_mode or 1
 
     -- Fetch icons
-    local icons = require("core.icons").category
+    local icons = require("core.icons")
 
     -- Consolidate categories
     local main_mappings = {}
 
     for section, mode_mappings in pairs(mappings) do
         if section == "alt" then
-            utils.load_sub_mappings(which_key, function(key) return string.format("<M-%s>", key) end, mode_mappings)
+            utils.load_sub_mappings(registrar, function(key) return string.format("<M-%s>", key) end, mode_mappings)
         elseif section == "ctl" then
-            utils.load_sub_mappings(which_key, function(key) return string.format("<C-%s>", key) end, mode_mappings)
+            utils.load_sub_mappings(registrar, function(key) return string.format("<C-%s>", key) end, mode_mappings)
         elseif section == "misc" then
-            utils.load_sub_mappings(which_key, nil, mode_mappings)
+            utils.load_sub_mappings(registrar, nil, mode_mappings)
         elseif section == "overload" then
-            utils.load_sub_mappings(which_key, nil, mode_mappings)
+            utils.load_sub_mappings(registrar, nil, mode_mappings)
         elseif section == "compatibility" and compatibility_mode == 1 then
-            utils.load_sub_mappings(which_key, "<leader>", mode_mappings)
+            utils.load_sub_mappings(registrar, "<leader>", mode_mappings)
         elseif section == "compatibility" and compatibility_mode > 1 then
-            utils.load_sub_mappings(which_key, nil, mode_mappings)
+            utils.load_sub_mappings(registrar, nil, mode_mappings)
         else
             local prefix = string.sub(section, 0, 1)
             if main_mappings[prefix] ~= nil then
@@ -146,14 +148,17 @@ utils.load_mappings = function(mappings)
     for prefix, categories in pairs(main_mappings) do
         local labels = {}
         for category, mode_mappings in pairs(categories) do
-            table.insert(labels, string.format("%s %s", icons[category], category))
-            utils.load_main_mappings(which_key, "<leader>" .. prefix, icons[category], mode_mappings)
+            table.insert(labels, string.format("%s %s", icons.category[category], utils.capitalize(category)))
+            utils.load_main_mappings(registrar, "<leader>" .. prefix, icons.category[category], mode_mappings)
         end
         if #labels > 0 then
-            which_key.register({ ["<leader>" .. prefix] = { name = table.concat(labels, " / ") } },
+            registrar.register({ ["<leader>" .. prefix] = { name = table.concat(labels, " / ") } },
                 { mode = "n", silent = true, noremap = true })
         end
     end
+
+    -- Main Mappings
+    registrar.register({ ["<leader><leader>"] = { name = icons.generic.main .. " Main" } })
 end
 
 utils.get_plugin_name = function()
@@ -298,6 +303,12 @@ utils.outline = function(action)
             end
         end
     end
+end
+
+utils.foldtext = function()
+    local fs = vim.v.foldstart
+    local bufno = vim.api.nvim_get_current_buf()
+    return vim.api.nvim_buf_get_lines(bufno, fs - 1, fs, true)[1]
 end
 
 return utils

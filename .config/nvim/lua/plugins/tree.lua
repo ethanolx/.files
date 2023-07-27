@@ -76,7 +76,6 @@ local options = {
         width = 30,
         centralize_selection = true,
         preserve_window_proportions = true,
-        hide_root_folder = true,
     },
     git = {
         enable = true,
@@ -125,6 +124,7 @@ local options = {
         add_trailing = true,
         highlight_opened_files = "none",
         special_files = {},
+        root_folder_label = false,
     },
     diagnostics = {
         enable = true,

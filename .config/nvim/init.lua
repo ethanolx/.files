@@ -1,5 +1,5 @@
--- Load cache if available
-pcall(require, "impatient")
+-- Enable cache loader
+vim.loader.enable()
 
 -- Load core modules
 require("core")

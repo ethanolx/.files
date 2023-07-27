@@ -4,6 +4,7 @@
 -- |                              |
 -- +------------------------------+
 
+-- Leader key
 vim.g.mapleader = " "
 
 -- Set timeout for parenthesis matching

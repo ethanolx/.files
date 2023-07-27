@@ -1,6 +1,3 @@
--- Font
-vim.opt.guifont = "UbuntuMono NF:h10"
-
 -- Colour Scheme
 vim.opt.termguicolors = true
 
@@ -43,6 +40,9 @@ vim.opt.signcolumn = "auto:2-4"
 
 vim.opt.foldcolumn = "1"
 vim.opt.foldlevel = 99
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = "v:lua.require('core.utils').foldtext()"
+vim.opt.foldmethod = "expr"
 vim.opt.foldenable = true
 
 vim.opt.number = true

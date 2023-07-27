@@ -16,6 +16,7 @@ toggleterm.setup {
         FloatBorder = { link = "FloatBorder", },
     },
     hide_numbers = true,
+    open_mapping = "<C-\\>",
     shade_filetypes = {},
     shade_terminals = false,
     insert_mappings = true,
@@ -25,7 +26,7 @@ toggleterm.setup {
     direction = "tab",
     close_on_exit = true,
     shell = vim.loop.os_uname().sysname == "Linux" and "zsh" or "pwsh",
-    on_open = function (terminal)
+    on_open = function (_)
         vim.cmd "normal i"
     end,
     float_opts = {
@@ -34,7 +35,7 @@ toggleterm.setup {
     winbar = {
         enabled = true,
         name_formatter = function(terminal)
-            return terminal.name
+            return terminal.display_name or terminal.id
         end
     },
 }
